@@ -9,6 +9,7 @@
         // Локализация / Localization
         var L10n = {
             en: {
+                nativeLanguageTitle: 'English',
                 sex: {m: 'm', f: ' f ', men: 'Men', women: 'Women', all: 'All'},
                 summaryTable: {
                     mainTitle: 'Summary race results',
@@ -36,6 +37,7 @@
                 }
             },
             ru: {
+                nativeLanguageTitle: 'Русский',
                 sex: {m: 'м', f: 'ж', men: 'Мужчины', women: 'Женщины', all: 'Все'},
                 summaryTable: {
                     mainTitle: 'Сводные результаты забега',
@@ -65,15 +67,31 @@
         };
         var LANG = 'en';
 
+        // иконки, закодированные в base64
+        var IMGbase64 = {
+            extIco48: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAABelBMVEWLjQmMjQmMjguNjw2OkA6QkgySlAyTlQ6UlhCWmAySlBWQkhSVlx+Ymh2eoBamqB2mqDCrrTCxsyy4ui66vC/DxT/Jy0q8vVfBwmLExmPNz27T1GO/wHXBwnzCw33DxH/ExYHHyIjExY/Oz5jb3LPi4sDl5sjr69Xw8OD29uz6+vL8/Pv+/v7///+3uWiztF2xslqvsFWsrletrlGrrEyqrEuqq0qmp0ChozqgojygojefoDOenzGRklavsHBubmVsbG1VVVNIR0tBQUw7O0ZAQEA2Nj0zMzw1NTgyMjAvLy4vLy0oKCwkJC0lJDAnJzMoKDIuLTk1NSExMRYsLRUoKBwmJxohIhozNA06OhM+PxFCQwpPUA1WVwZaWg9hYgdydAl3eQV6ewZ6fAd8fgV9fwSAggOChACChQCDhQCEhgCFhwCGiACHiQKJiwSJiwiIigiHiQeGiAiEhgiChAmDhQuGiA+JiwqKjAh/gQiBgxVqajRLTCdCQh+MD1J8AAADAElEQVR42tWTg6MrORjF02Tm2rZV5Nq2b227HdRK9bfvzpu+Zb3eUwXnl6/nSwv+P4KC2rJHOZYnqGU/x/WdHF8ghrRYhT1Zx4KkyxTXCgH5JSxf295Z2sRbp1ycNPMjdgGv9zOhCN29LJeND3bGm51/jjcID+lCsfR0f3t1ODECSOMCq/iSg2mHWqm1WnQmzc30ON2IIJR0g8t5y8qSO5/kfC6b6X5uvEF0KtKHV4P5sqrYQaUSQyO0z2G6nxmtlwMRJnKCl/1OZXEQgID1bnoglnaYbma7YrX9XO/SlgKvuXX3w51x6DM/TA0kJV7Ly9xIAtbMeyjFW6tz+66vqxFA0wHzw/SAhM45TVcTpKZ/F0t3SIgN2DX7A9mh4X7rw+TI0PCIx3g7UaNRkL9QbPWHAKIy1ufJHsvz/dO78Hq6m4rr7yZqhID8Oj5nKGGQtr1M9dssVqv+tWS1lvsz+rvxDlLtP8WrIerbKGVXXo/6mZTX/DBJB9mk23AzBqsTMIv4lBfXiUtoJJ1Dvm+h4zDpVF2NVF8EZNfkvdHK0GN+XhhPAr/5cWogkfNrn4ZrReDWpZBUhkmn6W52jPZYtRf9JGHXXI12kdoVyPdxwG66254YloDu/nTp6+HqbHKUVGdYEjNU5Cm+am6uzvoKzg9V2fD4eDszRup2SaSvV0omlUaj+iy7PbrPj9daRGQdX7IVAoUX8KXLaXe43EnKrft6exeJ6hJbfWGIEBKAeXzI5BI5AAlIO4yfIjFalWIbSw8iDMMSFFrAxzzimXCYAJCvEDezwqX8rlF7Ury5tHPQCxmhQp6cby/PUwRAkfh42Bv8/Y8csT3LUizHezw7j09ONrECKy4jsEKo7wY7SI1/HDrd3REqLOI1Gd6YP7gQPTDvtJQknQRUCSLCMwxB4UWMpXsRhuW/rzM+Dor+WgwS2yo7CQpD+NOqhID6Etu6GqZqnlcX6oc/gFYlfqVjDrYDzOMj9j8HHP+9FZg5fNJOl0C08xCBtkQ40KYQ+Lf0I5mywlu7pFkzAAAAAElFTkSuQmCC',
+            en: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAMAAACXZR4WAAAAWlBMVEVAQEBAQEDMAAD////PDg/88PAAM5nw8/kNPp/miImTqdThamr++fmEnc4JOp36+/3h5/PY3+765ubXyNb20dGKkL1Lb7dHbLbvsbE8Y7EtV6vuqqrMf4vfZGXxBPxdAAAAAnRSTlNfO/q7ZYcAAABzSURBVAjXZc9JEoAgDERRBAwEnOfx/te0gxss/ybVbxdVqDyZsQqenNWlb2o+YfM9dYvAOsYhAOi42LSAjfudAM5IgHQBVucBPtsCjFRqm64D0N7zBmgNXwcBwhDHFeCWbrpnwMl14wXIhyoCZL8gon6/PDvNBSUoA2a1AAAAAElFTkSuQmCC',
+            ru: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAASElEQVR42mNwcHCwBuJIIE4gEYP0WDOAGP/JBCC9IAMSKDAggToG1Nf//08OhhvAwPD/Pzl4EBnwn0wTBo8BkRQYAE6JFOUFAB950GCPrs2eAAAAAElFTkSuQmCC'
+        };
+
         // Читаем настройки из кэша
         var lsprefs = {};
-        if (localStorage.parkrunExtendedInfo != undefined) {
-            lsprefs = JSON.parse(localStorage.getItem('parkrunExtendedInfo'));
-        }
-        if (lsprefs.LANG != undefined) {
-            LANG = lsprefs.LANG;
-        }
+        chrome.storage.local.get(['parkrunExtendedInfo'], function(result) {
+            if (result.parkrunExtendedInfo !== undefined) {
+                lsprefs = result.parkrunExtendedInfo;
+                if (lsprefs.LANG !== undefined && L10n.hasOwnProperty(lsprefs.LANG)) {
+                    LANG = lsprefs.LANG;
+                }
+            }
+            // запускаем основное тело скрипта
+            main();
+        });
+    } else {
+        return;
+    }
 
+    // Основное тело скрипта
+    function main() {
         // добавляем непереведенные фразы из основных языков
         if (LANG != 'ru') {
             extendObjects(L10n.en, L10n.ru);
@@ -86,12 +104,17 @@
         L10n[LANG].sex.m = L10n[LANG].sex.m.replace(/\s/g, '&nbsp;');
         L10n[LANG].sex.f = L10n[LANG].sex.f.replace(/\s/g, '&nbsp;');
 
-        // иконки, закодированные в base64
-        var IMGbase64 = {
-            extIco48: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAABelBMVEWLjQmMjQmMjguNjw2OkA6QkgySlAyTlQ6UlhCWmAySlBWQkhSVlx+Ymh2eoBamqB2mqDCrrTCxsyy4ui66vC/DxT/Jy0q8vVfBwmLExmPNz27T1GO/wHXBwnzCw33DxH/ExYHHyIjExY/Oz5jb3LPi4sDl5sjr69Xw8OD29uz6+vL8/Pv+/v7///+3uWiztF2xslqvsFWsrletrlGrrEyqrEuqq0qmp0ChozqgojygojefoDOenzGRklavsHBubmVsbG1VVVNIR0tBQUw7O0ZAQEA2Nj0zMzw1NTgyMjAvLy4vLy0oKCwkJC0lJDAnJzMoKDIuLTk1NSExMRYsLRUoKBwmJxohIhozNA06OhM+PxFCQwpPUA1WVwZaWg9hYgdydAl3eQV6ewZ6fAd8fgV9fwSAggOChACChQCDhQCEhgCFhwCGiACHiQKJiwSJiwiIigiHiQeGiAiEhgiChAmDhQuGiA+JiwqKjAh/gQiBgxVqajRLTCdCQh+MD1J8AAADAElEQVR42tWTg6MrORjF02Tm2rZV5Nq2b227HdRK9bfvzpu+Zb3eUwXnl6/nSwv+P4KC2rJHOZYnqGU/x/WdHF8ghrRYhT1Zx4KkyxTXCgH5JSxf295Z2sRbp1ycNPMjdgGv9zOhCN29LJeND3bGm51/jjcID+lCsfR0f3t1ODECSOMCq/iSg2mHWqm1WnQmzc30ON2IIJR0g8t5y8qSO5/kfC6b6X5uvEF0KtKHV4P5sqrYQaUSQyO0z2G6nxmtlwMRJnKCl/1OZXEQgID1bnoglnaYbma7YrX9XO/SlgKvuXX3w51x6DM/TA0kJV7Ly9xIAtbMeyjFW6tz+66vqxFA0wHzw/SAhM45TVcTpKZ/F0t3SIgN2DX7A9mh4X7rw+TI0PCIx3g7UaNRkL9QbPWHAKIy1ufJHsvz/dO78Hq6m4rr7yZqhID8Oj5nKGGQtr1M9dssVqv+tWS1lvsz+rvxDlLtP8WrIerbKGVXXo/6mZTX/DBJB9mk23AzBqsTMIv4lBfXiUtoJJ1Dvm+h4zDpVF2NVF8EZNfkvdHK0GN+XhhPAr/5cWogkfNrn4ZrReDWpZBUhkmn6W52jPZYtRf9JGHXXI12kdoVyPdxwG66254YloDu/nTp6+HqbHKUVGdYEjNU5Cm+am6uzvoKzg9V2fD4eDszRup2SaSvV0omlUaj+iy7PbrPj9daRGQdX7IVAoUX8KXLaXe43EnKrft6exeJ6hJbfWGIEBKAeXzI5BI5AAlIO4yfIjFalWIbSw8iDMMSFFrAxzzimXCYAJCvEDezwqX8rlF7Ury5tHPQCxmhQp6cby/PUwRAkfh42Bv8/Y8csT3LUizHezw7j09ONrECKy4jsEKo7wY7SI1/HDrd3REqLOI1Gd6YP7gQPTDvtJQknQRUCSLCMwxB4UWMpXsRhuW/rzM+Dor+WgwS2yo7CQpD+NOqhID6Etu6GqZqnlcX6oc/gFYlfqVjDrYDzOMj9j8HHP+9FZg5fNJOl0C08xCBtkQ40KYQ+Lf0I5mywlu7pFkzAAAAAElFTkSuQmCC',
-            en: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAMAAACXZR4WAAAAWlBMVEVAQEBAQEDMAAD////PDg/88PAAM5nw8/kNPp/miImTqdThamr++fmEnc4JOp36+/3h5/PY3+765ubXyNb20dGKkL1Lb7dHbLbvsbE8Y7EtV6vuqqrMf4vfZGXxBPxdAAAAAnRSTlNfO/q7ZYcAAABzSURBVAjXZc9JEoAgDERRBAwEnOfx/te0gxss/ybVbxdVqDyZsQqenNWlb2o+YfM9dYvAOsYhAOi42LSAjfudAM5IgHQBVucBPtsCjFRqm64D0N7zBmgNXwcBwhDHFeCWbrpnwMl14wXIhyoCZL8gon6/PDvNBSUoA2a1AAAAAElFTkSuQmCC',
-            ru: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAASElEQVR42mNwcHCwBuJIIE4gEYP0WDOAGP/JBCC9IAMSKDAggToG1Nf//08OhhvAwPD/Pzl4EBnwn0wTBo8BkRQYAE6JFOUFAB950GCPrs2eAAAAAElFTkSuQmCC'
-        };
+        // удаляем добавленные скриптом элементы
+        if (document.getElementById('scriptPrefs') !== null) {
+            document.getElementById('scriptPrefs').remove();
+        }
+        if (document.getElementById('scriptTage') !== null) {
+            document.getElementById('scriptTage').remove();
+        }
+        if (document.getElementById('scriptTsummary') !== null) {
+            document.getElementById('scriptTsummary').remove();
+        }
+
 
         // добавляем на страницу блок настроек скрипта
         addOptionsSelector();
@@ -104,39 +127,43 @@
         var Cmain = document.getElementById('main');
         var Tresults = document.getElementById('results');
         var Atr = Tresults.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-        var style = document.createElement('style');
-        style.innerHTML = '.ageTable, .summaryTable {text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
-                           .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 28pt; background: #e5f3fc;} \
-                           .ageTable td, .summaryTable td, .ageTable th, .summaryTable th {border: 1px solid #c7dbe3;} \
-                           .ageTable td, .summaryTable td {padding: 5px;} \
-                           .ageTable th, .summaryTable th {padding: 0px 10px 5px;} \
-                           .ageTable th:nth-child(1), .summaryTable th:nth-child(1) {font-weight: bold; text-align: left; font-size: 12pt; padding: 0px 10px 0px;} \
-                           .summaryTable td:nth-child(1) {padding-left: 10px; text-align: left; font-weight: bold;} \
-                           .summaryTable tr:nth-child(1) td:not(:nth-child(2)), .summaryTable tr:nth-child(2) td:not(:nth-child(2)), .summaryTable tr:nth-child(3) td:not(:nth-child(2)) \
-                               {padding-left: 10px; text-align: left;} \
-                           .ageTable td:nth-child(3n), .ageTable td:nth-child(3n+1) {width: 45px;} \
-                           .ageTable tbody tr:hover, .summaryTable tbody tr:hover {background: #e5f3fc; font-weight: bold; vertical-align: top;} \
-                           .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none;} \
-                           .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
-                           .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
-                           .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
-                           .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {display: block;} \
-                           .sexM {color: rgb(34, 102, 200);} \
-                           .sexF {color: rgb(255, 60, 150);} \
-                           .sexMF {padding: 0px 2px 5px !important;} \
-                           .sexMF span:nth-child(2) {padding: 1px; font-size: 14pt; vertical-align: middle;} \
-                           .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
-                           .guestsInfo p {margin-bottom: 5px;} \
-                           .guestsInfo p span {font-weight: bold;} \
-                           .scriptPrefs {position: absolute; right: 100px; top: 5px; width: 200px; z-index: 4; align: left;}\
-                           .headerPrefs {padding-left: 54px; width: 100%; font-size: 10pt; text-align: left; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px;}\
-                           .selLang {width: 100%; margin-top: 5px; text-align: left;}\
-                           .extIco {float: left; margin-top: -18px; margin-right: 2px; border-radius: 5px;}\
-                           .optionFlag {vertical-align: top; padding: 4px;}\
-                           .optionFlag:hover {padding: 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
-                           .currentFlag {vertical-align: top; padding: 2px; border: 2px inset #DDDDDD;}\
-                          ';
-        Cmain.appendChild(style);
+
+        if (document.getElementById('scriptStyles') === null) {
+            var style = document.createElement('style');
+            style.id = 'scriptStyles';
+            style.innerHTML = '.ageTable, .summaryTable {text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
+                               .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 28pt; background: #e5f3fc;} \
+                               .ageTable td, .summaryTable td, .ageTable th, .summaryTable th {border: 1px solid #c7dbe3;} \
+                               .ageTable td, .summaryTable td {padding: 5px;} \
+                               .ageTable th, .summaryTable th {padding: 0px 10px 5px;} \
+                               .ageTable th:nth-child(1), .summaryTable th:nth-child(1) {font-weight: bold; text-align: left; font-size: 12pt; padding: 0px 10px 0px;} \
+                               .summaryTable td:nth-child(1) {padding-left: 10px; text-align: left; font-weight: bold;} \
+                               .summaryTable tr:nth-child(1) td:not(:nth-child(2)), .summaryTable tr:nth-child(2) td:not(:nth-child(2)), .summaryTable tr:nth-child(3) td:not(:nth-child(2)) \
+                                   {padding-left: 10px; text-align: left;} \
+                               .ageTable td:nth-child(3n), .ageTable td:nth-child(3n+1) {width: 45px;} \
+                               .ageTable tbody tr:hover, .summaryTable tbody tr:hover {background: #e5f3fc; font-weight: bold; vertical-align: top;} \
+                               .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none;} \
+                               .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
+                               .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
+                               .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
+                               .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {display: block;} \
+                               .sexM {color: rgb(34, 102, 200);} \
+                               .sexF {color: rgb(255, 60, 150);} \
+                               .sexMF {padding: 0px 2px 5px !important;} \
+                               .sexMF span:nth-child(2) {padding: 1px; font-size: 14pt; vertical-align: middle;} \
+                               .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
+                               .guestsInfo p {margin-bottom: 5px;} \
+                               .guestsInfo p span {font-weight: bold;} \
+                               .scriptPrefs {position: absolute; right: 100px; top: 5px; width: 200px; z-index: 4; align: left;}\
+                               .headerPrefs {padding-left: 54px; width: 100%; font-size: 10pt; text-align: left; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px;}\
+                               .selLang {width: 100%; margin-top: 5px; text-align: left;}\
+                               .extIco {float: left; margin-top: -18px; margin-right: 2px; border-radius: 5px;}\
+                               .optionFlag {vertical-align: top; padding: 4px;}\
+                               .optionFlag:hover {padding: 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
+                               .currentFlag {vertical-align: top; padding: 2px; border: 2px inset #DDDDDD;}\
+                              ';
+            Cmain.appendChild(style);
+        }
 
         // база для хранения собранной информации
         var DB = {
@@ -249,6 +276,7 @@
 
         // добавляем на страничку информацию о количестве участников по возрастным группам
         var Tage = document.createElement('table');
+        Tage.id = 'scriptTage';
         Tage.className = 'ageTable';
         var Tagehead = document.createElement('thead');
         Tagehead.innerHTML = '<tr>\
@@ -295,6 +323,7 @@
 
         // добавляем на страничку пустую таблицу для общих результатов
         var Tsummary = document.createElement('table');
+        Tsummary.id = 'scriptTsummary';
         Tsummary.className = 'summaryTable';
         var Thead = document.createElement('thead');
         Thead.innerHTML = '<tr>\
@@ -417,8 +446,6 @@
         nodes[1].innerHTML = ((DB.ageAVG.m + DB.ageAVG.f)/(DB.number.m + DB.number.f - DB.number.WC.all)).toFixed();
         nodes[2].innerHTML = (DB.ageAVG.m/(DB.number.m - DB.number.WC.m)).toFixed();
         nodes[3].innerHTML = (DB.ageAVG.f/(DB.number.f - DB.number.WC.f)).toFixed();
-    } else {
-        return;
     }
 
     // проверка, находимся ли мы на страничке результатов
@@ -557,7 +584,7 @@
         for (var lang in L10n) {
             var flag = document.createElement('img');
             flag.id = 'optionFlag_' + lang;
-            flag.title = lang;
+            flag.title = L10n[lang].nativeLanguageTitle;
             flag.src = IMGbase64[lang];
             if (lang == LANG) {
                 flag.className = 'currentFlag';
@@ -566,10 +593,12 @@
                 // при клике по флажку меняем язык и перезагружаем страницу
                 flag.onclick = function() {
                     this.className = 'currentFlag';
-                    lsprefs.LANG = this.id.slice(this.id.indexOf('_') + 1);
-                    localStorage.setItem('parkrunExtendedInfo', JSON.stringify(lsprefs));
                     document.getElementById('optionFlag_' + LANG).className = 'optionFlag';
-                    location.reload();
+                    LANG = this.id.slice(this.id.indexOf('_') + 1);
+                    lsprefs.LANG = LANG;
+                    chrome.storage.local.set({parkrunExtendedInfo: lsprefs}, function() {
+                        main();
+                    });
                 };
             }
             selLang.appendChild(flag);

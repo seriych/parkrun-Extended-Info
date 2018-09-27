@@ -71,7 +71,9 @@
         var IMGbase64 = {
             extIco48: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAABelBMVEWLjQmMjQmMjguNjw2OkA6QkgySlAyTlQ6UlhCWmAySlBWQkhSVlx+Ymh2eoBamqB2mqDCrrTCxsyy4ui66vC/DxT/Jy0q8vVfBwmLExmPNz27T1GO/wHXBwnzCw33DxH/ExYHHyIjExY/Oz5jb3LPi4sDl5sjr69Xw8OD29uz6+vL8/Pv+/v7///+3uWiztF2xslqvsFWsrletrlGrrEyqrEuqq0qmp0ChozqgojygojefoDOenzGRklavsHBubmVsbG1VVVNIR0tBQUw7O0ZAQEA2Nj0zMzw1NTgyMjAvLy4vLy0oKCwkJC0lJDAnJzMoKDIuLTk1NSExMRYsLRUoKBwmJxohIhozNA06OhM+PxFCQwpPUA1WVwZaWg9hYgdydAl3eQV6ewZ6fAd8fgV9fwSAggOChACChQCDhQCEhgCFhwCGiACHiQKJiwSJiwiIigiHiQeGiAiEhgiChAmDhQuGiA+JiwqKjAh/gQiBgxVqajRLTCdCQh+MD1J8AAADAElEQVR42tWTg6MrORjF02Tm2rZV5Nq2b227HdRK9bfvzpu+Zb3eUwXnl6/nSwv+P4KC2rJHOZYnqGU/x/WdHF8ghrRYhT1Zx4KkyxTXCgH5JSxf295Z2sRbp1ycNPMjdgGv9zOhCN29LJeND3bGm51/jjcID+lCsfR0f3t1ODECSOMCq/iSg2mHWqm1WnQmzc30ON2IIJR0g8t5y8qSO5/kfC6b6X5uvEF0KtKHV4P5sqrYQaUSQyO0z2G6nxmtlwMRJnKCl/1OZXEQgID1bnoglnaYbma7YrX9XO/SlgKvuXX3w51x6DM/TA0kJV7Ly9xIAtbMeyjFW6tz+66vqxFA0wHzw/SAhM45TVcTpKZ/F0t3SIgN2DX7A9mh4X7rw+TI0PCIx3g7UaNRkL9QbPWHAKIy1ufJHsvz/dO78Hq6m4rr7yZqhID8Oj5nKGGQtr1M9dssVqv+tWS1lvsz+rvxDlLtP8WrIerbKGVXXo/6mZTX/DBJB9mk23AzBqsTMIv4lBfXiUtoJJ1Dvm+h4zDpVF2NVF8EZNfkvdHK0GN+XhhPAr/5cWogkfNrn4ZrReDWpZBUhkmn6W52jPZYtRf9JGHXXI12kdoVyPdxwG66254YloDu/nTp6+HqbHKUVGdYEjNU5Cm+am6uzvoKzg9V2fD4eDszRup2SaSvV0omlUaj+iy7PbrPj9daRGQdX7IVAoUX8KXLaXe43EnKrft6exeJ6hJbfWGIEBKAeXzI5BI5AAlIO4yfIjFalWIbSw8iDMMSFFrAxzzimXCYAJCvEDezwqX8rlF7Ury5tHPQCxmhQp6cby/PUwRAkfh42Bv8/Y8csT3LUizHezw7j09ONrECKy4jsEKo7wY7SI1/HDrd3REqLOI1Gd6YP7gQPTDvtJQknQRUCSLCMwxB4UWMpXsRhuW/rzM+Dor+WgwS2yo7CQpD+NOqhID6Etu6GqZqnlcX6oc/gFYlfqVjDrYDzOMj9j8HHP+9FZg5fNJOl0C08xCBtkQ40KYQ+Lf0I5mywlu7pFkzAAAAAElFTkSuQmCC',
             en: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAMAAACXZR4WAAAAWlBMVEVAQEBAQEDMAAD////PDg/88PAAM5nw8/kNPp/miImTqdThamr++fmEnc4JOp36+/3h5/PY3+765ubXyNb20dGKkL1Lb7dHbLbvsbE8Y7EtV6vuqqrMf4vfZGXxBPxdAAAAAnRSTlNfO/q7ZYcAAABzSURBVAjXZc9JEoAgDERRBAwEnOfx/te0gxss/ybVbxdVqDyZsQqenNWlb2o+YfM9dYvAOsYhAOi42LSAjfudAM5IgHQBVucBPtsCjFRqm64D0N7zBmgNXwcBwhDHFeCWbrpnwMl14wXIhyoCZL8gon6/PDvNBSUoA2a1AAAAAElFTkSuQmCC',
-            ru: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAASElEQVR42mNwcHCwBuJIIE4gEYP0WDOAGP/JBCC9IAMSKDAggToG1Nf//08OhhvAwPD/Pzl4EBnwn0wTBo8BkRQYAE6JFOUFAB950GCPrs2eAAAAAElFTkSuQmCC'
+            ru: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAASElEQVR42mNwcHCwBuJIIE4gEYP0WDOAGP/JBCC9IAMSKDAggToG1Nf//08OhhvAwPD/Pzl4EBnwn0wTBo8BkRQYAE6JFOUFAB950GCPrs2eAAAAAElFTkSuQmCC',
+            m: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAABelBMVEUulMswmNAumtQvnNUundQxndYzn9g0oNg4odo3ots4pNk8ptg7pd0+pt1Ap99DqN9DquBIrOFMreJNruFQsOJSseJSsORYs+VYtOJht+VjuOZSqtI0otIsmdMnl9Aklc8nlM0mk8oikMogkcoijcYfi8QdicEdh74fhrwhh7kehLkeg7ckg7YZgbMYg7onjsQnj8YDfbQDea4KgLAQkMECeKUAe6gPj74Pkb8jlsAsnccHjb0AgK8AdKMwn8hDn8Qnm8c/ock9e5hhWlpQT09KSkpJSUlHR0dGRkZFRUVFRERDQ0NBQUE+QEA+Pj49PT08PDw6Ojo5OTk1NTUzMzMyMjIxMTEsLS0sLCwmJycaHBxSUFBERERRTk47ODhbWFhIRkYAAADjvb/uvb34y8ruxcfxwcHsxsf1ysr5zs760tL31dX71tb62dn72tr83Nz73t774OD74uL84+P+5uP/6Oj/6uf/7u7+4N//2Nj/2tbfvLy2oKCausyquyT6AAAAfHRSTlP////////////////////////////////////7/P/////+/////////////////////v/gy7KEYjwgChQRMTtlksj9/v39//////////////z/////////////yq1zWkIOABN3osfe/////////////////////////9z+koo2owAAAjNJREFUeAF10U9PE1EUBfBz7nszQ2khGiBqZMffyELjSr6MiX4wP4wbF25ciCG2JIqAaKJQGjudmffudYACDZ2et/293Jtz+QZ3MTOYAXTEZDzuouEXUqopVrzMQHoCtpwiRv1tT6URWcgs0puJBNpxrRpQzNMIc6glQ0yOVmUa2SBRoZrACYHoQ8IppCmgfjB8DNCcqf164qeRGdLR7tn+o9oAqmJNi7v491WerXeXPcVR0ICY9F/GErG9s/iBGZ3mD27RbeP8vlu6IQUwQ75M2A83PW7tzAVPEIS2R+LZVIHWAoABFEDPK04jWNkJKjcumqEJRZ0bmY3/B52B8gUfeIUYqtiIoGWRIXi5NKOgaETQf5K5yoShqM0MZHHQzlxpsVDFLATTvOqkwwrAbARK7MPIpVObhXphx1FVEsWB2kYT6hUR7BRZBW1BBvziN6cOvBdHYf7nawAA+u9jyaVs8x76HHIzbxdvAeDdIvNvc9WLWk2ivapQGJA5ELBh65NkWfks2Z7YqRcqAjAbAm2ArT69Q6e3vr99h0YVDFangwsCfT1MUkHMDp7jBnUZzABT5TnsXGEnSUohMfdRw9Y1YlEjrY3a4SqOKUyd8FJxQTyuUWEALNbP5JQJ6a6EOELIMYKqK1XjIZ2jUIQEpaaAATdIpIy1EamFw9gICXUxjNFOl6owOvFCAb2JAhrj/LauTZTZrUzxJx6JWzmD8SGwAbNq697t8BURMKCFHATBsQDwH9z5L5joIlrtAAAAAElFTkSuQmCC',
+            f: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAABgFBMVEXeXt/eXuLgYObkYOnoYubrYuztZfDvZvH0aPX2afL4avD7be7+be7+bO3+cO3/cu3+dO79dO/8ce/6cfD2cPT5Z/b1Z+3zZOnzZuTsY9/kYdvbXd7YXNrYW9fWWtfTW9PVU9DMScTcStPfSt/0XujzYeX0X+fsbtryX+b1XuvzZOfdPtDJPbvUPsjkbtT5eOz+duz/d+3/ee7/e+7/fO//f+/+gu//hfD+iPD8h+v/jvHux8jlvb/10NH91NT619n82dn72tr73Nz839/94OD64OD53+H64uL74uL74+P94+P+5OX/5uf/6er+6+z/8e796OL73tzNq6mihX2QcFyLblmKbF2GaFSDZVeBZVN7YU55X0x0XEt2WkhzWEZyWUVwV0RyVUFvVkhqUz9pTz5qTTlmSzZkSzpkTDxiTD9eSDpZSDheRTNaPyxSPS9PPC5QOStNNiZEMCE5KRhRPzNUQjRTPzZyVUyGUmJxWUZcQDZ3XkskHBc2KyEuIRj///82hf3PAAAAgHRSTlP////////////////////////////8//z////////////+7f7w162Tf1EhGE6p//////////////////P8///////////////////////////38vv///z//v/////////////////////8//z/////////+v//1r/3cWAyJaCrAMas5/8AAAJMSURBVHgBZdPRTmNVGMXx//r2Pqe0FFJHBYOOSUl8G2+MYeLb+CQ+wIzojS8ERphhVEZocdqec/ZyYgmge13/sr61T3L0PY/pSwEIRWl4kvyE9BeWUkhZe5EqtDW/AgxSS/L1LBI1Kue2IRJ9ayad2lSh/szFKEeKNASyN+MauYDaXDxkr2hNM6T/of43xZBaWex0t1cHo8/qJkruSSOI2Plzdd2s/ui+tKpzOUigHV2+3o1Yz97MeUiwjSI3Ujv1xdWUNjclLkXVJBhlXV5MxgSABmrUIt6ufp+WTAGp4BqRl9dXo3bIZVvsqatNKL3rkpXMNgfjGgFEHny/JDZyqdHGTT9VSQA4lrMSNVL3/Eb77gBQOUyhGrEpX/wV07IZoGtu9ledXb3Off95WTZ7i66gxWHepHqTNaz9fLxkf+Ju/WzWjXdHVE1djnDarJrBiPYu/62datPaiCHFUKx8NWs6l7qp9NnZESD74OdvvKRGSh+91NHHAiiUH/3ipkK/fP3S58e3adKLWK+6Tf/D3nfBNvc/52ksPFxo/v4TgHepH7z05PDb/zTFYsBwVsYwkM6OKMr91asXT5p+uisufi2EDwHsO6evyqI5eWyS8QcTAG/5FHwb6dh5f/Fw7lR3dvlgJJhZA7yPkIJm/EonWyS5+DIikLgVCRyaS4rRKh7O2ZZCQgg1vdA8AhHmEV0oQtIEYzs4RqEIutA9MvnoTaRdsLGZCymE+/UqnTx8gtO4O48IjcscCdvmPJ6lOIEHBKcUF4wB0L9hS+AfVDsfaaQ0bawAAAAASUVORK5CYII='
         };
 
         // Читаем настройки из кэша
@@ -132,11 +134,11 @@
             var style = document.createElement('style');
             style.id = 'scriptStyles';
             style.innerHTML = '.ageTable, .summaryTable {text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
-                               .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 28pt; background: #e5f3fc;} \
+                               .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 14pt; background: #e5f3fc;} \
                                .ageTable td, .summaryTable td, .ageTable th, .summaryTable th {border: 1px solid #c7dbe3;} \
                                .ageTable td, .summaryTable td {padding: 5px;} \
-                               .ageTable th, .summaryTable th {padding: 0px 10px 5px;} \
-                               .ageTable th:nth-child(1), .summaryTable th:nth-child(1) {font-weight: bold; text-align: left; font-size: 12pt; padding: 0px 10px 0px;} \
+                               .ageTable th, .summaryTable th {padding: 5px 0px; vertical-align: middle;} \
+                               .ageTable th:nth-child(1), .summaryTable th:nth-child(1) {font-weight: bold; text-align: left; font-size: 12pt; padding: 0px 10px;} \
                                .summaryTable td:nth-child(1) {padding-left: 10px; text-align: left; font-weight: bold;} \
                                .summaryTable tr:nth-child(1) td:not(:nth-child(2)), .summaryTable tr:nth-child(2) td:not(:nth-child(2)), .summaryTable tr:nth-child(3) td:not(:nth-child(2)) \
                                    {padding-left: 10px; text-align: left;} \
@@ -147,10 +149,8 @@
                                .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
                                .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
                                .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {display: block;} \
-                               .sexM {color: rgb(34, 102, 200);} \
-                               .sexF {color: rgb(255, 60, 150);} \
-                               .sexMF {padding: 0px 2px 5px !important;} \
-                               .sexMF span:nth-child(2) {padding: 1px; font-size: 14pt; vertical-align: middle;} \
+                               .sexMF img {vertical-align: middle;} \
+                               .sexMF span {font-size: 14pt; vertical-align: middle;} \
                                .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
                                .guestsInfo p {margin-bottom: 5px;} \
                                .guestsInfo p span {font-weight: bold;} \
@@ -282,10 +282,10 @@
         Tagehead.innerHTML = '<tr>\
                                   <th style="width: 220px;">' + L10n[LANG].ageTable.mainTitle + '</th>\
                                   <th class="sexMF" title="' + L10n[LANG].sex.all + '">\
-                                      <span class="sexM">&#128697;</span><span>+</span><span class="sexF">&#128698;</span>\
+                                      <img src="' + IMGbase64.m + '"><span>+</span><img src="' + IMGbase64.f + '">\
                                   </th>\
-                                  <th colspan="3" class="sexM" title="' + L10n[LANG].sex.men + '">&#128697;</th>\
-                                  <th colspan="3" class="sexF" title="' + L10n[LANG].sex.women + '">&#128698;</th>\
+                                  <th colspan="3" class="sexMF" title="' + L10n[LANG].sex.men + '"><img src="' + IMGbase64.m + '"></th>\
+                                  <th colspan="3" class="sexMF" title="' + L10n[LANG].sex.women + '"><img src="' + IMGbase64.f + '"></th>\
                               </tr>';
         Tage.appendChild(Tagehead);
         var Tagebody = document.createElement('tbody');
@@ -329,10 +329,10 @@
         Thead.innerHTML = '<tr>\
                                <th style="font-size: 14pt;">' + L10n[LANG].summaryTable.mainTitle + '</th>\
                                <th class="sexMF" title="' + L10n[LANG].sex.all + '">\
-                                   <span class="sexM">&#128697;</span><span>+</span><span class="sexF">&#128698;</span>\
+                                   <img src="' + IMGbase64.m + '">+<img src="' + IMGbase64.f + '">\
                                </th>\
-                               <th colspan="2" class="sexM" title="' + L10n[LANG].sex.men + '">&#128697;</th>\
-                               <th colspan="2" class="sexF" title="' + L10n[LANG].sex.women + '">&#128698;</th>\
+                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.men + '"><img src="' + IMGbase64.m + '"></th>\
+                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.women + '"><img src="' + IMGbase64.f + '"></th>\
                            </tr>';
         Tsummary.appendChild(Thead);
         var Tbody = document.createElement('tbody');

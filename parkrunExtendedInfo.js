@@ -24,7 +24,10 @@
                     firstHomeNote: 'name (parkruns in general)',
                     firstRun: 'For the first time visiting parkrun:',
                     firstRunTooltip: 'Information is only available for the last race',
-                    ageAVG: 'Average age*:',
+                    jubileeNext: 'Soon jubilee race:',
+                    jubilee: 'Jubilee race:',
+                    jubileeTooltip: 'Shows the total number of races now, and not at the date of the viewed race',
+                    ageAVG: 'Average age:*',
                     ageAVGTooltip: 'The average age may be inaccurate (deviation not more than 2 years)'
                 },
                 ageTable: {
@@ -33,7 +36,16 @@
                     '---': 'Age not specified'
                 },
                 scriptSettings: {
-                    headerTooltip: 'Script settings'
+                    headerTooltip: 'Script settings',
+                    jubileeMax: {
+                        'title': 'Show upcoming jubilee races:',
+                        '0': 'Do not show',
+                        '1': '1 race before',
+                        '2': '2 races before',
+                        '3': '3 races before',
+                        '4': '4 races before',
+                        '5': '5 races before'
+                    }
                 }
             },
             ru: {
@@ -52,7 +64,10 @@
                     firstHomeNote: 'имя (всего забегов)',
                     firstRun: 'Впервые пробежали parkrun:',
                     firstRunTooltip: 'Информация доступна только для последнего забега',
-                    ageAVG: 'Средний возраст*:',
+                    jubileeNext: 'Скоро юбилейный забег:',
+                    jubilee: 'Юбилейный забег:',
+                    jubileeTooltip: 'Показывается общее число забегов на сегодняшний день, а не на момент проведения просматриваемого забега',
+                    ageAVG: 'Средний возраст:*',
                     ageAVGTooltip: 'Средний возраст может быть неточным (отклонение не более 2 лет)'
                 },
                 ageTable: {
@@ -61,15 +76,32 @@
                     '---': 'Возраст не указан'
                 },
                 scriptSettings: {
-                    headerTooltip: 'Настройки скрипта'
+                    headerTooltip: 'Настройки скрипта',
+                    jubileeMax: {
+                        'title': 'Показывать приближение к юбилейным забегам:',
+                        '0': 'Не показывать',
+                        '1': 'За 1 забег',
+                        '2': 'За 2 забега',
+                        '3': 'За 3 забега',
+                        '4': 'За 4 забега',
+                        '5': 'За 5 забегов'
+                    }
                 }
             }
         };
+
+        // настройки по умолчанию
         var LANG = 'en';
+        var jubileeMax = 2;
+        var defaultPrefs = {
+            LANG: LANG,
+            jubileeMax: jubileeMax
+        };
 
         // иконки, закодированные в base64
         var IMGbase64 = {
             extIco48: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAABelBMVEWLjQmMjQmMjguNjw2OkA6QkgySlAyTlQ6UlhCWmAySlBWQkhSVlx+Ymh2eoBamqB2mqDCrrTCxsyy4ui66vC/DxT/Jy0q8vVfBwmLExmPNz27T1GO/wHXBwnzCw33DxH/ExYHHyIjExY/Oz5jb3LPi4sDl5sjr69Xw8OD29uz6+vL8/Pv+/v7///+3uWiztF2xslqvsFWsrletrlGrrEyqrEuqq0qmp0ChozqgojygojefoDOenzGRklavsHBubmVsbG1VVVNIR0tBQUw7O0ZAQEA2Nj0zMzw1NTgyMjAvLy4vLy0oKCwkJC0lJDAnJzMoKDIuLTk1NSExMRYsLRUoKBwmJxohIhozNA06OhM+PxFCQwpPUA1WVwZaWg9hYgdydAl3eQV6ewZ6fAd8fgV9fwSAggOChACChQCDhQCEhgCFhwCGiACHiQKJiwSJiwiIigiHiQeGiAiEhgiChAmDhQuGiA+JiwqKjAh/gQiBgxVqajRLTCdCQh+MD1J8AAADAElEQVR42tWTg6MrORjF02Tm2rZV5Nq2b227HdRK9bfvzpu+Zb3eUwXnl6/nSwv+P4KC2rJHOZYnqGU/x/WdHF8ghrRYhT1Zx4KkyxTXCgH5JSxf295Z2sRbp1ycNPMjdgGv9zOhCN29LJeND3bGm51/jjcID+lCsfR0f3t1ODECSOMCq/iSg2mHWqm1WnQmzc30ON2IIJR0g8t5y8qSO5/kfC6b6X5uvEF0KtKHV4P5sqrYQaUSQyO0z2G6nxmtlwMRJnKCl/1OZXEQgID1bnoglnaYbma7YrX9XO/SlgKvuXX3w51x6DM/TA0kJV7Ly9xIAtbMeyjFW6tz+66vqxFA0wHzw/SAhM45TVcTpKZ/F0t3SIgN2DX7A9mh4X7rw+TI0PCIx3g7UaNRkL9QbPWHAKIy1ufJHsvz/dO78Hq6m4rr7yZqhID8Oj5nKGGQtr1M9dssVqv+tWS1lvsz+rvxDlLtP8WrIerbKGVXXo/6mZTX/DBJB9mk23AzBqsTMIv4lBfXiUtoJJ1Dvm+h4zDpVF2NVF8EZNfkvdHK0GN+XhhPAr/5cWogkfNrn4ZrReDWpZBUhkmn6W52jPZYtRf9JGHXXI12kdoVyPdxwG66254YloDu/nTp6+HqbHKUVGdYEjNU5Cm+am6uzvoKzg9V2fD4eDszRup2SaSvV0omlUaj+iy7PbrPj9daRGQdX7IVAoUX8KXLaXe43EnKrft6exeJ6hJbfWGIEBKAeXzI5BI5AAlIO4yfIjFalWIbSw8iDMMSFFrAxzzimXCYAJCvEDezwqX8rlF7Ury5tHPQCxmhQp6cby/PUwRAkfh42Bv8/Y8csT3LUizHezw7j09ONrECKy4jsEKo7wY7SI1/HDrd3REqLOI1Gd6YP7gQPTDvtJQknQRUCSLCMwxB4UWMpXsRhuW/rzM+Dor+WgwS2yo7CQpD+NOqhID6Etu6GqZqnlcX6oc/gFYlfqVjDrYDzOMj9j8HHP+9FZg5fNJOl0C08xCBtkQ40KYQ+Lf0I5mywlu7pFkzAAAAAElFTkSuQmCC',
+            prefsIco36: 'data:image/png;base64,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',
             en: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAMAAACXZR4WAAAAWlBMVEVAQEBAQEDMAAD////PDg/88PAAM5nw8/kNPp/miImTqdThamr++fmEnc4JOp36+/3h5/PY3+765ubXyNb20dGKkL1Lb7dHbLbvsbE8Y7EtV6vuqqrMf4vfZGXxBPxdAAAAAnRSTlNfO/q7ZYcAAABzSURBVAjXZc9JEoAgDERRBAwEnOfx/te0gxss/ybVbxdVqDyZsQqenNWlb2o+YfM9dYvAOsYhAOi42LSAjfudAM5IgHQBVucBPtsCjFRqm64D0N7zBmgNXwcBwhDHFeCWbrpnwMl14wXIhyoCZL8gon6/PDvNBSUoA2a1AAAAAElFTkSuQmCC',
             ru: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAASElEQVR42mNwcHCwBuJIIE4gEYP0WDOAGP/JBCC9IAMSKDAggToG1Nf//08OhhvAwPD/Pzl4EBnwn0wTBo8BkRQYAE6JFOUFAB950GCPrs2eAAAAAElFTkSuQmCC',
             m: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAABelBMVEUulMswmNAumtQvnNUundQxndYzn9g0oNg4odo3ots4pNk8ptg7pd0+pt1Ap99DqN9DquBIrOFMreJNruFQsOJSseJSsORYs+VYtOJht+VjuOZSqtI0otIsmdMnl9Aklc8nlM0mk8oikMogkcoijcYfi8QdicEdh74fhrwhh7kehLkeg7ckg7YZgbMYg7onjsQnj8YDfbQDea4KgLAQkMECeKUAe6gPj74Pkb8jlsAsnccHjb0AgK8AdKMwn8hDn8Qnm8c/ock9e5hhWlpQT09KSkpJSUlHR0dGRkZFRUVFRERDQ0NBQUE+QEA+Pj49PT08PDw6Ojo5OTk1NTUzMzMyMjIxMTEsLS0sLCwmJycaHBxSUFBERERRTk47ODhbWFhIRkYAAADjvb/uvb34y8ruxcfxwcHsxsf1ysr5zs760tL31dX71tb62dn72tr83Nz73t774OD74uL84+P+5uP/6Oj/6uf/7u7+4N//2Nj/2tbfvLy2oKCausyquyT6AAAAfHRSTlP////////////////////////////////////7/P/////+/////////////////////v/gy7KEYjwgChQRMTtlksj9/v39//////////////z/////////////yq1zWkIOABN3osfe/////////////////////////9z+koo2owAAAjNJREFUeAF10U9PE1EUBfBz7nszQ2khGiBqZMffyELjSr6MiX4wP4wbF25ciCG2JIqAaKJQGjudmffudYACDZ2et/293Jtz+QZ3MTOYAXTEZDzuouEXUqopVrzMQHoCtpwiRv1tT6URWcgs0puJBNpxrRpQzNMIc6glQ0yOVmUa2SBRoZrACYHoQ8IppCmgfjB8DNCcqf164qeRGdLR7tn+o9oAqmJNi7v491WerXeXPcVR0ICY9F/GErG9s/iBGZ3mD27RbeP8vlu6IQUwQ75M2A83PW7tzAVPEIS2R+LZVIHWAoABFEDPK04jWNkJKjcumqEJRZ0bmY3/B52B8gUfeIUYqtiIoGWRIXi5NKOgaETQf5K5yoShqM0MZHHQzlxpsVDFLATTvOqkwwrAbARK7MPIpVObhXphx1FVEsWB2kYT6hUR7BRZBW1BBvziN6cOvBdHYf7nawAA+u9jyaVs8x76HHIzbxdvAeDdIvNvc9WLWk2ivapQGJA5ELBh65NkWfks2Z7YqRcqAjAbAm2ArT69Q6e3vr99h0YVDFangwsCfT1MUkHMDp7jBnUZzABT5TnsXGEnSUohMfdRw9Y1YlEjrY3a4SqOKUyd8FJxQTyuUWEALNbP5JQJ6a6EOELIMYKqK1XjIZ2jUIQEpaaAATdIpIy1EamFw9gICXUxjNFOl6owOvFCAb2JAhrj/LauTZTZrUzxJx6JWzmD8SGwAbNq697t8BURMKCFHATBsQDwH9z5L5joIlrtAAAAAElFTkSuQmCC',
@@ -81,10 +113,12 @@
         chrome.storage.local.get(['parkrunExtendedInfo'], function(result) {
             if (result.parkrunExtendedInfo !== undefined) {
                 lsprefs = result.parkrunExtendedInfo;
+                console.log(lsprefs);
                 if (lsprefs.LANG !== undefined && L10n.hasOwnProperty(lsprefs.LANG)) {
                     LANG = lsprefs.LANG;
                 }
             }
+            extendObjects(lsprefs, defaultPrefs);
             // запускаем основное тело скрипта
             main();
         });
@@ -107,8 +141,8 @@
         L10n[LANG].sex.f = L10n[LANG].sex.f.replace(/\s/g, '&nbsp;');
 
         // удаляем добавленные скриптом элементы
-        if (document.getElementById('scriptPrefs') !== null) {
-            document.getElementById('scriptPrefs').remove();
+        if (document.getElementById('scriptPrefsMain') !== null) {
+            document.getElementById('scriptPrefsMain').remove();
         }
         if (document.getElementById('scriptTage') !== null) {
             document.getElementById('scriptTage').remove();
@@ -119,7 +153,7 @@
 
 
         // добавляем на страницу блок настроек скрипта
-        addOptionsSelector();
+        addMainOptionsSelector();
 
         var note = {
             pb: ['Личный рекорд!', 'New PB!'],
@@ -154,13 +188,20 @@
                                .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
                                .guestsInfo p {margin-bottom: 5px;} \
                                .guestsInfo p span {font-weight: bold;} \
-                               .scriptPrefs {position: absolute; right: 100px; top: 5px; width: 200px; z-index: 4; align: left;}\
-                               .headerPrefs {padding-left: 54px; width: 100%; font-size: 10pt; text-align: left; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px;}\
-                               .selLang {width: 100%; margin-top: 5px; text-align: left;}\
-                               .extIco {float: left; margin-top: -18px; margin-right: 2px; border-radius: 5px;}\
-                               .optionFlag {vertical-align: top; padding: 4px;}\
+                               .scriptPrefsMain {position: absolute; right: 100px; top: 5px; width: 200px; z-index: 4; align: left; text-align: left;}\
+                               .headerPrefs {font-size: 10pt; text-align: left; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px;}\
+                               .selLang {display: inline-block; margin: 5px auto 0px; text-align: left;}\
+                               .extIco {float: left; margin-right: 2px; border-radius: 5px;}\
+                               .optionFlag {display: inline-block; padding: 4px;}\
                                .optionFlag:hover {padding: 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
                                .currentFlag {vertical-align: top; padding: 2px; border: 2px inset #DDDDDD;}\
+                               .scriptPrefs {position: absolute; right: 345px; top: 0px; padding: 5px 10px; width: auto; height: 164px; z-index: 4; text-align: left;}\
+                               .scriptPrefs div {color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px;}\
+                               .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 305px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMGbase64.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
+                               .scriptPrefsIcoDiv:hover {filter: none !important; cursor: pointer; background-size: 36px !important;}\
+                               .selJubilee {margin-top: 2px;}\
+                               .selJubilee option {color: rgb(0, 0, 0); font-weight: normal;}\
+                               .selJubilee option:checked {color: rgb(0, 144, 255) !important; font-weight: bold !important;}\
                               ';
             Cmain.appendChild(style);
         }
@@ -175,6 +216,16 @@
             maxRaces: {
                         m: {name: '', races: 0},
                         f: {name: '', races: 0}
+            },
+            jubilee: {
+                        all: {number: 0, names: [], strNames: ''},
+                          m: {number: 0, names: [], strNames: ''},
+                          f: {number: 0, names: [], strNames: ''},
+                       next: {
+                        all: {number: 0, names: [], strNames: ''},
+                          m: {number: 0, names: [], strNames: ''},
+                          f: {number: 0, names: [], strNames: ''}
+                       }
             },
             personalBest: {
                         all: {number: 0, names: [], strNames: ''},
@@ -229,6 +280,16 @@
                 if (races == 1) {
                     DB.firstRun[sex].all += 1;
                     DB.firstRun[sex].allNames.push({name: name});
+                } else if (races % 50 == 0) {
+                    DB.jubilee[sex].number += 1;
+                    DB.jubilee[sex].names.push({name: name, races: races});
+                    DB.jubilee.all.number += 1;
+                    DB.jubilee.all.names.push({name: name, races: races});
+                } else if (races % 50 >= 50 - lsprefs.jubileeMax) {
+                    DB.jubilee.next[sex].number += 1;
+                    DB.jubilee.next[sex].names.push({name: name, races: races});
+                    DB.jubilee.next.all.number += 1;
+                    DB.jubilee.next.all.names.push({name: name, races: races});
                 }
                 if (~note.first.indexOf(persbest)) {
                     if (races != 1) {
@@ -269,10 +330,15 @@
                 DB.personalBest.all.names.push(extendObjects({sex: sex}, DB.personalBest[sex].names[i]));
             }
             DB.personalBest[sex].names.sort(compareByName);
+            DB.jubilee[sex].names.sort(compareByRaces);
+            DB.jubilee.next[sex].names.sort(compareByRaces);
+
         }
         DB.firstRun.all.allNames.sort(compareFirst);
         DB.firstRun.all.homeNames.sort(compareFirst);
         DB.personalBest.all.names.sort(compareByName);
+        DB.jubilee.all.names.sort(compareByRaces);
+        DB.jubilee.next.all.names.sort(compareByRaces);
 
         // добавляем на страничку информацию о количестве участников по возрастным группам
         var Tage = document.createElement('table');
@@ -337,7 +403,7 @@
         Tsummary.appendChild(Thead);
         var Tbody = document.createElement('tbody');
         Tsummary.appendChild(Tbody);
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < 10; i++) {
             var tr = document.createElement('tr');
             tr.id = 'summary' + (1 + i);
             if (i < 3) {
@@ -446,6 +512,31 @@
         nodes[1].innerHTML = ((DB.ageAVG.m + DB.ageAVG.f)/(DB.number.m + DB.number.f - DB.number.WC.all)).toFixed();
         nodes[2].innerHTML = (DB.ageAVG.m/(DB.number.m - DB.number.WC.m)).toFixed();
         nodes[3].innerHTML = (DB.ageAVG.f/(DB.number.f - DB.number.WC.f)).toFixed();
+        // юбилейные забеги
+        nodes = document.getElementById('summary9').getElementsByTagName('td');
+        if (latestPage) {
+            nodes[0].innerHTML = L10n[LANG].summaryTable.jubilee + '' + names2p(DB.jubilee.all.names);
+        } else {
+            nodes[0].innerHTML = L10n[LANG].summaryTable.jubilee + '*' + names2p(DB.jubilee.all.names);
+            nodes[0].title = L10n[LANG].summaryTable.jubileeTooltip;
+        }
+        nodes[1].innerHTML = DB.jubilee.all.number;
+        nodes[2].innerHTML = DB.jubilee.m.number + names2p(DB.jubilee.m.names);
+        nodes[3].innerHTML = DB.jubilee.f.number + names2p(DB.jubilee.f.names);
+        // скоро юбилейные забеги
+        nodes = document.getElementById('summary10').getElementsByTagName('td');
+        if (latestPage) {
+            nodes[0].innerHTML = L10n[LANG].summaryTable.jubileeNext + '' + names2p(DB.jubilee.next.all.names);
+        } else {
+            nodes[0].innerHTML = L10n[LANG].summaryTable.jubileeNext + '*' + names2p(DB.jubilee.next.all.names);
+            nodes[0].title = L10n[LANG].summaryTable.jubileeTooltip;
+        }
+        nodes[1].innerHTML = DB.jubilee.next.all.number;
+        nodes[2].innerHTML = DB.jubilee.next.m.number + names2p(DB.jubilee.next.m.names);
+        nodes[3].innerHTML = DB.jubilee.next.f.number + names2p(DB.jubilee.next.f.names);
+        if (lsprefs.jubileeMax == 0) {
+            document.getElementById('summary10').style.display = 'none';
+        }
     }
 
     // проверка, находимся ли мы на страничке результатов
@@ -556,11 +647,18 @@
     }
 
     // добавляем на страницу блок настроек скрипта
-    function addOptionsSelector() {
-        // блок с настройками
+    function addMainOptionsSelector() {
+        // блок с основными настройками
         var div = document.createElement('div');
-        div.id = 'scriptPrefs';
-        div.className = 'scriptPrefs';
+        div.id = 'scriptPrefsMain';
+        div.className = 'scriptPrefsMain';
+
+        // иконка расширения
+        var extIco = document.createElement('img');
+        extIco.className = 'extIco';
+        extIco.title = 'parkrun Extended Info';
+        extIco.src = IMGbase64.extIco48;
+        div.appendChild(extIco);
 
         // заголовок
         var header = document.createElement('div');
@@ -573,13 +671,6 @@
         var selLang = document.createElement('div');
         selLang.className = 'selLang';
 
-        // иконка расширения
-        var extIco = document.createElement('img');
-        extIco.className = 'extIco';
-        extIco.title = 'parkrun Extended Info';
-        extIco.src = IMGbase64.extIco48;
-        selLang.appendChild(extIco);
-
         // добавляем флажки языков
         for (var lang in L10n) {
             var flag = document.createElement('img');
@@ -590,13 +681,19 @@
                 flag.className = 'currentFlag';
             } else {
                 flag.className = 'optionFlag';
-                // при клике по флажку меняем язык и перезагружаем страницу
+                // при клике по флажку меняем язык и перезагружаем элементы
                 flag.onclick = function() {
                     this.className = 'currentFlag';
                     document.getElementById('optionFlag_' + LANG).className = 'optionFlag';
                     LANG = this.id.slice(this.id.indexOf('_') + 1);
                     lsprefs.LANG = LANG;
                     chrome.storage.local.set({parkrunExtendedInfo: lsprefs}, function() {
+                        if (document.getElementById('scriptPrefs') != null) {
+                            addOptionsSelector();
+                        }
+                        if (document.getElementById('scriptPrefsIcoDiv') != null) {
+                            document.getElementById('scriptPrefsIcoDiv').title = L10n[LANG].scriptSettings.headerTooltip;
+                        }
                         main();
                     });
                 };
@@ -604,9 +701,101 @@
             selLang.appendChild(flag);
         }
 
+
         // добавляем блок на страничку
         div.appendChild(selLang);
         var node = document.getElementById('mainheader');
         node.insertBefore(div, node.firstChild);
+
+        // иконка настроек
+        if (document.getElementById('scriptPrefsIcoDiv') == null) {
+            var div = document.createElement('div');
+            div.id = 'scriptPrefsIcoDiv';
+            div.className = 'scriptPrefsIcoDiv';
+            div.title = L10n[LANG].scriptSettings.headerTooltip;
+            div.onclick = function() {
+                if (this.style.filter == 'none') {
+                    this.style.filter = 'grayscale(100%)';
+                    this.style.backgroundSize = '32px';
+                    document.getElementById('scriptPrefs').remove();
+                } else {
+                    this.style.filter = 'none';
+                    this.style.backgroundSize = '36px';
+                    if (document.getElementById('scriptPrefs') == null) {
+                        addOptionsSelector();
+                    }
+                }
+            };
+            // добавляем блок на страничку
+            node.insertBefore(div, node.firstChild);
+        }
+    }
+
+    // добавляем на страницу раскрывающийся блок настроек скрипта
+    function addOptionsSelector() {
+        // Удаляем блок, если он уже есть
+        if (document.getElementById('scriptPrefs') != null) {
+            document.getElementById('scriptPrefs').remove();
+        }
+
+        // блок с дополнительными настройками
+        var div = document.createElement('div');
+        div.id = 'scriptPrefs';
+        div.className = 'scriptPrefs';
+        // прячем блок, если мышь покинула его
+        div.onmouseleave = function() {
+            document.getElementById('scriptPrefsIcoDiv').style.filter = 'grayscale(100%)';
+            document.getElementById('scriptPrefsIcoDiv').style.backgroundSize = '32px';
+            this.remove();
+        };
+
+        // заголовок выбора максимального лимита количества забегов, оставшихся до юбилея
+        var pJubilee = document.createElement('div');
+        pJubilee.id = 'pJubilee';
+        pJubilee.innerHTML = L10n[LANG].scriptSettings.jubileeMax.title;
+        div.appendChild(pJubilee);
+
+        // добавляем выбор максимального лимита количества забегов, оставшихся до юбилея
+        var selJubilee = document.createElement('select');
+        selJubilee.id = 'selJubilee';
+        selJubilee.className = 'selJubilee';
+        for (var i = 0; i <= 5; i++) {
+            var option = document.createElement('option');
+            option.innerHTML = L10n[LANG].scriptSettings.jubileeMax[i];
+            option.value = i;
+            if (i == lsprefs.jubileeMax) {
+                option.selected = 'selected';
+            } else {
+                option.style.color = 'rgb(0, 0, 0)';
+                option.style.fontWeight = 'normal';
+            }
+            selJubilee.appendChild(option);
+        }
+
+        selJubilee.onchange = selectLength;
+        function selectLength() {
+            var Aopt = this.getElementsByTagName('option');
+            for (i = 0; i < Aopt.length; i++) {
+                if (this.value == Aopt[i].value) {
+                    if (Aopt[i].style.color == 'rgb(0, 0, 0)') {
+                        Aopt[i].selected = 'selected';
+                        lsprefs.jubileeMax = this.value;
+                        console.log(lsprefs);
+                        chrome.storage.local.set({parkrunExtendedInfo: lsprefs}, function() {
+                            main();
+                        });
+                    }
+                } else {
+                    Aopt[i].style.color = 'rgb(0, 0, 0)';
+                    Aopt[i].style.fontWeight = 'normal';
+                }
+            }
+        }
+        div.appendChild(selJubilee);
+
+        var node = document.getElementById('mainheader');
+        node.insertBefore(div, node.firstChild);
+
+        document.getElementById('pJubilee').style.width = document.getElementById('pJubilee').style.left;
     }
 })();

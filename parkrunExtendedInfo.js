@@ -37,6 +37,8 @@
                 },
                 scriptSettings: {
                     headerTooltip: 'Script settings',
+                    showAgeTable: 'Show age groups table',
+                    showHoverStyle: 'Expand lists when a mouse pointer hovers',
                     jubileeMax: {
                         'title': 'Show upcoming jubilee races:',
                         '0': 'Do not show',
@@ -77,6 +79,8 @@
                 },
                 scriptSettings: {
                     headerTooltip: 'Настройки скрипта',
+                    showAgeTable: 'Показывать результаты по возрастам',
+                    showHoverStyle: 'Раскрывать списки при наведении мыши',
                     jubileeMax: {
                         'title': 'Показывать приближение к юбилейным забегам:',
                         '0': 'Не показывать',
@@ -93,15 +97,20 @@
         // настройки по умолчанию
         var LANG = 'en';
         var jubileeMax = 2;
+        var showAgeTable = true;
+        var showHoverStyle = true;
         var defaultPrefs = {
             LANG: LANG,
-            jubileeMax: jubileeMax
+            jubileeMax: jubileeMax,
+            showAgeTable: showAgeTable,
+            showHoverStyle: showHoverStyle
         };
 
         // иконки, закодированные в base64
         var IMGbase64 = {
             extIco48: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAABelBMVEWLjQmMjQmMjguNjw2OkA6QkgySlAyTlQ6UlhCWmAySlBWQkhSVlx+Ymh2eoBamqB2mqDCrrTCxsyy4ui66vC/DxT/Jy0q8vVfBwmLExmPNz27T1GO/wHXBwnzCw33DxH/ExYHHyIjExY/Oz5jb3LPi4sDl5sjr69Xw8OD29uz6+vL8/Pv+/v7///+3uWiztF2xslqvsFWsrletrlGrrEyqrEuqq0qmp0ChozqgojygojefoDOenzGRklavsHBubmVsbG1VVVNIR0tBQUw7O0ZAQEA2Nj0zMzw1NTgyMjAvLy4vLy0oKCwkJC0lJDAnJzMoKDIuLTk1NSExMRYsLRUoKBwmJxohIhozNA06OhM+PxFCQwpPUA1WVwZaWg9hYgdydAl3eQV6ewZ6fAd8fgV9fwSAggOChACChQCDhQCEhgCFhwCGiACHiQKJiwSJiwiIigiHiQeGiAiEhgiChAmDhQuGiA+JiwqKjAh/gQiBgxVqajRLTCdCQh+MD1J8AAADAElEQVR42tWTg6MrORjF02Tm2rZV5Nq2b227HdRK9bfvzpu+Zb3eUwXnl6/nSwv+P4KC2rJHOZYnqGU/x/WdHF8ghrRYhT1Zx4KkyxTXCgH5JSxf295Z2sRbp1ycNPMjdgGv9zOhCN29LJeND3bGm51/jjcID+lCsfR0f3t1ODECSOMCq/iSg2mHWqm1WnQmzc30ON2IIJR0g8t5y8qSO5/kfC6b6X5uvEF0KtKHV4P5sqrYQaUSQyO0z2G6nxmtlwMRJnKCl/1OZXEQgID1bnoglnaYbma7YrX9XO/SlgKvuXX3w51x6DM/TA0kJV7Ly9xIAtbMeyjFW6tz+66vqxFA0wHzw/SAhM45TVcTpKZ/F0t3SIgN2DX7A9mh4X7rw+TI0PCIx3g7UaNRkL9QbPWHAKIy1ufJHsvz/dO78Hq6m4rr7yZqhID8Oj5nKGGQtr1M9dssVqv+tWS1lvsz+rvxDlLtP8WrIerbKGVXXo/6mZTX/DBJB9mk23AzBqsTMIv4lBfXiUtoJJ1Dvm+h4zDpVF2NVF8EZNfkvdHK0GN+XhhPAr/5cWogkfNrn4ZrReDWpZBUhkmn6W52jPZYtRf9JGHXXI12kdoVyPdxwG66254YloDu/nTp6+HqbHKUVGdYEjNU5Cm+am6uzvoKzg9V2fD4eDszRup2SaSvV0omlUaj+iy7PbrPj9daRGQdX7IVAoUX8KXLaXe43EnKrft6exeJ6hJbfWGIEBKAeXzI5BI5AAlIO4yfIjFalWIbSw8iDMMSFFrAxzzimXCYAJCvEDezwqX8rlF7Ury5tHPQCxmhQp6cby/PUwRAkfh42Bv8/Y8csT3LUizHezw7j09ONrECKy4jsEKo7wY7SI1/HDrd3REqLOI1Gd6YP7gQPTDvtJQknQRUCSLCMwxB4UWMpXsRhuW/rzM+Dor+WgwS2yo7CQpD+NOqhID6Etu6GqZqnlcX6oc/gFYlfqVjDrYDzOMj9j8HHP+9FZg5fNJOl0C08xCBtkQ40KYQ+Lf0I5mywlu7pFkzAAAAAElFTkSuQmCC',
-            prefsIco36: 'data:image/png;base64,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',
+            prefsIco36: 'data:image/png;base64,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',
+            prefsBackground: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAB0CAIAAADLmM+sAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAiklEQVQY022RMRLCMAwE9w46Gnqq/CJ/SMM3+H9BF6WwPJYNlTWe1Z5k8zmelmQ4DRhhiVaDsbMOA5b7fTudnKTmUXLpCZH+4R1n41WY7lVxUDM8O8LFteQCvnWvImecedz30pJVGLCy/xRTDj8zrn05p/obxbRPZf7Vseyf+bz3h7ft5bu/46/gAnv6Ew0h6c/DAAAAAElFTkSuQmCC',
             en: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAMAAACXZR4WAAAAWlBMVEVAQEBAQEDMAAD////PDg/88PAAM5nw8/kNPp/miImTqdThamr++fmEnc4JOp36+/3h5/PY3+765ubXyNb20dGKkL1Lb7dHbLbvsbE8Y7EtV6vuqqrMf4vfZGXxBPxdAAAAAnRSTlNfO/q7ZYcAAABzSURBVAjXZc9JEoAgDERRBAwEnOfx/te0gxss/ybVbxdVqDyZsQqenNWlb2o+YfM9dYvAOsYhAOi42LSAjfudAM5IgHQBVucBPtsCjFRqm64D0N7zBmgNXwcBwhDHFeCWbrpnwMl14wXIhyoCZL8gon6/PDvNBSUoA2a1AAAAAElFTkSuQmCC',
             ru: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAASElEQVR42mNwcHCwBuJIIE4gEYP0WDOAGP/JBCC9IAMSKDAggToG1Nf//08OhhvAwPD/Pzl4EBnwn0wTBo8BkRQYAE6JFOUFAB950GCPrs2eAAAAAElFTkSuQmCC',
             m: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAABelBMVEUulMswmNAumtQvnNUundQxndYzn9g0oNg4odo3ots4pNk8ptg7pd0+pt1Ap99DqN9DquBIrOFMreJNruFQsOJSseJSsORYs+VYtOJht+VjuOZSqtI0otIsmdMnl9Aklc8nlM0mk8oikMogkcoijcYfi8QdicEdh74fhrwhh7kehLkeg7ckg7YZgbMYg7onjsQnj8YDfbQDea4KgLAQkMECeKUAe6gPj74Pkb8jlsAsnccHjb0AgK8AdKMwn8hDn8Qnm8c/ock9e5hhWlpQT09KSkpJSUlHR0dGRkZFRUVFRERDQ0NBQUE+QEA+Pj49PT08PDw6Ojo5OTk1NTUzMzMyMjIxMTEsLS0sLCwmJycaHBxSUFBERERRTk47ODhbWFhIRkYAAADjvb/uvb34y8ruxcfxwcHsxsf1ysr5zs760tL31dX71tb62dn72tr83Nz73t774OD74uL84+P+5uP/6Oj/6uf/7u7+4N//2Nj/2tbfvLy2oKCausyquyT6AAAAfHRSTlP////////////////////////////////////7/P/////+/////////////////////v/gy7KEYjwgChQRMTtlksj9/v39//////////////z/////////////yq1zWkIOABN3osfe/////////////////////////9z+koo2owAAAjNJREFUeAF10U9PE1EUBfBz7nszQ2khGiBqZMffyELjSr6MiX4wP4wbF25ciCG2JIqAaKJQGjudmffudYACDZ2et/293Jtz+QZ3MTOYAXTEZDzuouEXUqopVrzMQHoCtpwiRv1tT6URWcgs0puJBNpxrRpQzNMIc6glQ0yOVmUa2SBRoZrACYHoQ8IppCmgfjB8DNCcqf164qeRGdLR7tn+o9oAqmJNi7v491WerXeXPcVR0ICY9F/GErG9s/iBGZ3mD27RbeP8vlu6IQUwQ75M2A83PW7tzAVPEIS2R+LZVIHWAoABFEDPK04jWNkJKjcumqEJRZ0bmY3/B52B8gUfeIUYqtiIoGWRIXi5NKOgaETQf5K5yoShqM0MZHHQzlxpsVDFLATTvOqkwwrAbARK7MPIpVObhXphx1FVEsWB2kYT6hUR7BRZBW1BBvziN6cOvBdHYf7nawAA+u9jyaVs8x76HHIzbxdvAeDdIvNvc9WLWk2ivapQGJA5ELBh65NkWfks2Z7YqRcqAjAbAm2ArT69Q6e3vr99h0YVDFangwsCfT1MUkHMDp7jBnUZzABT5TnsXGEnSUohMfdRw9Y1YlEjrY3a4SqOKUyd8FJxQTyuUWEALNbP5JQJ6a6EOELIMYKqK1XjIZ2jUIQEpaaAATdIpIy1EamFw9gICXUxjNFOl6owOvFCAb2JAhrj/LauTZTZrUzxJx6JWzmD8SGwAbNq697t8BURMKCFHATBsQDwH9z5L5joIlrtAAAAAElFTkSuQmCC',
@@ -164,6 +173,14 @@
         var Tresults = document.getElementById('results');
         var Atr = Tresults.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
+        if (document.getElementById('scriptStyles') !== null) {
+            document.getElementById('scriptStyles').remove();
+        }
+        if (lsprefs.showHoverStyle) {
+            var trHoverStyle = 'display: block;';
+        } else {
+            trHoverStyle = 'display: none;';
+        }
         if (document.getElementById('scriptStyles') === null) {
             var style = document.createElement('style');
             style.id = 'scriptStyles';
@@ -173,6 +190,7 @@
                                .ageTable td, .summaryTable td {padding: 5px;} \
                                .ageTable th, .summaryTable th {padding: 5px 0px; vertical-align: middle;} \
                                .ageTable th:nth-child(1), .summaryTable th:nth-child(1) {font-weight: bold; text-align: left; font-size: 12pt; padding: 0px 10px;} \
+                               .ageTable th:nth-child(2) {width: 90px;} \
                                .summaryTable td:nth-child(1) {padding-left: 10px; text-align: left; font-weight: bold;} \
                                .summaryTable tr:nth-child(1) td:not(:nth-child(2)), .summaryTable tr:nth-child(2) td:not(:nth-child(2)), .summaryTable tr:nth-child(3) td:not(:nth-child(2)) \
                                    {padding-left: 10px; text-align: left;} \
@@ -182,7 +200,7 @@
                                .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
                                .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
                                .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
-                               .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {display: block;} \
+                               .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {' + trHoverStyle + '} \
                                .sexMF img {vertical-align: middle;} \
                                .sexMF span {font-size: 14pt; vertical-align: middle;} \
                                .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
@@ -195,8 +213,9 @@
                                .optionFlag {display: inline-block; padding: 4px;}\
                                .optionFlag:hover {padding: 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
                                .currentFlag {vertical-align: top; padding: 2px; border: 2px inset #DDDDDD;}\
-                               .scriptPrefs {position: absolute; right: 345px; top: 0px; padding: 5px 10px; width: auto; height: 164px; z-index: 4; text-align: left;}\
-                               .scriptPrefs div {color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px;}\
+                               .scriptPrefs {background: url("' + IMGbase64.prefsBackground + '") repeat-x left top; position: absolute; right: 345px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
+                               .scriptPrefs div {border-top: 1px dashed #AACCBB; vertical-align: middle; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px; margin-top: 3px; padding-top: 2px;}\
+                               .scriptPrefs div input {vertical-align: middle; margin-right: 5px;}\
                                .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 305px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMGbase64.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
                                .scriptPrefsIcoDiv:hover {filter: none !important; cursor: pointer; background-size: 36px !important;}\
                                .selJubilee {margin-top: 2px;}\
@@ -385,7 +404,9 @@
                 '<td>' + DB.ageNumber[ageGR].f.name + names2p(DB.ageNumber[ageGR].f.names) + '</td>';
             Tagebody.appendChild(agetr);
         }
-        Cmain.insertBefore(Tage, Cmain.firstChild);
+        if (lsprefs.showAgeTable) {
+            Cmain.insertBefore(Tage, Cmain.firstChild);
+        }
 
         // добавляем на страничку пустую таблицу для общих результатов
         var Tsummary = document.createElement('table');
@@ -425,6 +446,7 @@
         Cmain.insertBefore(Tsummary, Cmain.firstChild);
 
         // заполняем таблицу с общими результатами
+
         // лучшие по времени
         var nodes = document.getElementById('summary1').getElementsByTagName('td');
         nodes[0].innerHTML = L10n[LANG].summaryTable.fastest;
@@ -439,6 +461,7 @@
         nodes[3].innerHTML = DB.fastest.m.name;
         nodes[4].innerHTML = DB.fastest.f.time;
         nodes[5].innerHTML = DB.fastest.f.name;
+
         // лучшие по возрастному рейтингу
         nodes = document.getElementById('summary2').getElementsByTagName('td');
         nodes[0].innerHTML = L10n[LANG].summaryTable.ageRate;
@@ -453,6 +476,7 @@
         nodes[3].innerHTML = DB.ageRate.m.name;
         nodes[4].innerHTML = DB.ageRate.f.rate + ' %';
         nodes[5].innerHTML = DB.ageRate.f.name;
+
         // лучшие максимальному количеству забегов
         nodes = document.getElementById('summary3').getElementsByTagName('td');
         nodes[0].innerHTML = L10n[LANG].summaryTable.maxRaces;
@@ -467,6 +491,7 @@
         nodes[3].innerHTML = DB.maxRaces.m.name;
         nodes[4].innerHTML = DB.maxRaces.f.races;
         nodes[5].innerHTML = DB.maxRaces.f.name;
+
         // количество участников забега
         nodes = document.getElementById('summary4').getElementsByTagName('td');
         nodes[0].innerHTML = L10n[LANG].summaryTable.number;
@@ -477,12 +502,14 @@
         nodes[1].innerHTML = DB.number.all + notscan;
         nodes[2].innerHTML = DB.number.m;
         nodes[3].innerHTML = DB.number.f;
+
         // личные рекорды
         nodes = document.getElementById('summary5').getElementsByTagName('td');
         nodes[0].innerHTML = L10n[LANG].summaryTable.personalBest + names2p(DB.personalBest.all.names);
         nodes[1].innerHTML = DB.personalBest.all.number;
         nodes[2].innerHTML = DB.personalBest.m.number + names2p(DB.personalBest.m.names);
         nodes[3].innerHTML = DB.personalBest.f.number + names2p(DB.personalBest.f.names);
+
         // впервые на паркране вообще
         nodes = document.getElementById('summary6').getElementsByTagName('td');
         if (latestPage) {
@@ -499,12 +526,14 @@
             nodes[2].title = L10n[LANG].summaryTable.firstRunTooltip;
             nodes[3].title = L10n[LANG].summaryTable.firstRunTooltip;
         }
+
         // впервые на этом паркране
         nodes = document.getElementById('summary7').getElementsByTagName('td');
         nodes[0].innerHTML = L10n[LANG].summaryTable.firstHome + names2p(DB.firstRun.all.homeNames);
         nodes[1].innerHTML = DB.firstRun.all.home;
         nodes[2].innerHTML = DB.firstRun.m.home + names2p(DB.firstRun.m.homeNames);
         nodes[3].innerHTML = DB.firstRun.f.home + names2p(DB.firstRun.f.homeNames);
+
         // средний возраст
         nodes = document.getElementById('summary8').getElementsByTagName('td');
         document.getElementById('summary8').title = L10n[LANG].summaryTable.ageAVGTooltip;
@@ -512,6 +541,7 @@
         nodes[1].innerHTML = ((DB.ageAVG.m + DB.ageAVG.f)/(DB.number.m + DB.number.f - DB.number.WC.all)).toFixed();
         nodes[2].innerHTML = (DB.ageAVG.m/(DB.number.m - DB.number.WC.m)).toFixed();
         nodes[3].innerHTML = (DB.ageAVG.f/(DB.number.f - DB.number.WC.f)).toFixed();
+
         // юбилейные забеги
         nodes = document.getElementById('summary9').getElementsByTagName('td');
         if (latestPage) {
@@ -523,6 +553,7 @@
         nodes[1].innerHTML = DB.jubilee.all.number;
         nodes[2].innerHTML = DB.jubilee.m.number + names2p(DB.jubilee.m.names);
         nodes[3].innerHTML = DB.jubilee.f.number + names2p(DB.jubilee.f.names);
+
         // скоро юбилейные забеги
         nodes = document.getElementById('summary10').getElementsByTagName('td');
         if (latestPage) {
@@ -701,7 +732,6 @@
             selLang.appendChild(flag);
         }
 
-
         // добавляем блок на страничку
         div.appendChild(selLang);
         var node = document.getElementById('mainheader');
@@ -771,16 +801,13 @@
             }
             selJubilee.appendChild(option);
         }
-
-        selJubilee.onchange = selectLength;
-        function selectLength() {
+        selJubilee.onchange = function () {
             var Aopt = this.getElementsByTagName('option');
             for (i = 0; i < Aopt.length; i++) {
                 if (this.value == Aopt[i].value) {
                     if (Aopt[i].style.color == 'rgb(0, 0, 0)') {
                         Aopt[i].selected = 'selected';
                         lsprefs.jubileeMax = this.value;
-                        console.log(lsprefs);
                         chrome.storage.local.set({parkrunExtendedInfo: lsprefs}, function() {
                             main();
                         });
@@ -793,6 +820,48 @@
         }
         div.appendChild(selJubilee);
 
+        // добавляем чекбокс отображения таблицы с результатами по возрастным группам
+        var checkAgeTableDiv = document.createElement('div');
+        checkAgeTableDiv.id = 'checkAgeTableDiv';
+        var checkAgeTableInput = document.createElement('input');
+        checkAgeTableInput.id = 'checkAgeTableInput';
+        checkAgeTableInput.type = 'checkbox';
+        checkAgeTableInput.checked = lsprefs.showAgeTable;
+        checkAgeTableInput.onchange = function () {
+            lsprefs.showAgeTable = this.checked;
+            chrome.storage.local.set({parkrunExtendedInfo: lsprefs}, function() {
+                main();
+            });
+        }
+        checkAgeTableDiv.appendChild(checkAgeTableInput);
+        var checkAgeTableLabel = document.createElement('label');
+        checkAgeTableLabel.htmlFor = 'checkAgeTableInput';
+        checkAgeTableLabel.innerHTML = L10n[LANG].scriptSettings.showAgeTable;
+        checkAgeTableDiv.appendChild(checkAgeTableLabel);
+        div.appendChild(checkAgeTableDiv);
+
+
+        // добавляем чекбокс показа раскрывающихся списков
+        var checkHoverStyleDiv = document.createElement('div');
+        checkHoverStyleDiv.id = 'checkHoverStyleDiv';
+        var checkHoverStyleInput = document.createElement('input');
+        checkHoverStyleInput.id = 'checkHoverStyleInput';
+        checkHoverStyleInput.type = 'checkbox';
+        checkHoverStyleInput.checked = lsprefs.showHoverStyle;
+        checkHoverStyleInput.onchange = function () {
+            lsprefs.showHoverStyle = this.checked;
+            chrome.storage.local.set({parkrunExtendedInfo: lsprefs}, function() {
+                main();
+            });
+        }
+        checkHoverStyleDiv.appendChild(checkHoverStyleInput);
+        var checkHoverStyleLabel = document.createElement('label');
+        checkHoverStyleLabel.htmlFor = 'checkHoverStyleInput';
+        checkHoverStyleLabel.innerHTML = L10n[LANG].scriptSettings.showHoverStyle;
+        checkHoverStyleDiv.appendChild(checkHoverStyleLabel);
+        div.appendChild(checkHoverStyleDiv);
+
+        // добавляем блок на страницу
         var node = document.getElementById('mainheader');
         node.insertBefore(div, node.firstChild);
 

@@ -106,15 +106,15 @@
             showHoverStyle: showHoverStyle
         };
 
-        // иконки, закодированные в base64
-        var IMGbase64 = {
-            extIco48: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAABelBMVEWLjQmMjQmMjguNjw2OkA6QkgySlAyTlQ6UlhCWmAySlBWQkhSVlx+Ymh2eoBamqB2mqDCrrTCxsyy4ui66vC/DxT/Jy0q8vVfBwmLExmPNz27T1GO/wHXBwnzCw33DxH/ExYHHyIjExY/Oz5jb3LPi4sDl5sjr69Xw8OD29uz6+vL8/Pv+/v7///+3uWiztF2xslqvsFWsrletrlGrrEyqrEuqq0qmp0ChozqgojygojefoDOenzGRklavsHBubmVsbG1VVVNIR0tBQUw7O0ZAQEA2Nj0zMzw1NTgyMjAvLy4vLy0oKCwkJC0lJDAnJzMoKDIuLTk1NSExMRYsLRUoKBwmJxohIhozNA06OhM+PxFCQwpPUA1WVwZaWg9hYgdydAl3eQV6ewZ6fAd8fgV9fwSAggOChACChQCDhQCEhgCFhwCGiACHiQKJiwSJiwiIigiHiQeGiAiEhgiChAmDhQuGiA+JiwqKjAh/gQiBgxVqajRLTCdCQh+MD1J8AAADAElEQVR42tWTg6MrORjF02Tm2rZV5Nq2b227HdRK9bfvzpu+Zb3eUwXnl6/nSwv+P4KC2rJHOZYnqGU/x/WdHF8ghrRYhT1Zx4KkyxTXCgH5JSxf295Z2sRbp1ycNPMjdgGv9zOhCN29LJeND3bGm51/jjcID+lCsfR0f3t1ODECSOMCq/iSg2mHWqm1WnQmzc30ON2IIJR0g8t5y8qSO5/kfC6b6X5uvEF0KtKHV4P5sqrYQaUSQyO0z2G6nxmtlwMRJnKCl/1OZXEQgID1bnoglnaYbma7YrX9XO/SlgKvuXX3w51x6DM/TA0kJV7Ly9xIAtbMeyjFW6tz+66vqxFA0wHzw/SAhM45TVcTpKZ/F0t3SIgN2DX7A9mh4X7rw+TI0PCIx3g7UaNRkL9QbPWHAKIy1ufJHsvz/dO78Hq6m4rr7yZqhID8Oj5nKGGQtr1M9dssVqv+tWS1lvsz+rvxDlLtP8WrIerbKGVXXo/6mZTX/DBJB9mk23AzBqsTMIv4lBfXiUtoJJ1Dvm+h4zDpVF2NVF8EZNfkvdHK0GN+XhhPAr/5cWogkfNrn4ZrReDWpZBUhkmn6W52jPZYtRf9JGHXXI12kdoVyPdxwG66254YloDu/nTp6+HqbHKUVGdYEjNU5Cm+am6uzvoKzg9V2fD4eDszRup2SaSvV0omlUaj+iy7PbrPj9daRGQdX7IVAoUX8KXLaXe43EnKrft6exeJ6hJbfWGIEBKAeXzI5BI5AAlIO4yfIjFalWIbSw8iDMMSFFrAxzzimXCYAJCvEDezwqX8rlF7Ury5tHPQCxmhQp6cby/PUwRAkfh42Bv8/Y8csT3LUizHezw7j09ONrECKy4jsEKo7wY7SI1/HDrd3REqLOI1Gd6YP7gQPTDvtJQknQRUCSLCMwxB4UWMpXsRhuW/rzM+Dor+WgwS2yo7CQpD+NOqhID6Etu6GqZqnlcX6oc/gFYlfqVjDrYDzOMj9j8HHP+9FZg5fNJOl0C08xCBtkQ40KYQ+Lf0I5mywlu7pFkzAAAAAElFTkSuQmCC',
-            prefsIco36: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAGmElEQVR4Ab2Ye0xWdRjHz/D2iogAiprMUFTI26xlmulyjDZy2ZzV1pzb9J/CmtVqOufSsbWMOYdZaEQYltfYNHTTsnShAtKiNEfSUFGBMQavgtx8QXi/nc/8HTn5onjDZ3t2Du/tfM73+T7P73eweiHi7Fxo5wY7s01usXOZndOtxxiA7LOzuW+f/goNHeqPjh7fFhs7tWPYsGjxd5+gvrLfz7IzuLdhVtp5NTg4TElJi7R6dZq2b9+vwsJ/9PfpcyooOKNdu3/T4sXLACJnWvcR/ezcZL7osXqONDsV/9QLSknJUHFxmWprG9TR0Sl3bP7qkFDL/mylnTH3A5OZ/HK8hg6yABph3T3whWbMeEVbsw6p7HyNrlxpkNdbz1FEfb1P69Z9rfDwYUJFO+fcD0w2MO0F6YoOt9TDneCZUpTh7svKKlRVVauKihrV1HjV3t6p6uomVJNdSn7La+e8+4HZCUxb3qc20EalvjbcQAWkU8aFHk/YueXLU4VXLl2qFglUY2OLDeMVMJERo4XR7ZxvBQYVWE9V6EA3TM7bCVG6vitRvtxFav/5QwfMZDpHdxkjUXPatITrlKqk5LwuXqwSQKiDjwA1ypTamWgFxmg7/7rZiXHi3LBY+5bMtdSa1ZXXMy01fxsRADgy7FYZF6DO0qUp/qNH/rDLdVnnz1dSLluZWu3dexxfOYrutAIjys6T+OrAgXxt3JjN5zodfx39ZukItWyzQbLJLijyxhd91Z4RDJzbV8u5s1WrMvzHjhUL/5CoBBBgQM2eDZTlM0PSiRA78wb09wgQgt8YHDxIFuUzVCU73rMEVKudbihgmrZ4AHMDrYyNfa56zZosf37+KQN0GSBgVFdXj490+HCREhMXOEqlmHIf9XhC6Dz5fDdE8J0pU6YL6zi1TLKAer8LqHhNlCjl6892patkHztADD3K5QbC0A0NzVxQ+QX/MiwdqEoHprXVLyfq6po0a9Zc3t/jmBooWrIUKICAMXNmiSsB5y43MeQoWV5eMUC3SlZZeRMIlVpbffL7BRTlE2ViihuY7oBy3J32pANF+Z6J6e+M+BhXAuOh1qxNmBpTAkOWl/8fqL6+UW1t7ers9IvPrV2bbr9Xr9uD79JprgYIgCpxlccdC5kZQHsGhAogU7I7AuElgCgfU7u7YN0LCgoSVrCIbqASTY64DcY3buhAhp3mvfqWcnOPA8IcAqpboKamFkqnOwWwyckrnOE5/U5Tm8EX5ZrKbzAnXpoUpZOfjNPmdxJYvVVeeY3VXHQaRwxN3g7k87WZxTYw8CAjxP79X+wMsnoMAzMjJlyn0iZKZyepbFu0CjNXqKy8kQUVIDEgUYqlg2nt9fYMxFpnxkKnaZge400+PC06XMdT4qXTU6UTcfIVjQVKxdkrgVLx6UpmDsbVhQtVtDwwunatBSCMTbcFwLj2R1vuBWa+o8yR1ROlk/Hynxqnjn1PsKyo8/fYW1BnzlbT2qgEEErZ61oNQKz6wDhJy/M5POjA7DHT+66xGAOjDDDKGyedmYA60q9jpe2RTG+UUkVuDOVDJTwlFlsWVpYFFCsqKiVRkG7CwGJL61LGcy+e0eRRkTr00Xjppxh8I/+Zm+XS4THS/miWFDV/HqbmU3FAoRT7InaOtDAX5ZwlgRSD1GzSyEJjhx6D1m4GJvfdWMojlT8tXZwp/ekC+nGUtDsCIFWv9ajlxESS7gNGpmPWmyPbipPmASCVnYK7RD2VSQ6MgAHE+yJQGDoASF8GA6SmksmSL4GR4OyZ2PQTQVz8QZ4y5jhDb0dyvDq+C5cOjgQA/2BogDhSQkqmzqxwNX420IFhJDjLTYP5vQcO7qB0dMRgsS/iQgApK1T6PgIlUKQLDFP/MBJT4x8URBlxM2bfnGg9ZCRRd/bTeEKZAykXF0clzlEEZVCMI22PyYFhPjkwV81we+hIZbeGOsoIQRnKgwrShn68xjnKkGrMGcs8wl9uZZrNovxIInv4kBBanIujCCXCH+wSpfRBvA6MOg6OAQZ1mE+izEYZyvTIIgsgOotyaWsIgw8QjnQSrwPEcKT9gVf0EM8jLZM7lrOT4zkMJQDC2JxTMoDwEEsFHgLGlKmB5aW3/mshthbso7UrgqTDUAhjY3Dmj3I+mIAy7m7qtUij0xY9HwxUF0heDImRmU9uGMrUqxHMmAcKpSgf7cywQxWeavFZr5XpLgNyE0blH0t0EF7xeACxyDwzgR97xJmHuhyTW8yi67EeQ/wHhLvpoF33AHAAAAAASUVORK5CYII=',
-            prefsBackground: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAB0CAIAAADLmM+sAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAiklEQVQY022RMRLCMAwE9w46Gnqq/CJ/SMM3+H9BF6WwPJYNlTWe1Z5k8zmelmQ4DRhhiVaDsbMOA5b7fTudnKTmUXLpCZH+4R1n41WY7lVxUDM8O8LFteQCvnWvImecedz30pJVGLCy/xRTDj8zrn05p/obxbRPZf7Vseyf+bz3h7ft5bu/46/gAnv6Ew0h6c/DAAAAAElFTkSuQmCC',
-            en: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAMAAACXZR4WAAAAWlBMVEVAQEBAQEDMAAD////PDg/88PAAM5nw8/kNPp/miImTqdThamr++fmEnc4JOp36+/3h5/PY3+765ubXyNb20dGKkL1Lb7dHbLbvsbE8Y7EtV6vuqqrMf4vfZGXxBPxdAAAAAnRSTlNfO/q7ZYcAAABzSURBVAjXZc9JEoAgDERRBAwEnOfx/te0gxss/ybVbxdVqDyZsQqenNWlb2o+YfM9dYvAOsYhAOi42LSAjfudAM5IgHQBVucBPtsCjFRqm64D0N7zBmgNXwcBwhDHFeCWbrpnwMl14wXIhyoCZL8gon6/PDvNBSUoA2a1AAAAAElFTkSuQmCC',
-            ru: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAASElEQVR42mNwcHCwBuJIIE4gEYP0WDOAGP/JBCC9IAMSKDAggToG1Nf//08OhhvAwPD/Pzl4EBnwn0wTBo8BkRQYAE6JFOUFAB950GCPrs2eAAAAAElFTkSuQmCC',
-            m: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAABelBMVEUulMswmNAumtQvnNUundQxndYzn9g0oNg4odo3ots4pNk8ptg7pd0+pt1Ap99DqN9DquBIrOFMreJNruFQsOJSseJSsORYs+VYtOJht+VjuOZSqtI0otIsmdMnl9Aklc8nlM0mk8oikMogkcoijcYfi8QdicEdh74fhrwhh7kehLkeg7ckg7YZgbMYg7onjsQnj8YDfbQDea4KgLAQkMECeKUAe6gPj74Pkb8jlsAsnccHjb0AgK8AdKMwn8hDn8Qnm8c/ock9e5hhWlpQT09KSkpJSUlHR0dGRkZFRUVFRERDQ0NBQUE+QEA+Pj49PT08PDw6Ojo5OTk1NTUzMzMyMjIxMTEsLS0sLCwmJycaHBxSUFBERERRTk47ODhbWFhIRkYAAADjvb/uvb34y8ruxcfxwcHsxsf1ysr5zs760tL31dX71tb62dn72tr83Nz73t774OD74uL84+P+5uP/6Oj/6uf/7u7+4N//2Nj/2tbfvLy2oKCausyquyT6AAAAfHRSTlP////////////////////////////////////7/P/////+/////////////////////v/gy7KEYjwgChQRMTtlksj9/v39//////////////z/////////////yq1zWkIOABN3osfe/////////////////////////9z+koo2owAAAjNJREFUeAF10U9PE1EUBfBz7nszQ2khGiBqZMffyELjSr6MiX4wP4wbF25ciCG2JIqAaKJQGjudmffudYACDZ2et/293Jtz+QZ3MTOYAXTEZDzuouEXUqopVrzMQHoCtpwiRv1tT6URWcgs0puJBNpxrRpQzNMIc6glQ0yOVmUa2SBRoZrACYHoQ8IppCmgfjB8DNCcqf164qeRGdLR7tn+o9oAqmJNi7v491WerXeXPcVR0ICY9F/GErG9s/iBGZ3mD27RbeP8vlu6IQUwQ75M2A83PW7tzAVPEIS2R+LZVIHWAoABFEDPK04jWNkJKjcumqEJRZ0bmY3/B52B8gUfeIUYqtiIoGWRIXi5NKOgaETQf5K5yoShqM0MZHHQzlxpsVDFLATTvOqkwwrAbARK7MPIpVObhXphx1FVEsWB2kYT6hUR7BRZBW1BBvziN6cOvBdHYf7nawAA+u9jyaVs8x76HHIzbxdvAeDdIvNvc9WLWk2ivapQGJA5ELBh65NkWfks2Z7YqRcqAjAbAm2ArT69Q6e3vr99h0YVDFangwsCfT1MUkHMDp7jBnUZzABT5TnsXGEnSUohMfdRw9Y1YlEjrY3a4SqOKUyd8FJxQTyuUWEALNbP5JQJ6a6EOELIMYKqK1XjIZ2jUIQEpaaAATdIpIy1EamFw9gICXUxjNFOl6owOvFCAb2JAhrj/LauTZTZrUzxJx6JWzmD8SGwAbNq697t8BURMKCFHATBsQDwH9z5L5joIlrtAAAAAElFTkSuQmCC',
-            f: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAABgFBMVEXeXt/eXuLgYObkYOnoYubrYuztZfDvZvH0aPX2afL4avD7be7+be7+bO3+cO3/cu3+dO79dO/8ce/6cfD2cPT5Z/b1Z+3zZOnzZuTsY9/kYdvbXd7YXNrYW9fWWtfTW9PVU9DMScTcStPfSt/0XujzYeX0X+fsbtryX+b1XuvzZOfdPtDJPbvUPsjkbtT5eOz+duz/d+3/ee7/e+7/fO//f+/+gu//hfD+iPD8h+v/jvHux8jlvb/10NH91NT619n82dn72tr73Nz839/94OD64OD53+H64uL74uL74+P94+P+5OX/5uf/6er+6+z/8e796OL73tzNq6mihX2QcFyLblmKbF2GaFSDZVeBZVN7YU55X0x0XEt2WkhzWEZyWUVwV0RyVUFvVkhqUz9pTz5qTTlmSzZkSzpkTDxiTD9eSDpZSDheRTNaPyxSPS9PPC5QOStNNiZEMCE5KRhRPzNUQjRTPzZyVUyGUmJxWUZcQDZ3XkskHBc2KyEuIRj///82hf3PAAAAgHRSTlP////////////////////////////8//z////////////+7f7w162Tf1EhGE6p//////////////////P8///////////////////////////38vv///z//v/////////////////////8//z/////////+v//1r/3cWAyJaCrAMas5/8AAAJMSURBVHgBZdPRTmNVGMXx//r2Pqe0FFJHBYOOSUl8G2+MYeLb+CQ+wIzojS8ERphhVEZocdqec/ZyYgmge13/sr61T3L0PY/pSwEIRWl4kvyE9BeWUkhZe5EqtDW/AgxSS/L1LBI1Kue2IRJ9ayad2lSh/szFKEeKNASyN+MauYDaXDxkr2hNM6T/of43xZBaWex0t1cHo8/qJkruSSOI2Plzdd2s/ui+tKpzOUigHV2+3o1Yz97MeUiwjSI3Ujv1xdWUNjclLkXVJBhlXV5MxgSABmrUIt6ufp+WTAGp4BqRl9dXo3bIZVvsqatNKL3rkpXMNgfjGgFEHny/JDZyqdHGTT9VSQA4lrMSNVL3/Eb77gBQOUyhGrEpX/wV07IZoGtu9ledXb3Off95WTZ7i66gxWHepHqTNaz9fLxkf+Ju/WzWjXdHVE1djnDarJrBiPYu/62datPaiCHFUKx8NWs6l7qp9NnZESD74OdvvKRGSh+91NHHAiiUH/3ipkK/fP3S58e3adKLWK+6Tf/D3nfBNvc/52ksPFxo/v4TgHepH7z05PDb/zTFYsBwVsYwkM6OKMr91asXT5p+uisufi2EDwHsO6evyqI5eWyS8QcTAG/5FHwb6dh5f/Fw7lR3dvlgJJhZA7yPkIJm/EonWyS5+DIikLgVCRyaS4rRKh7O2ZZCQgg1vdA8AhHmEV0oQtIEYzs4RqEIutA9MvnoTaRdsLGZCymE+/UqnTx8gtO4O48IjcscCdvmPJ6lOIEHBKcUF4wB0L9hS+AfVDsfaaQ0bawAAAAASUVORK5CYII='
+        // иконки
+        var IMG = {
+            extIco48: chrome.runtime.getURL('images/icon48.png'),
+            prefsIco36: chrome.runtime.getURL('images/config36.png'),
+            prefsBackground: chrome.runtime.getURL('images/prefsBackground.png'),
+            en: chrome.runtime.getURL('images/flags/en.png'),
+            ru: chrome.runtime.getURL('images/flags/ru.png'),
+            m: chrome.runtime.getURL('images/man36.png'),
+            f: chrome.runtime.getURL('images/woman36.png')
         };
 
         // Читаем настройки из кэша
@@ -209,14 +209,14 @@
                                .scriptPrefsMain {position: absolute; right: 100px; top: 5px; width: 200px; z-index: 4; align: left; text-align: left;}\
                                .headerPrefs {font-size: 10pt; text-align: left; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px;}\
                                .selLang {display: inline-block; margin: 5px auto 0px; text-align: left;}\
-                               .extIco {float: left; margin-right: 2px; border-radius: 5px;}\
+                               .extIco {float: left; margin-right: 2px;}\
                                .optionFlag {display: inline-block; padding: 4px;}\
                                .optionFlag:hover {padding: 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
                                .currentFlag {vertical-align: top; padding: 2px; border: 2px inset #DDDDDD;}\
-                               .scriptPrefs {background: url("' + IMGbase64.prefsBackground + '") repeat-x left top; position: absolute; right: 345px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
+                               .scriptPrefs {background: url("' + IMG.prefsBackground + '") repeat-x left top; position: absolute; right: 345px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
                                .scriptPrefs div {border-top: 1px dashed #AACCBB; vertical-align: middle; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px; margin-top: 3px; padding-top: 2px;}\
                                .scriptPrefs div input {vertical-align: middle; margin-right: 5px;}\
-                               .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 305px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMGbase64.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
+                               .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 305px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMG.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
                                .scriptPrefsIcoDiv:hover {filter: none !important; cursor: pointer; background-size: 36px !important;}\
                                .selJubilee {margin-top: 2px;}\
                                .selJubilee option {color: rgb(0, 0, 0); font-weight: normal;}\
@@ -367,10 +367,10 @@
         Tagehead.innerHTML = '<tr>\
                                   <th style="width: 220px;">' + L10n[LANG].ageTable.mainTitle + '</th>\
                                   <th class="sexMF" title="' + L10n[LANG].sex.all + '">\
-                                      <img src="' + IMGbase64.m + '"><span>+</span><img src="' + IMGbase64.f + '">\
+                                      <img src="' + IMG.m + '"><span>+</span><img src="' + IMG.f + '">\
                                   </th>\
-                                  <th colspan="3" class="sexMF" title="' + L10n[LANG].sex.men + '"><img src="' + IMGbase64.m + '"></th>\
-                                  <th colspan="3" class="sexMF" title="' + L10n[LANG].sex.women + '"><img src="' + IMGbase64.f + '"></th>\
+                                  <th colspan="3" class="sexMF" title="' + L10n[LANG].sex.men + '"><img src="' + IMG.m + '"></th>\
+                                  <th colspan="3" class="sexMF" title="' + L10n[LANG].sex.women + '"><img src="' + IMG.f + '"></th>\
                               </tr>';
         Tage.appendChild(Tagehead);
         var Tagebody = document.createElement('tbody');
@@ -416,10 +416,10 @@
         Thead.innerHTML = '<tr>\
                                <th style="font-size: 14pt;">' + L10n[LANG].summaryTable.mainTitle + '</th>\
                                <th class="sexMF" title="' + L10n[LANG].sex.all + '">\
-                                   <img src="' + IMGbase64.m + '">+<img src="' + IMGbase64.f + '">\
+                                   <img src="' + IMG.m + '">+<img src="' + IMG.f + '">\
                                </th>\
-                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.men + '"><img src="' + IMGbase64.m + '"></th>\
-                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.women + '"><img src="' + IMGbase64.f + '"></th>\
+                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.men + '"><img src="' + IMG.m + '"></th>\
+                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.women + '"><img src="' + IMG.f + '"></th>\
                            </tr>';
         Tsummary.appendChild(Thead);
         var Tbody = document.createElement('tbody');
@@ -688,7 +688,7 @@
         var extIco = document.createElement('img');
         extIco.className = 'extIco';
         extIco.title = 'parkrun Extended Info';
-        extIco.src = IMGbase64.extIco48;
+        extIco.src = IMG.extIco48;
         div.appendChild(extIco);
 
         // заголовок
@@ -707,7 +707,7 @@
             var flag = document.createElement('img');
             flag.id = 'optionFlag_' + lang;
             flag.title = L10n[lang].nativeLanguageTitle;
-            flag.src = IMGbase64[lang];
+            flag.src = IMG[lang];
             if (lang == LANG) {
                 flag.className = 'currentFlag';
             } else {

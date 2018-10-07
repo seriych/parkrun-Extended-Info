@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "parkrun Extended Info",
   "short_name": "parkrunExInf",
-  "version": "2018.10.4.1",
+  "version": "2018.10.8.0",
   "author": "seriych",
 
   "default_locale": "en",
@@ -13,6 +13,15 @@
      "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+  "web_accessible_resources": [
+    "images/icon48.png",
+    "images/config36.png",
+    "images/prefsBackground.png",
+    "images/flags/en.png",
+    "images/flags/ru.png",
+    "images/man36.png",
+    "images/woman36.png"
+  ],
   "content_scripts": [
     {
       "matches": [ "*://*/*" ],

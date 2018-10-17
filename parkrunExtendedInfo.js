@@ -280,6 +280,10 @@
                 name = name.split(/(\s|\-)+/).map(word => word[0].toUpperCase() + word.substring(1).toLowerCase()).join(' ').replace(/\s*\-\s*/g, '-');
                 var rate = parseFloat(Atd[indexes.rate].innerHTML);
                 var sex = Atd[indexes.sex].innerHTML.toLowerCase();
+				if (sex == 'f') {
+					Atd[indexes.sex].style.backgroundColor = '#FFE0FF';
+					Atd[indexes.name].style.backgroundColor = '#FFE0FF';
+				}
                 var age = Atd[indexes.age].getElementsByTagName('a')[0].innerHTML.replace(/^[^0-9\-]*/, '');
                 if (age.length < 1) {
                     age = 'WC';

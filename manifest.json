@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "parkrun Extended Info",
   "short_name": "parkrunExInf",
-  "version": "2018.10.8.0",
+  "version": "2018.10.14.0",
   "author": "seriych",
 
   "default_locale": "en",

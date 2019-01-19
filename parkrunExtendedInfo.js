@@ -117,9 +117,9 @@
             m: chrome.runtime.getURL('images/man36.png'),
             f: chrome.runtime.getURL('images/woman36.png')
         };
-		if (juniorsPage) {
-			IMG.prefsBackground = chrome.runtime.getURL('images/prefsBackgroundJuniors.png');
-		}
+        if (juniorsPage) {
+            IMG.prefsBackground = chrome.runtime.getURL('images/prefsBackgroundJuniors.png');
+        }
 
         // Читаем настройки из кэша
         var lsprefs = {};
@@ -284,10 +284,10 @@
                 name = name.split(/(\s|\-)+/).map(word => word[0].toUpperCase() + word.substring(1).toLowerCase()).join(' ').replace(/\s*\-\s*/g, '-');
                 var rate = parseFloat(Atd[indexes.rate].innerHTML);
                 var sex = Atd[indexes.sex].innerHTML.toLowerCase();
-				if (sex == 'f') {
-					Atd[indexes.sex].style.backgroundColor = '#FFE0FF';
-					Atd[indexes.name].style.backgroundColor = '#FFE0FF';
-				}
+                if (sex == 'f') {
+                    Atd[indexes.sex].style.backgroundColor = '#FFE0FF';
+                    Atd[indexes.name].style.backgroundColor = '#FFE0FF';
+                }
                 var age = Atd[indexes.age].getElementsByTagName('a')[0].innerHTML.replace(/^[^0-9\-]*/, '');
                 if (age.length < 1) {
                     age = 'WC';
@@ -584,7 +584,7 @@
         if (!~url.indexOf('runSeqNumber')) {
             latestPage = true;
         }
-		if (~url.indexOf('-juniors/results/')) {
+        if (~url.indexOf('-juniors/results/')) {
             juniorsPage = true;
         }
         return ~url.indexOf('parkrun.') && ((~url.indexOf('/latestresults') || ~url.indexOf('/ostatnierezultaty') || ~url.indexOf('/?runSeqNumber=')));
@@ -688,27 +688,27 @@
         return target;
     }
 
-	// проверяем, является ли забег юбилейным
+    // проверяем, является ли забег юбилейным
     function isJubileeNow(races) {
-		if (races % 50 == 0
-			|| (juniorsPage && (races == 11 || races == 21))
-		) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	// проверяем, что скоро будет юбилейный забег
+        if (races % 50 == 0
+            || (juniorsPage && (races == 11 || races == 21))
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // проверяем, что скоро будет юбилейный забег
     function isJubileeSoon(races) {
-		if (races % 50 >= 50 - lsprefs.jubileeMax
-			|| (juniorsPage && races < 21 && (races % 11 >= 11 - lsprefs.jubileeMax || races % 21 >= 21 - lsprefs.jubileeMax))
-		) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        if (races % 50 >= 50 - lsprefs.jubileeMax
+            || (juniorsPage && races < 21 && (races % 11 >= 11 - lsprefs.jubileeMax || races % 21 >= 21 - lsprefs.jubileeMax))
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // добавляем на страницу блок настроек скрипта
     function addMainOptionsSelector() {

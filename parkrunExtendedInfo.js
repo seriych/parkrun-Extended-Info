@@ -2,6 +2,7 @@
     'use strict';
 
     var latestPage = false;
+    var juniorsPage = false;
 
     // Выполняем обработку, если мы на нужной странице
     if (isResultsPage()) {
@@ -116,6 +117,9 @@
             m: chrome.runtime.getURL('images/man36.png'),
             f: chrome.runtime.getURL('images/woman36.png')
         };
+		if (juniorsPage) {
+			IMG.prefsBackground = chrome.runtime.getURL('images/prefsBackgroundJuniors.png');
+		}
 
         // Читаем настройки из кэша
         var lsprefs = {};
@@ -303,12 +307,12 @@
                 if (races == 1) {
                     DB.firstRun[sex].all += 1;
                     DB.firstRun[sex].allNames.push({name: name});
-                } else if (races % 50 == 0) {
+                } else if (isJubileeNow(races)) {
                     DB.jubilee[sex].number += 1;
                     DB.jubilee[sex].names.push({name: name, races: races});
                     DB.jubilee.all.number += 1;
                     DB.jubilee.all.names.push({name: name, races: races});
-                } else if (races % 50 >= 50 - lsprefs.jubileeMax) {
+                } else if (isJubileeSoon(races)) {
                     DB.jubilee.next[sex].number += 1;
                     DB.jubilee.next[sex].names.push({name: name, races: races});
                     DB.jubilee.next.all.number += 1;
@@ -580,7 +584,10 @@
         if (!~url.indexOf('runSeqNumber')) {
             latestPage = true;
         }
-        return ~url.indexOf('parkrun.') && (~url.indexOf('/latestresults') || ~url.indexOf('/ostatnierezultaty') || ~url.indexOf('/?runSeqNumber='));
+		if (~url.indexOf('-juniors/results/')) {
+            juniorsPage = true;
+        }
+        return ~url.indexOf('parkrun.') && ((~url.indexOf('/latestresults') || ~url.indexOf('/ostatnierezultaty') || ~url.indexOf('/?runSeqNumber=')));
     }
 
     // переводим запись времени в секунды
@@ -680,6 +687,28 @@
         }
         return target;
     }
+
+	// проверяем, является ли забег юбилейным
+    function isJubileeNow(races) {
+		if (races % 50 == 0
+			|| (juniorsPage && (races == 11 || races == 21))
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	// проверяем, что скоро будет юбилейный забег
+    function isJubileeSoon(races) {
+		if (races % 50 >= 50 - lsprefs.jubileeMax
+			|| (juniorsPage && races < 21 && (races % 11 >= 11 - lsprefs.jubileeMax || races % 21 >= 21 - lsprefs.jubileeMax))
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
     // добавляем на страницу блок настроек скрипта
     function addMainOptionsSelector() {

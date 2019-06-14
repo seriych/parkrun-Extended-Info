@@ -188,7 +188,7 @@
         if (document.getElementById('scriptStyles') === null) {
             var style = document.createElement('style');
             style.id = 'scriptStyles';
-            style.innerHTML = '.ageTable, .summaryTable {text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
+            style.innerHTML = '.ageTable, .summaryTable {font-family: sans-serif, Arial; text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
                                .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 14pt; background: #e5f3fc;} \
                                .ageTable td, .summaryTable td, .ageTable th, .summaryTable th {border: 1px solid #c7dbe3;} \
                                .ageTable td, .summaryTable td {padding: 5px;} \
@@ -200,7 +200,7 @@
                                    {padding-left: 10px; text-align: left;} \
                                .ageTable td:nth-child(3n), .ageTable td:nth-child(3n+1) {width: 45px;} \
                                .ageTable tbody tr:hover, .summaryTable tbody tr:hover {background: #e5f3fc; font-weight: bold; vertical-align: top;} \
-                               .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none;} \
+                               .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none; margin: 0px !important;} \
                                .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
                                .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
                                .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
@@ -210,14 +210,14 @@
                                .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
                                .guestsInfo p {margin-bottom: 5px;} \
                                .guestsInfo p span {font-weight: bold;} \
-                               .scriptPrefsMain {position: absolute; right: 100px; top: 5px; width: 200px; z-index: 4; align: left; text-align: left;}\
-                               .headerPrefs {font-size: 10pt; text-align: left; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px;}\
+                               .scriptPrefsMain {font-family: sans-serif, Arial; position: absolute; right: 100px; top: 5px; width: 200px; z-index: 4; align: left; text-align: left;}\
+                               .headerPrefs {font-size: 10pt; text-align: left; color: white; text-shadow: #222222 -1px -1px 1px, #222222 -1px 1px 1px, #222222 1px -1px 1px, #222222 1px 1px 1px;}\
                                .selLang {display: inline-block; margin: 5px auto 0px; text-align: left;}\
                                .extIco {float: left; margin-right: 2px;}\
                                .optionFlag {display: inline-block; padding: 4px;}\
                                .optionFlag:hover {padding: 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
                                .currentFlag {vertical-align: top; padding: 2px; border: 2px inset #DDDDDD;}\
-                               .scriptPrefs {background: url("' + IMG.prefsBackground + '") repeat-x left top; position: absolute; right: 345px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
+                               .scriptPrefs {font-size: 10pt; font-family: sans-serif, Arial; background: rgba(140, 155, 100, 0.9); position: absolute; right: 345px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
                                .scriptPrefs div {border-top: 1px dashed #AACCBB; vertical-align: middle; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px; margin-top: 3px; padding-top: 2px;}\
                                .scriptPrefs div input {vertical-align: middle; margin-right: 5px;}\
                                .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 305px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMG.prefsIco36 + '") no-repeat center center; background-size: 32px;}\

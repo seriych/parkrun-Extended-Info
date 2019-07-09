@@ -587,7 +587,7 @@
         if (~url.indexOf('-juniors/results/')) {
             juniorsPage = true;
         }
-        return ~url.indexOf('parkrun.') && ((~url.indexOf('/latestresults') || ~url.indexOf('/ostatnierezultaty') || ~url.indexOf('/?runSeqNumber=')));
+        return ~url.indexOf('parkrun.') && ((~url.indexOf('/latestresults') || ~url.indexOf('/ostatnierezultaty') || ~url.indexOf('/weeklyresults')));
     }
 
     // переводим запись времени в секунды

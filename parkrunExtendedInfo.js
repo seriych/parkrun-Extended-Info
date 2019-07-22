@@ -168,9 +168,9 @@
         // добавляем на страницу блок настроек скрипта
         addMainOptionsSelector();
 
-        var note = {
-            pb: ['Личный рекорд!', 'New PB!'],
-            first: ['Первый забег!', 'First Timer!']
+        var note = { // ru             en              pl           it              de             dk              fr                  jp           sw
+            pb:    ["Личный рекорд!", "New PB!",      "Nowe PB!",  "Nuovo PB!",    "Neue PB!",    "Ny PB!",       "Meilleure Perf'!", "自己ベスト!", "Nytt PB!"],
+            first: ["Первый забег!",  "First Timer!", "Debiutant", "Prima volta!", "Erstläufer!", "Første gang!", "Première Perf'!",  "初参加!",   "Debut!"]
         };
 
         var Cmain = document.getElementById('main');

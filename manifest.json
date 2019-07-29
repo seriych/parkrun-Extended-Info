@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "parkrun Extended Info",
   "short_name": "parkrunExInf",
-  "version": "2019.7.22.0",
+  "version": "2019.7.29.0",
   "author": "seriych",
 
   "default_locale": "en",
@@ -18,8 +18,13 @@
     "images/config36.png",
     "images/prefsBackground.png",
     "images/prefsBackgroundJuniors.png",
+    "images/flags/cn.png",
     "images/flags/en.png",
+    "images/flags/fr.png",
+    "images/flags/jp.png",
+    "images/flags/pl.png",
     "images/flags/ru.png",
+    "images/flags/tw.png",
     "images/man36.png",
     "images/woman36.png"
   ],

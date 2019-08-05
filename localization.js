@@ -1,5 +1,6 @@
 ﻿// Локализация / Localization
 var L10n = {
+
     en: { // English
         nativeLanguageTitle: 'English',
         sex: {m: 'm', f: ' f ', men: 'Men', women: 'Women', all: 'All'},
@@ -42,6 +43,7 @@ var L10n = {
             }
         }
     },
+
     pl: { // Polish
         nativeLanguageTitle: 'Polski',
         sex: {m: 'm', f: 'k ', men: 'Mężczyźni', women: 'Kobiety', all: 'Wszyscy'},
@@ -84,6 +86,7 @@ var L10n = {
             }
         }
     },
+
     ru: { // Russian
         nativeLanguageTitle: 'Русский',
         sex: {m: 'м', f: 'ж', men: 'Мужчины', women: 'Женщины', all: 'Все'},
@@ -126,6 +129,7 @@ var L10n = {
             }
         }
     },
+
     fr: { // French
         nativeLanguageTitle: 'Français',
         sex: {m: 'h', f: 'f ', men: 'Homme', women: 'Femme', all: 'Tous'},
@@ -168,6 +172,7 @@ var L10n = {
             }
         }
     },
+
     cn: { // Simplified Chinese
         nativeLanguageTitle: '简体中文',
         sex: {m: '男', f: '女', men: '男子', women: '女子', all: '全部性别'},
@@ -210,6 +215,7 @@ var L10n = {
             }
         }
     },
+
     tw: { // Traditional Chinese
         nativeLanguageTitle: '繁體中文',
         sex: {m: '男', f: '女', men: '男子', women: '女子', all: '全部性别'},
@@ -252,6 +258,7 @@ var L10n = {
             }
         }
     },
+
     jp: { // Japanese
         nativeLanguageTitle: '日本語',
         sex: {m: '男', f: '女', men: '男性', women: '女性', all: '全体'},
@@ -294,4 +301,5 @@ var L10n = {
             }
         }
     }
+
 };

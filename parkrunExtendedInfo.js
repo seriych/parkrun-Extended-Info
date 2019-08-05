@@ -63,16 +63,11 @@
         L10n[LANG].sex.f = L10n[LANG].sex.f.replace(/\s/g, '&nbsp;');
 
         // удаляем добавленные скриптом элементы
-        if (document.getElementById('scriptPrefsMain') !== null) {
-            document.getElementById('scriptPrefsMain').remove();
+        for (var id of ['scriptPrefsMain', 'scriptTage', 'scriptTsummary', 'main_header']) {
+            if (document.getElementById(id) !== null) {
+                document.getElementById(id).remove();
+            }
         }
-        if (document.getElementById('scriptTage') !== null) {
-            document.getElementById('scriptTage').remove();
-        }
-        if (document.getElementById('scriptTsummary') !== null) {
-            document.getElementById('scriptTsummary').remove();
-        }
-
 
         // добавляем на страницу блок настроек скрипта
         addMainOptionsSelector();
@@ -485,6 +480,13 @@
         if (lsprefs.jubileeMax == 0) {
             document.getElementById('summary10').style.display = 'none';
         }
+
+        // Клонируем заголовок таблицы результатов
+        var Ccontent = document.getElementById('content');
+        var main_header = Ccontent.getElementsByTagName('h2')[0].cloneNode(true);
+        main_header.style.marginTop = '-10px';
+        main_header.id = 'main_header';
+        Cmain.insertBefore(main_header, Cmain.firstChild);
     }
 
     // проверка, находимся ли мы на страничке результатов

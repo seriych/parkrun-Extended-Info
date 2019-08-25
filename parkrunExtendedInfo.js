@@ -114,17 +114,17 @@
                                .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
                                .guestsInfo p {margin-bottom: 5px;} \
                                .guestsInfo p span {font-weight: bold;} \
-                               .scriptPrefsMain {font-family: sans-serif, Arial; position: absolute; right: 50px; top: 5px; width: 250px; z-index: 4; align: left; text-align: left;}\
+                               .scriptPrefsMain {font-family: sans-serif, Arial; position: absolute; right: 50px; top: 5px; width: 190px; z-index: 4; align: left; text-align: left;}\
                                .headerPrefs {font-size: 10pt; text-align: left; color: white; text-shadow: #222222 -1px -1px 1px, #222222 -1px 1px 1px, #222222 1px -1px 1px, #222222 1px 1px 1px;}\
-                               .selLang {display: inline-block; margin: 5px auto 0px; text-align: left;}\
+                               .selLang {margin: 5px auto 0px; text-align: left;}\
                                .extIco {float: left; margin-right: 2px;}\
-                               .optionFlag {display: inline-block; padding: 4px;}\
-                               .optionFlag:hover {padding: 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
-                               .currentFlag {vertical-align: top; padding: 2px; border: 2px inset #DDDDDD;}\
-                               .scriptPrefs {font-size: 10pt; font-family: sans-serif, Arial; background: rgba(140, 155, 100, 0.9); position: absolute; right: 345px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
+                               .optionFlag {padding: 3px 4px;}\
+                               .optionFlag:hover {padding: 1px 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
+                               .currentFlag {vertical-align: top; padding: 1px 2px; border: 2px inset #DDDDDD;}\
+                               .scriptPrefs {font-size: 10pt; font-family: sans-serif, Arial; background: rgba(140, 155, 100, 0.9); position: absolute; right: 285px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
                                .scriptPrefs div {border-top: 1px dashed #AACCBB; vertical-align: middle; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px; margin-top: 3px; padding-top: 2px;}\
                                .scriptPrefs div input {vertical-align: middle; margin-right: 5px;}\
-                               .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 305px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMG.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
+                               .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 245px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMG.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
                                .scriptPrefsIcoDiv:hover {filter: none !important; cursor: pointer; background-size: 36px !important;}\
                                .selJubilee {margin-top: 2px;}\
                                .selJubilee option {color: rgb(0, 0, 0); font-weight: normal;}\

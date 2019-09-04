@@ -1,8 +1,11 @@
 ﻿(function() {
     'use strict';
 
-    var latestPage = false;
-    var juniorsPage = false;
+    var latestPage = false,
+        juniorsPage = false,
+        historyPage = false,
+        athleteResultsLocalPage = false,
+        athleteResultsAllPage = false;
 
     // Выполняем обработку, если мы на нужной странице
     if (isResultsPage()) {
@@ -18,6 +21,12 @@
             showAgeTable: showAgeTable,
             showHoverStyle: showHoverStyle
         };
+        var COLORS = {
+            count: '145, 238, 145',
+            man:   '160, 208, 250',
+            woman: '255, 195, 255'
+        };
+        var DB = {};
 
         // иконки
         var IMG = {
@@ -41,8 +50,21 @@
                 }
             }
             extendObjects(lsprefs, defaultPrefs);
-            // запускаем основное тело скрипта
-            main();
+
+            // запускаем обработку страницы
+            if (historyPage) {
+                // история забегов
+                extendEventHistory();
+            } else if (athleteResultsAllPage) {
+                // результаты бегуна на всех паркранах
+                extendAthleteAll();
+            } else if (athleteResultsLocalPage) {
+                // результаты бегуна на текущем паркране
+                extendAthleteLocal();
+            } else {
+                // результаты забега
+                main();
+            }
         });
     } else {
         return;
@@ -102,7 +124,7 @@
                                .summaryTable td:nth-child(1) {padding-left: 10px; text-align: left; font-weight: bold;} \
                                .summaryTable tr:nth-child(1) td:not(:nth-child(2)), .summaryTable tr:nth-child(2) td:not(:nth-child(2)), .summaryTable tr:nth-child(3) td:not(:nth-child(2)) \
                                    {padding-left: 10px; text-align: left;} \
-                               .ageTable td:nth-child(3n), .ageTable td:nth-child(3n+1) {width: 45px;} \
+                               .ageTable td:nth-child(3), .ageTable td:nth-child(5), .ageTable td:nth-child(6), .ageTable td:nth-child(8) {width: 50px;} \
                                .ageTable tbody tr:hover, .summaryTable tbody tr:hover {background: #e5f3fc; font-weight: bold; vertical-align: top;} \
                                .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none; margin: 0px !important;} \
                                .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
@@ -134,7 +156,7 @@
         }
 
         // база для хранения собранной информации
-        var DB = {
+        DB = {
             firstRun: {
                         all: {all: 0, home: 0, allNames: [], homeNames: []},
                           m: {all: 0, home: 0, allNames: [], homeNames: []},
@@ -308,12 +330,12 @@
             }
             agetr.innerHTML = '<td>' + GRname + names2p(DB.ageNumber[ageGR].all.names) + '</td>' +
                 '<td>' + allnumber + '</td>' +
-                '<td>' + mnumber + '</td>' +
                 '<td>' + DB.ageNumber[ageGR].m.time + '</td>' +
                 '<td>' + DB.ageNumber[ageGR].m.name + names2p(DB.ageNumber[ageGR].m.names) + '</td>' +
+                '<td>' + mnumber + '</td>' +
                 '<td>' + fnumber + '</td>' +
-                '<td>' + DB.ageNumber[ageGR].f.time + '</td>' +
-                '<td>' + DB.ageNumber[ageGR].f.name + names2p(DB.ageNumber[ageGR].f.names) + '</td>';
+                '<td>' + DB.ageNumber[ageGR].f.name + names2p(DB.ageNumber[ageGR].f.names) + '</td>' +
+                '<td>' + DB.ageNumber[ageGR].f.time + '</td>';
             Tagebody.appendChild(agetr);
         }
         if (lsprefs.showAgeTable) {
@@ -487,6 +509,114 @@
         main_header.style.marginTop = '-10px';
         main_header.id = 'main_header';
         Cmain.insertBefore(main_header, Cmain.firstChild);
+
+        // Добавляем гистограммы
+        addHistogram(Tagebody, 1);
+        addHistogram(Tagebody, 4, false, COLORS.man, true);
+        addHistogram(Tagebody, 5, false, COLORS.woman);
+        addHistogram(Tagebody, 2, true, COLORS.man);
+        addHistogram(Tagebody, 7, true, COLORS.woman);
+        //addHistogram(Tresults.getElementsByTagName('tbody')[0], 4);
+        //addHistogram(Tresults.getElementsByTagName('tbody')[0], 9);
+    }
+
+
+    // Обрабатываем страницу истории забегов
+    function extendEventHistory() {
+        var TBresults = document.getElementById('results').getElementsByTagName('tbody')[0];
+        addHistogram(TBresults, 2);
+        addHistogram(TBresults, 6, true, COLORS.man);
+        addHistogram(TBresults, 9, true, COLORS.woman);
+    }
+
+    // Обрабатываем страницу результатов бегуна на всех паркранах
+    function extendAthleteAll() {
+        var TBresults = document.getElementsByClassName('sortable')[0].getElementsByTagName('tbody')[0];
+        addHistogram(TBresults, 4, true);
+        addHistogram(TBresults, 5);
+        TBresults = document.getElementsByClassName('sortable')[1].getElementsByTagName('tbody')[0];
+        addHistogram(TBresults, 1);
+        addHistogram(TBresults, 4, true);
+    }
+
+    // Обрабатываем страницу результатов бегуна на текущем паркране
+    function extendAthleteLocal() {
+        var TBresults = document.getElementsByClassName('sortable')[0].getElementsByTagName('tbody')[0];
+        addHistogram(TBresults, 1, true);
+        addHistogram(TBresults, 2);
+        TBresults = document.getElementsByClassName('sortable')[1].getElementsByTagName('tbody')[0];
+        addHistogram(TBresults, 3, true);
+        addHistogram(TBresults, 4);
+    }
+
+    // добавляем гистограмму в колонку таблицы
+    function addHistogram(parent_node, col_num = 0, is_speed = false, color = COLORS.count, is_to_left = false) {
+        var direction = "to right";
+        if (is_to_left) {
+            direction = "to left";
+        }
+        var Atr = parent_node.getElementsByTagName('tr');
+
+        // читаем содержимое ячеек в массив
+        var value_max = 0,
+            value_min = 100000;
+        var Avalue = [];
+        for (var i = 0; i < Atr.length; i++) {
+            var td = Atr[i].getElementsByTagName('td')[col_num];
+            var value = td.innerText;
+            if (is_speed) {
+                value = time2sec(value);
+            } else {
+                value = parseFloat(td.innerText);
+            }
+            Avalue.push(value);
+
+            if (value > value_max) {
+                value_max = value;
+            }
+            if (value < value_min) {
+                value_min = value;
+            }
+        }
+
+        // отбрасываем слишком медленные забеги
+        if ((Avalue.length > 5) && is_speed && historyPage && (value_min < 30*60)) {
+            value_max = Math.min(value_max, 30*60);
+        }
+
+        // настройка линейности гистограмм
+        var pow = 1;
+        if (historyPage || is_speed) {
+            pow = 0.75; // выглядит лучше, чем просто отношение (для забегов с большими выбросами, например, на юбилеях)
+        }
+
+        // нормируем масштаб гистограмм для обоих полов
+        if (!is_speed && !historyPage && !athleteResultsLocalPage && !athleteResultsAllPage && col_num > 2) {
+            for (var ageGR in DB.ageNumber) {
+                value_max = Math.max(value_max, DB.ageNumber[ageGR].m.number, DB.ageNumber[ageGR].f.number);
+            }
+        }
+
+        // рисуем гистограммы
+        for (var i = 0; i < Atr.length; i++) {
+            var td = Atr[i].getElementsByTagName('td')[col_num];
+            var transparent = 0.7;
+            if ((historyPage || athleteResultsLocalPage || athleteResultsAllPage)
+                && ((is_speed && Avalue[i] == value_min) || (!is_speed && Avalue[i] == value_max))) {
+                transparent = 1;
+                td.style.fontWeight = 'bold';
+            }
+            if (!is_speed) {
+                if (col_num > 1 && (athleteResultsAllPage || athleteResultsLocalPage)) {
+                    var pct = 2 + 98 * Math.pow((Avalue[i] - value_min) / (value_max - value_min), pow);
+                } else {
+                    var pct = 100 * Math.pow(Avalue[i] / value_max, pow);
+                }
+            } else {
+                var pct = 2 + 98 * Math.pow((1/Avalue[i] - 1/value_max) / (1/value_min - 1/value_max), 1/pow);
+            }
+            td.style.backgroundImage = 'linear-gradient(' + direction + ', rgba(' + color + ', ' + transparent + ') ' + pct + '%, transparent ' + pct + '%)';
+        }
     }
 
     // проверка, находимся ли мы на страничке результатов
@@ -498,7 +628,22 @@
         if (~url.indexOf('-juniors/results/')) {
             juniorsPage = true;
         }
-        return ~url.indexOf('parkrun.') && ((~url.indexOf('/latestresults') || ~url.indexOf('/ostatnierezultaty') || ~url.indexOf('/weeklyresults')));
+        if (~url.indexOf('/eventhistory') || ~url.indexOf('/historiabiegu')) {
+            historyPage = true;
+        }
+        if (~url.indexOf('/athletehistory')) {
+            athleteResultsLocalPage = true;
+        }
+        if (~url.indexOf('/athleteresultshistory')) {
+            athleteResultsAllPage = true;
+        }
+        return ~url.indexOf('parkrun.')
+            && (
+                ~url.indexOf('/latestresults') || ~url.indexOf('/ostatnierezultaty')
+                || ~url.indexOf('/weeklyresults')
+                || ~url.indexOf('/eventhistory') || ~url.indexOf('/historiabiegu')
+                || ~url.indexOf('/athletehistory') || ~url.indexOf('/athleteresultshistory')
+        );
     }
 
     // переводим запись времени в секунды

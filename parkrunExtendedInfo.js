@@ -92,13 +92,9 @@
         // добавляем на страницу блок настроек скрипта
         addMainOptionsSelector();
 
-        let note = { // ru             en              pl           it              de             dk              fr                  jp           sw
-            pb:    ["Личный рекорд!", "New PB!",      "Nowe PB!",  "Nuovo PB!",    "Neue PB!",    "Ny PB!",       "Meilleure Perf'!", "自己ベスト!", "Nytt PB!"],
-            first: ["Первый забег!",  "First Timer!", "Debiutant", "Prima volta!", "Erstläufer!", "Første gang!", "Première Perf'!",  "初参加!",   "Debut!"]
-        };
-
+        // основные элементы страницы
         let Cmain = document.getElementById('main'),
-            Tresults = document.getElementById('results'),
+            Tresults = document.getElementsByClassName('Results-table')[0],
             Atr = Tresults.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
         if (document.getElementById('scriptStyles') !== null) {
@@ -194,24 +190,26 @@
 
         // перебираем всех участников забега и собираем информацию
         for (let i = 0; i < Atr.length; i++) {
-            let Atd = Atr[i].getElementsByTagName('td'),
-                indexes = {name: 0, time: 1, age: 2, rate: 3, sex: 4, persbest: 6, races: 7};
-            if (Atd.length > 10) {
-                indexes = {name: 1, time: 2, age: 3, rate: 4, sex: 5, persbest: 8, races: 9};
-            }
-            let time = Atd[indexes.time].innerHTML;
-            if (time === '') {
+            let Atd = Atr[i].getElementsByTagName('td');
+            if (+Atr[i].getAttribute('data-runs') === 0) {
                 DB.number.u += 1;
             } else {
-                let name = Atd[indexes.name].getElementsByTagName('a')[0].innerHTML;
-                name = name.split(/(\s|\-)+/).map(word => word[0].toUpperCase() + word.substring(1).toLowerCase()).join(' ').replace(/\s*\-\s*/g, '-');
-                let rate = parseFloat(Atd[indexes.rate].innerHTML),
-                    sex = Atd[indexes.sex].innerHTML.toLowerCase();
-                if (sex === 'f') {
-                    Atd[indexes.sex].style.backgroundColor = '#FFE0FF';
-                    Atd[indexes.name].style.backgroundColor = '#FFE0FF';
+                let name = Atr[i].getAttribute('data-name'),
+                    rate = Atr[i].getAttribute('data-agegrade'),
+                    sex = 'm',
+                    age = Atr[i].getAttribute('data-agegroup').replace(/^[^0-9\-]*/, ''),
+                    races = parseInt(Atr[i].getAttribute('data-runs')),
+                    time = Atd[Atd.length - 1].innerText;
+                name = name
+                        .split(/(\s|\-)+/)
+                        .map(word => word[0].toUpperCase() + word.substring(1).toLowerCase())
+                        .join(' ')
+                        .replace(/\s*\-\s*/g, '-');
+                if (Atr[i].getElementsByClassName('Results-table-td--F').length > 0) {
+                    sex = 'f';
+                    Atd[1].style.backgroundColor = '#FFE0FF';
+                    Atd[2].style.backgroundColor = '#FFE0FF';
                 }
-                let age = Atd[indexes.age].getElementsByTagName('a')[0].innerHTML.replace(/^[^0-9\-]*/, '');
                 if (age.length < 1) {
                     age = 'WC';
                 }
@@ -225,8 +223,6 @@
                     DB.ageNumber[age][sex].time = time;
                     DB.ageNumber[age][sex].name = name;
                 }
-                let persbest = Atd[indexes.persbest].innerHTML,
-                    races = parseInt(Atd[indexes.races].innerHTML);
                 if (races === 1) {
                     DB.firstRun[sex].all += 1;
                     DB.firstRun[sex].allNames.push({name: name});
@@ -241,12 +237,12 @@
                     DB.jubilee.next.all.number += 1;
                     DB.jubilee.next.all.names.push({name: name, races: races});
                 }
-                if (~note.first.indexOf(persbest)) {
+                if (Atr[i].getElementsByClassName('Results-table-td--ft').length > 0) {
                     if (races !== 1) {
                         DB.firstRun[sex].home += 1;
                         DB.firstRun[sex].homeNames.push({name: name, races: races});
                     }
-                } else if (~note.pb.indexOf(persbest)) {
+                } else if (Atr[i].getElementsByClassName('Results-table-td--pb').length > 0) {
                     DB.personalBest[sex].number += 1;
                     DB.personalBest[sex].names.push({name: name, time: time});
                 }
@@ -498,11 +494,17 @@
             document.getElementById('summary10').style.display = 'none';
         }
 
-        // Клонируем заголовок таблицы результатов
+        // Клонируем заголовок таблицы результатов и вставляем в более компактном виде
         let Ccontent = document.getElementById('content'),
-            main_header = Ccontent.getElementsByTagName('h2')[0].cloneNode(true);
-        main_header.style.marginTop = '-10px';
+            main_header = Ccontent.getElementsByClassName('Results-header')[0].cloneNode(true),
+            headerH1 = main_header.getElementsByTagName('h1')[0],
+            headerH3 = main_header.getElementsByTagName('h3')[0],
+            spacer = main_header.getElementsByClassName('spacer')[0].cloneNode(true);
         main_header.id = 'main_header';
+        main_header.style.marginTop = '-15px';
+        headerH3.insertBefore(spacer, headerH3.firstChild);
+        headerH3.insertAdjacentHTML('afterbegin', '<strong>' + headerH1.innerText + '</strong>');
+        headerH1.remove();
         Cmain.insertBefore(main_header, Cmain.firstChild);
 
         // Добавляем гистограммы
@@ -511,8 +513,6 @@
         addHistogram(Tagebody, 5, false, COLORS.woman);
         addHistogram(Tagebody, 2, true, COLORS.man);
         addHistogram(Tagebody, 7, true, COLORS.woman);
-        //addHistogram(Tresults.getElementsByTagName('tbody')[0], 4);
-        //addHistogram(Tresults.getElementsByTagName('tbody')[0], 9);
     }
 
 
@@ -546,9 +546,9 @@
 
     // добавляем гистограмму в колонку таблицы
     function addHistogram(parent_node, col_num = 0, is_speed = false, color = COLORS.count, is_to_left = false) {
-        let direction = "to right";
+        let direction = 'to right';
         if (is_to_left) {
-            direction = "to left";
+            direction = 'to left';
         }
         let Atr = parent_node.getElementsByTagName('tr');
 
@@ -611,7 +611,7 @@
             } else {
                 pct = 2 + 98 * (((1/Avalue[i] - 1/value_max) / (1/value_min - 1/value_max)) ** (1/pow));
             }
-            td.style.backgroundImage = 'linear-gradient(' + direction + ', rgba(' + color + ', ' + transparent + ') ' + pct + '%, transparent ' + pct + '%)';
+            td.style.backgroundImage = `linear-gradient(${direction}, rgba(${color}, ${transparent}) ${pct}%, transparent ${pct}%)`;
         }
     }
 

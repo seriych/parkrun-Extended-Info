@@ -97,100 +97,13 @@
             Tresults = document.getElementsByClassName('Results-table')[0],
             Atr = Tresults.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
-        if (document.getElementById('scriptStyles') !== null) {
-            document.getElementById('scriptStyles').remove();
-        }
-        let trHoverStyle = 'display: block;';
-        if (!lsprefs.showHoverStyle) {
-            trHoverStyle = 'display: none;';
-        }
-        if (document.getElementById('scriptStyles') === null) {
-            let style = document.createElement('style');
-            style.id = 'scriptStyles';
-            style.innerHTML = '\
-                .ageTable, .summaryTable {font-family: sans-serif, Arial; text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
-                .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 14pt; background: #e5f3fc;} \
-                .ageTable td, .summaryTable td, .ageTable th, .summaryTable th {border: 1px solid #c7dbe3;} \
-                .ageTable td, .summaryTable td {padding: 5px;} \
-                .ageTable th, .summaryTable th {padding: 5px 0px; vertical-align: middle;} \
-                .ageTable th:nth-child(1), .summaryTable th:nth-child(1) {font-weight: bold; text-align: left; font-size: 12pt; padding: 0px 10px;} \
-                .ageTable th:nth-child(2) {width: 90px;} \
-                .summaryTable td:nth-child(1) {padding-left: 10px; text-align: left; font-weight: bold;} \
-                .summaryTable tr:nth-child(1) td:not(:nth-child(2)), .summaryTable tr:nth-child(2) td:not(:nth-child(2)), .summaryTable tr:nth-child(3) td:not(:nth-child(2)) \
-                    {padding-left: 10px; text-align: left;} \
-                .ageTable td:nth-child(3), .ageTable td:nth-child(5), .ageTable td:nth-child(6), .ageTable td:nth-child(8) {width: 50px;} \
-                .ageTable tbody tr:hover, .summaryTable tbody tr:hover {background: #e5f3fc; font-weight: bold; vertical-align: top;} \
-                .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none; margin: 0px !important;} \
-                .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
-                .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
-                .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
-                .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {' + trHoverStyle + '} \
-                .sexMF img {vertical-align: middle;} \
-                .sexMF span {font-size: 14pt; vertical-align: middle;} \
-                .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
-                .guestsInfo p {margin-bottom: 5px;} \
-                .guestsInfo p span {font-weight: bold;} \
-                .scriptPrefsMain {font-family: sans-serif, Arial; position: absolute; right: 50px; top: 5px; width: 190px; z-index: 4; align: left; text-align: left;}\
-                .headerPrefs {font-size: 10pt; text-align: left; color: white; text-shadow: #222222 -1px -1px 1px, #222222 -1px 1px 1px, #222222 1px -1px 1px, #222222 1px 1px 1px;}\
-                .selLang {margin: 5px auto 0px; text-align: left;}\
-                .extIco {float: left; margin-right: 2px;}\
-                .optionFlag {padding: 3px 4px;}\
-                .optionFlag:hover {padding: 1px 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
-                .currentFlag {vertical-align: top; padding: 1px 2px; border: 2px inset #DDDDDD;}\
-                .scriptPrefs {font-size: 10pt; font-family: sans-serif, Arial; background: rgba(140, 155, 100, 0.9); position: absolute; right: 285px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
-                .scriptPrefs div {border-top: 1px dashed #AACCBB; vertical-align: middle; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px; margin-top: 3px; padding-top: 2px;}\
-                .scriptPrefs div input {vertical-align: middle; margin-right: 5px;}\
-                .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 245px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMG.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
-                .scriptPrefsIcoDiv:hover {filter: none !important; cursor: pointer; background-size: 36px !important;}\
-                .selJubilee {margin-top: 2px;}\
-                .selJubilee option {color: rgb(0, 0, 0); font-weight: normal;}\
-                .selJubilee option:checked {color: rgb(0, 144, 255) !important; font-weight: bold !important;}\
-            ';
-            Cmain.appendChild(style);
-        }
+        addExtensionCssStyles(Cmain);
 
         // база для хранения собранной информации
-        DB = {
-            firstRun: {
-                        all: {all: 0, home: 0, allNames: [], homeNames: []},
-                          m: {all: 0, home: 0, allNames: [], homeNames: []},
-                          f: {all: 0, home: 0, allNames: [], homeNames: []}
-            },
-            maxRaces: {
-                        m: {name: '', races: 0},
-                        f: {name: '', races: 0}
-            },
-            jubilee: {
-                        all: {number: 0, names: [], strNames: ''},
-                          m: {number: 0, names: [], strNames: ''},
-                          f: {number: 0, names: [], strNames: ''},
-                       next: {
-                        all: {number: 0, names: [], strNames: ''},
-                          m: {number: 0, names: [], strNames: ''},
-                          f: {number: 0, names: [], strNames: ''}
-                       }
-            },
-            personalBest: {
-                        all: {number: 0, names: [], strNames: ''},
-                          m: {number: 0, names: [], strNames: ''},
-                          f: {number: 0, names: [], strNames: ''}
-            },
-            fastest: {
-                        m: {name: '', time: 0},
-                        f: {name: '', time: 0}
-            },
-            ageRate: {
-                        m: {name: '', rate: 0},
-                        f: {name: '', rate: 0}
-            },
-            ageNumber: {},
-            number: {all: 0, m: 0, f: 0, u: 0, WC: {all: 0, m: 0, f: 0}, '---': {all: 0, m: 0, f: 0}},
-            ageAVG: {m: 0, f: 0}
-        };
+        DB = initDatabase();
 
         // перебираем всех участников забега и собираем информацию
         for (let i = 0; i < Atr.length; i++) {
-            let Atd = Atr[i].getElementsByTagName('td');
             if (+Atr[i].getAttribute('data-runs') === 0) {
                 DB.number.u += 1;
             } else {
@@ -199,7 +112,7 @@
                     sex = 'm',
                     age = Atr[i].getAttribute('data-agegroup').replace(/^[^0-9\-]*/, ''),
                     races = parseInt(Atr[i].getAttribute('data-runs')),
-                    time = Atd[Atd.length - 1].innerText;
+                    time = Atr[i].getElementsByClassName('Results-table-td--time')[0].getElementsByClassName('compact')[0].innerText;
                 name = name
                         .split(/(\s|\-)+/)
                         .map(word => word[0].toUpperCase() + word.substring(1).toLowerCase())
@@ -207,8 +120,8 @@
                         .replace(/\s*\-\s*/g, '-');
                 if (Atr[i].getElementsByClassName('Results-table-td--F').length > 0) {
                     sex = 'f';
-                    Atd[1].style.backgroundColor = '#FFE0FF';
-                    Atd[2].style.backgroundColor = '#FFE0FF';
+                    Atr[i].getElementsByTagName('td')[1].style.backgroundColor = '#FFE0FF';
+                    Atr[i].getElementsByTagName('td')[2].style.backgroundColor = '#FFE0FF';
                 }
                 if (age.length < 1) {
                     age = 'WC';
@@ -920,5 +833,101 @@
         node.insertBefore(div, node.firstChild);
 
         document.getElementById('pJubilee').style.width = document.getElementById('pJubilee').style.left;
+    }
+
+    // добавляем на страницу CSS стили расширения
+    function addExtensionCssStyles(node) {
+        if (document.getElementById('extensionStyles') !== null) {
+            document.getElementById('extensionStyles').remove();
+        }
+        let trHoverStyle = 'display: block;';
+        if (!lsprefs.showHoverStyle) {
+            trHoverStyle = 'display: none;';
+        }
+        if (document.getElementById('extensionStyles') === null) {
+            let style = document.createElement('style');
+            style.id = 'extensionStyles';
+            style.innerHTML = '\
+                .ageTable, .summaryTable {font-family: sans-serif, Arial; text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
+                .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 14pt; background: #e5f3fc;} \
+                .ageTable td, .summaryTable td, .ageTable th, .summaryTable th {border: 1px solid #c7dbe3;} \
+                .ageTable td, .summaryTable td {padding: 5px;} \
+                .ageTable th, .summaryTable th {padding: 5px 0px; vertical-align: middle;} \
+                .ageTable th:nth-child(1), .summaryTable th:nth-child(1) {font-weight: bold; text-align: left; font-size: 12pt; padding: 0px 10px;} \
+                .ageTable th:nth-child(2) {width: 90px;} \
+                .summaryTable td:nth-child(1) {padding-left: 10px; text-align: left; font-weight: bold;} \
+                .summaryTable tr:nth-child(1) td:not(:nth-child(2)), .summaryTable tr:nth-child(2) td:not(:nth-child(2)), .summaryTable tr:nth-child(3) td:not(:nth-child(2)) \
+                    {padding-left: 10px; text-align: left;} \
+                .ageTable td:nth-child(3), .ageTable td:nth-child(5), .ageTable td:nth-child(6), .ageTable td:nth-child(8) {width: 50px;} \
+                .ageTable tbody tr:hover, .summaryTable tbody tr:hover {background: #e5f3fc; font-weight: bold; vertical-align: top;} \
+                .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none; margin: 0px !important;} \
+                .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
+                .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
+                .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
+                .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {' + trHoverStyle + '} \
+                .sexMF img {vertical-align: middle;} \
+                .sexMF span {font-size: 14pt; vertical-align: middle;} \
+                .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
+                .guestsInfo p {margin-bottom: 5px;} \
+                .guestsInfo p span {font-weight: bold;} \
+                .scriptPrefsMain {font-family: sans-serif, Arial; position: absolute; right: 50px; top: 5px; width: 190px; z-index: 4; align: left; text-align: left;}\
+                .headerPrefs {font-size: 10pt; text-align: left; color: white; text-shadow: #222222 -1px -1px 1px, #222222 -1px 1px 1px, #222222 1px -1px 1px, #222222 1px 1px 1px;}\
+                .selLang {margin: 5px auto 0px; text-align: left;}\
+                .extIco {float: left; margin-right: 2px;}\
+                .optionFlag {padding: 3px 4px;}\
+                .optionFlag:hover {padding: 1px 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
+                .currentFlag {vertical-align: top; padding: 1px 2px; border: 2px inset #DDDDDD;}\
+                .scriptPrefs {font-size: 10pt; font-family: sans-serif, Arial; background: rgba(140, 155, 100, 0.9); position: absolute; right: 285px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
+                .scriptPrefs div {border-top: 1px dashed #AACCBB; vertical-align: middle; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px; margin-top: 3px; padding-top: 2px;}\
+                .scriptPrefs div input {vertical-align: middle; margin-right: 5px;}\
+                .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 245px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMG.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
+                .scriptPrefsIcoDiv:hover {filter: none !important; cursor: pointer; background-size: 36px !important;}\
+                .selJubilee {margin-top: 2px;}\
+                .selJubilee option {color: rgb(0, 0, 0); font-weight: normal;}\
+                .selJubilee option:checked {color: rgb(0, 144, 255) !important; font-weight: bold !important;}\
+            ';
+            node.appendChild(style);
+        }
+    }
+
+    // начальное состояние объекта базы для хранения собранной информации
+    function initDatabase() {
+        return {
+            firstRun: {
+                        all: {all: 0, home: 0, allNames: [], homeNames: []},
+                          m: {all: 0, home: 0, allNames: [], homeNames: []},
+                          f: {all: 0, home: 0, allNames: [], homeNames: []}
+            },
+            maxRaces: {
+                        m: {name: '', races: 0},
+                        f: {name: '', races: 0}
+            },
+            jubilee: {
+                        all: {number: 0, names: [], strNames: ''},
+                          m: {number: 0, names: [], strNames: ''},
+                          f: {number: 0, names: [], strNames: ''},
+                       next: {
+                        all: {number: 0, names: [], strNames: ''},
+                          m: {number: 0, names: [], strNames: ''},
+                          f: {number: 0, names: [], strNames: ''}
+                       }
+            },
+            personalBest: {
+                        all: {number: 0, names: [], strNames: ''},
+                          m: {number: 0, names: [], strNames: ''},
+                          f: {number: 0, names: [], strNames: ''}
+            },
+            fastest: {
+                        m: {name: '', time: 0},
+                        f: {name: '', time: 0}
+            },
+            ageRate: {
+                        m: {name: '', rate: 0},
+                        f: {name: '', rate: 0}
+            },
+            ageNumber: {},
+            number: {all: 0, m: 0, f: 0, u: 0, WC: {all: 0, m: 0, f: 0}, '---': {all: 0, m: 0, f: 0}},
+            ageAVG: {m: 0, f: 0}
+        };
     }
 })();

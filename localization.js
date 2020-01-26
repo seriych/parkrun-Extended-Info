@@ -3,31 +3,37 @@ var L10n = {
 
     en: { // English
         nativeLanguageTitle: 'English',
-        sex: {m: 'm', f: ' f ', men: 'Men', women: 'Women', all: 'All'},
+        sex: {
+            m: 'm',
+            f: ' f ',
+            men: 'Men',
+            women: 'Women',
+            all: 'All'
+        },
         summaryTable: {
             mainTitle: 'Summary run results',
-                    fastest: 'Fastest time:',
-                    ageRate: 'Top age grade:',
-                    maxRaces: 'Most runs:',
-                    number: 'Total participants:',
-                    unknown: 'unknowns',
-                    unknownTooltip: 'no barcode - no result :-(',
-                    personalBest: 'Personal bests (PBs):',
-                    firstHome: 'First time visiting this parkrun:',
+            fastest: 'Fastest time:',
+            ageRate: 'Top age grade:',
+            maxRaces: 'Most runs:',
+            number: 'Total participants:',
+            unknown: 'unknowns',
+            unknownTooltip: 'no barcode - no result :-(',
+            personalBest: 'Personal bests (PBs):',
+            firstHome: 'First time visiting this parkrun:',
             firstHomeNote: 'name (number of parkruns)',
-                    firstRun: 'First timers:',
-                    firstRunTooltip: 'Information is only available for the last run',
+            firstRun: 'First timers:',
+            firstRunTooltip: 'Information is only available for the last run',
             jubileeNext: 'Upcoming milestones:',
             jubilee: 'Milestone run:',
             jubileeTooltip: 'Shows the total number of runs now, and not at the date of the viewed run',
-                    ageAVG: 'Average age:*',
-                    ageAVGTooltip: 'The average age may be inaccurate (deviation not more than 2 years)'
-                },
-                ageTable: {
-                    mainTitle: 'Distribution by age and fastest by age',
-                    WC: 'Wheelchair users',
+            ageAVG: 'Average age:*',
+            ageAVGTooltip: 'The average age may be inaccurate (deviation not more than 2 years)'
+        },
+        ageTable: {
+            mainTitle: 'Distribution by age and fastest by age',
+            WC: 'Wheelchair users',
             '---': 'Age not specified'
-                },
+        },
         scriptSettings: {
             headerTooltip: 'Extension settings',
             showAgeTable: 'Show age groups table',
@@ -46,31 +52,37 @@ var L10n = {
 
     pl: { // Polish
         nativeLanguageTitle: 'Polski',
-        sex: {m: 'm', f: 'k ', men: 'Mężczyźni', women: 'Kobiety', all: 'Wszyscy'},
+        sex: {
+            m: 'm',
+            f: 'k ',
+            men: 'Mężczyźni',
+            women: 'Kobiety',
+            all: 'Wszyscy'
+        },
         summaryTable: {
             mainTitle: 'Podsumowanie wyników biegów',
-                    fastest: 'Najszybszy czas:',
-                    ageRate: 'Najlepszy współczynnik wieku:',
-                    maxRaces: 'Największa liczba biegów:',
-                    number: 'Całkowita liczba uczestników:',
-                    unknown: 'nieznani',
-                    unknownTooltip: 'nie ma kodu – nie ma wyniku :-(',
-                    personalBest: 'Rekordy życiowe (PBs):',
-                    firstHome: 'Debiutanci w tej lokalizacji parkrun:',
+            fastest: 'Najszybszy czas:',
+            ageRate: 'Najlepszy współczynnik wieku:',
+            maxRaces: 'Największa liczba biegów:',
+            number: 'Całkowita liczba uczestników:',
+            unknown: 'nieznani',
+            unknownTooltip: 'nie ma kodu – nie ma wyniku :-(',
+            personalBest: 'Rekordy życiowe (PBs):',
+            firstHome: 'Debiutanci w tej lokalizacji parkrun:',
             firstHomeNote: 'imię (liczba parkrunów)',
-                    firstRun: 'Debiutanci:',
-                    firstRunTooltip: 'Dane dostępne tylko dla ostatniego biegu',
+            firstRun: 'Debiutanci:',
+            firstRunTooltip: 'Dane dostępne tylko dla ostatniego biegu',
             jubileeNext: 'Zbliżający się jubileusz:',
             jubilee: 'Bieg jubileuszowy:',
             jubileeTooltip: 'Pokazuje całkowitą ilość biegów aktualnie, a nie w dniu danego biegu',
-                    ageAVG: 'Średnia wieku:*',
-                    ageAVGTooltip: 'Średnia wieku może nie być dokładna (różnica nie większa niż 2 lata)'
-                },
-                ageTable: {
-                    mainTitle: 'Rozkład wieku i najszybsi w kategoriach wiekowych',
-                    WC: 'Zawodnicy na wózkach inwalidzkich',
+            ageAVG: 'Średnia wieku:*',
+            ageAVGTooltip: 'Średnia wieku może nie być dokładna (różnica nie większa niż 2 lata)'
+        },
+        ageTable: {
+            mainTitle: 'Rozkład wieku i najszybsi w kategoriach wiekowych',
+            WC: 'Zawodnicy na wózkach inwalidzkich',
             '---': 'Wiek nie podany'
-                },
+        },
         scriptSettings: {
             headerTooltip: 'Ustawienia rozszerzeń',
             showAgeTable: 'Pokaż tabelę wiekową',
@@ -89,7 +101,13 @@ var L10n = {
 
     ru: { // Russian
         nativeLanguageTitle: 'Русский',
-        sex: {m: 'м', f: 'ж', men: 'Мужчины', women: 'Женщины', all: 'Все'},
+        sex: {
+            m: 'м',
+            f: 'ж',
+            men: 'Мужчины',
+            women: 'Женщины',
+            all: 'Все'
+        },
         summaryTable: {
             mainTitle: 'Сводные результаты забега',
             fastest: 'Лучшие по времени:',
@@ -132,31 +150,37 @@ var L10n = {
 
     fr: { // French
         nativeLanguageTitle: 'Français',
-        sex: {m: 'h', f: 'f ', men: 'Homme', women: 'Femme', all: 'Tous'},
+        sex: {
+            m: 'h',
+            f: 'f ',
+            men: 'Homme',
+            women: 'Femme',
+            all: 'Tous'
+        },
         summaryTable: {
             mainTitle: 'Récapitulatif des résultats',
-                    fastest: 'Meilleur temps:',
-                    ageRate: 'Meilleur gradient d’Age:',
-                    maxRaces: 'Plus grand nombre de footings:',
-                    number: 'Nombre total de participants:',
-                    unknown: 'inconnus',
-                    unknownTooltip: 'pas de code barre – pas de résultat :-(',
-                    personalBest: 'Meilleures Performances (MPs):',
-                    firstHome: 'Premières participations à ce parkrun:',
+            fastest: 'Meilleur temps:',
+            ageRate: 'Meilleur gradient d’Age:',
+            maxRaces: 'Plus grand nombre de footings:',
+            number: 'Nombre total de participants:',
+            unknown: 'inconnus',
+            unknownTooltip: 'pas de code barre – pas de résultat :-(',
+            personalBest: 'Meilleures Performances (MPs):',
+            firstHome: 'Premières participations à ce parkrun:',
             firstHomeNote: 'Nom (nombre de participations):',
-                    firstRun: 'Premières participations:',
-                    firstRunTooltip: 'Cette information est seulement disponible pour la dernière participation',
+            firstRun: 'Premières participations:',
+            firstRunTooltip: 'Cette information est seulement disponible pour la dernière participation',
             jubileeNext: 'Prochains entrants d’un Club:',
             jubilee: 'Nouveaux entrants d’un Club:',
             jubileeTooltip: 'Indique le nombre total de footings actuel et non à la date de ce footing',
-                    ageAVG: 'Age moyen:*',
-                    ageAVGTooltip: 'L’âge moyen peut être imprécis (pas plus de 2 ans d’écart)'
-                },
-                ageTable: {
-                    mainTitle: 'Répartition par tranches d’âge et meilleur temps par tranches d’âge',
-                    WC: 'Coureurs en fauteuil roulant',
+            ageAVG: 'Age moyen:*',
+            ageAVGTooltip: 'L’âge moyen peut être imprécis (pas plus de 2 ans d’écart)'
+        },
+        ageTable: {
+            mainTitle: 'Répartition par tranches d’âge et meilleur temps par tranches d’âge',
+            WC: 'Coureurs en fauteuil roulant',
             '---': 'Age non indiqué'
-                },
+        },
         scriptSettings: {
             headerTooltip: 'Paramètres d’extension',
             showAgeTable: 'Faire apparaître le tableau par tranches d’âge',
@@ -175,31 +199,37 @@ var L10n = {
 
     cn: { // Simplified Chinese
         nativeLanguageTitle: '简体中文',
-        sex: {m: '男', f: '女', men: '男子', women: '女子', all: '全部性别'},
+        sex: {
+            m: '男',
+            f: '女',
+            men: '男子',
+            women: '女子',
+            all: '全部性别'
+        },
         summaryTable: {
             mainTitle: '跑步成绩报告',
-                    fastest: '最快用时记录',
-                    ageRate: '年龄组最佳成绩百分比',
-                    maxRaces: '最多公园跑个人参加记录',
-                    number: '参加总人数',
-                    unknown: '无姓名参加者',
-                    unknownTooltip: '未带条形码 - 没有成绩记录 :-(',
-                    personalBest: '个人最佳成绩',
-                    firstHome: '第一次参加此公园跑的人数',
+            fastest: '最快用时记录',
+            ageRate: '年龄组最佳成绩百分比',
+            maxRaces: '最多公园跑个人参加记录',
+            number: '参加总人数',
+            unknown: '无姓名参加者',
+            unknownTooltip: '未带条形码 - 没有成绩记录 :-(',
+            personalBest: '个人最佳成绩',
+            firstHome: '第一次参加此公园跑的人数',
             firstHomeNote: '姓名 （参加公园跑次数）',
-                    firstRun: '第一次参加公园跑的人数',
-                    firstRunTooltip: '仅上次跑的信息可供查询',
+            firstRun: '第一次参加公园跑的人数',
+            firstRunTooltip: '仅上次跑的信息可供查询',
             jubileeNext: '下几次跑达到里程碑的人数',
             jubilee: '本次跑达到里程碑记录的人数',
             jubileeTooltip: '显示到目前（今天总参加数量',
-                    ageAVG: '平均年龄 *',
-                    ageAVGTooltip: '平均年龄不一定精确（误差不超过2岁）'
-                },
-                ageTable: {
-                    mainTitle: '年龄组别最快用时分布记录',
-                    WC: '使用轮椅的人数',
+            ageAVG: '平均年龄 *',
+            ageAVGTooltip: '平均年龄不一定精确（误差不超过2岁）'
+        },
+        ageTable: {
+            mainTitle: '年龄组别最快用时分布记录',
+            WC: '使用轮椅的人数',
             '---': '无年龄信息的人数'
-                },
+        },
         scriptSettings: {
             headerTooltip: '文档设定',
             showAgeTable: '显示年龄组别表格',
@@ -218,31 +248,37 @@ var L10n = {
 
     tw: { // Traditional Chinese
         nativeLanguageTitle: '繁體中文',
-        sex: {m: '男', f: '女', men: '男子', women: '女子', all: '全部性别'},
+        sex: {
+            m: '男',
+            f: '女',
+            men: '男子',
+            women: '女子',
+            all: '全部性别'
+        },
         summaryTable: {
             mainTitle: '跑步成績彙總',
-                    fastest: '最快時間:',
-                    ageRate: '年齡組最佳成績百分比:',
-                    maxRaces: '個人參加最多公園跑記錄:',
-                    number: '參加總人數:',
-                    unknown: '未知姓名參加者',
-                    unknownTooltip: '未帶條碼 - 無成績記錄 :-(',
-                    personalBest: '個人最佳成績:',
-                    firstHome: '初次參加本地公園跑人數:',
+            fastest: '最快時間:',
+            ageRate: '年齡組最佳成績百分比:',
+            maxRaces: '個人參加最多公園跑記錄:',
+            number: '參加總人數:',
+            unknown: '未知姓名參加者',
+            unknownTooltip: '未帶條碼 - 無成績記錄 :-(',
+            personalBest: '個人最佳成績:',
+            firstHome: '初次參加本地公園跑人數:',
             firstHomeNote: '姓名 (參加公園跑次數)',
-                    firstRun: '初次參加公園跑人數:',
-                    firstRunTooltip: '僅上次跑的訊息可供查詢',
+            firstRun: '初次參加公園跑人數:',
+            firstRunTooltip: '僅上次跑的訊息可供查詢',
             jubileeNext: '將達到里程碑的人數',
             jubilee: '本次跑達到里程碑的人數',
             jubileeTooltip: '顯示到目前總參加數量',
-                    ageAVG: '平均年齡:*',
-                    ageAVGTooltip: '平均年齡可能不正確(誤差不超過2歲)'
-                },
-                ageTable: {
-                    mainTitle: '年齡組別人數及年齡組別最快時間',
-                    WC: '使用輪椅的人數',
+            ageAVG: '平均年齡:*',
+            ageAVGTooltip: '平均年齡可能不正確(誤差不超過2歲)'
+        },
+        ageTable: {
+            mainTitle: '年齡組別人數及年齡組別最快時間',
+            WC: '使用輪椅的人數',
             '---': '未註明年齡'
-                },
+        },
         scriptSettings: {
             headerTooltip: '設定選項',
             showAgeTable: '顯示年齡組別表格',
@@ -261,31 +297,37 @@ var L10n = {
 
     jp: { // Japanese
         nativeLanguageTitle: '日本語',
-        sex: {m: '男', f: '女', men: '男性', women: '女性', all: '全体'},
+        sex: {
+            m: '男',
+            f: '女',
+            men: '男性',
+            women: '女性',
+            all: '全体'
+        },
         summaryTable: {
             mainTitle: '集計結果',
-                    fastest: '最速タイム',
-                    ageRate: '最高年齢換算スコア',
-                    maxRaces: '最多参加',
-                    number: '参加者合計',
-                    unknown: '不明',
-                    unknownTooltip: 'バーコードが無い場合は結果は出ません',
-                    personalBest: '自己ベスト',
-                    firstHome: '本パークラン初参加',
+            fastest: '最速タイム',
+            ageRate: '最高年齢換算スコア',
+            maxRaces: '最多参加',
+            number: '参加者合計',
+            unknown: '不明',
+            unknownTooltip: 'バーコードが無い場合は結果は出ません',
+            personalBest: '自己ベスト',
+            firstHome: '本パークラン初参加',
             firstHomeNote: '名前（参加回数）',
-                    firstRun: '初参加者',
-                    firstRunTooltip: '直近のパークランのみで表示',
+            firstRun: '初参加者',
+            firstRunTooltip: '直近のパークランのみで表示',
             jubileeNext: '次回表彰者',
             jubilee: '表彰者',
             jubileeTooltip: '当時ではなく現在の参加回数を表示',
-                    ageAVG: '平均年齢 *',
-                    ageAVGTooltip: '平均年齢は2歳以下のずれがあります'
-                },
-                ageTable: {
-                    mainTitle: '年代別の参加者数＆最速タイム',
-                    WC: '車椅子参加者',
+            ageAVG: '平均年齢 *',
+            ageAVGTooltip: '平均年齢は2歳以下のずれがあります'
+        },
+        ageTable: {
+            mainTitle: '年代別の参加者数＆最速タイム',
+            WC: '車椅子参加者',
             '---': '年齢未回答'
-                },
+        },
         scriptSettings: {
             headerTooltip: 'スクリプト設定',
             showAgeTable: '年代別結果の表示',

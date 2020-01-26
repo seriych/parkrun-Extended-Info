@@ -248,40 +248,7 @@
         }
 
         // добавляем на страничку пустую таблицу для общих результатов
-        let Tsummary = document.createElement('table');
-        Tsummary.id = 'scriptTsummary';
-        Tsummary.className = 'summaryTable';
-        let Thead = document.createElement('thead');
-        Thead.innerHTML = '<tr>\
-                               <th style="font-size: 14pt;">' + L10n[LANG].summaryTable.mainTitle + '</th>\
-                               <th class="sexMF" title="' + L10n[LANG].sex.all + '">\
-                                   <img src="' + IMG.m + '">+<img src="' + IMG.f + '">\
-                               </th>\
-                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.men + '"><img src="' + IMG.m + '"></th>\
-                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.women + '"><img src="' + IMG.f + '"></th>\
-                           </tr>';
-        Tsummary.appendChild(Thead);
-        let Tbody = document.createElement('tbody');
-        Tsummary.appendChild(Tbody);
-        for (let i = 0; i < 10; i++) {
-            let tr = document.createElement('tr');
-            tr.id = 'summary' + (1 + i);
-            if (i < 3) {
-                for (let j = 0; j < 6; j++) {
-                    tr.appendChild(document.createElement('td'));
-                }
-            } else {
-                for (let j = 0; j < 4; j++) {
-                    let td = document.createElement('td');
-                    if (j > 1) {
-                        td.colSpan = 2;
-                    }
-                    tr.appendChild(td);
-                }
-            }
-            Tbody.appendChild(tr);
-        }
-        Cmain.insertBefore(Tsummary, Cmain.firstChild);
+        addSummaryTable(Cmain);
 
         // заполняем таблицу с общими результатами
 
@@ -833,6 +800,44 @@
         node.insertBefore(div, node.firstChild);
 
         document.getElementById('pJubilee').style.width = document.getElementById('pJubilee').style.left;
+    }
+
+    // добавляем на страничку пустую таблицу для общих результатов
+    function addSummaryTable(node) {
+        let Tsummary = document.createElement('table');
+        Tsummary.id = 'scriptTsummary';
+        Tsummary.className = 'summaryTable';
+        let Thead = document.createElement('thead');
+        Thead.innerHTML = '<tr>\
+                               <th style="font-size: 14pt;">' + L10n[LANG].summaryTable.mainTitle + '</th>\
+                               <th class="sexMF" title="' + L10n[LANG].sex.all + '">\
+                                   <img src="' + IMG.m + '">+<img src="' + IMG.f + '">\
+                               </th>\
+                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.men + '"><img src="' + IMG.m + '"></th>\
+                               <th colspan="2" class="sexMF" title="' + L10n[LANG].sex.women + '"><img src="' + IMG.f + '"></th>\
+                           </tr>';
+        Tsummary.appendChild(Thead);
+        let Tbody = document.createElement('tbody');
+        Tsummary.appendChild(Tbody);
+        for (let i = 0; i < 10; i++) {
+            let tr = document.createElement('tr');
+            tr.id = 'summary' + (1 + i);
+            if (i < 3) {
+                for (let j = 0; j < 6; j++) {
+                    tr.appendChild(document.createElement('td'));
+                }
+            } else {
+                for (let j = 0; j < 4; j++) {
+                    let td = document.createElement('td');
+                    if (j > 1) {
+                        td.colSpan = 2;
+                    }
+                    tr.appendChild(td);
+                }
+            }
+            Tbody.appendChild(tr);
+        }
+        node.insertBefore(Tsummary, node.firstChild);
     }
 
     // добавляем на страницу CSS стили расширения

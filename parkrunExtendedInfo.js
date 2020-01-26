@@ -139,12 +139,12 @@
                 if (races === 1) {
                     DB.firstRun[sex].all += 1;
                     DB.firstRun[sex].allNames.push({name: name});
-                } else if (isJubileeNow(races)) {
+                } else if (isJubileeNow(races, age)) {
                     DB.jubilee[sex].number += 1;
                     DB.jubilee[sex].names.push({name: name, races: races});
                     DB.jubilee.all.number += 1;
                     DB.jubilee.all.names.push({name: name, races: races});
-                } else if (isJubileeSoon(races)) {
+                } else if (isJubileeSoon(races, age)) {
                     DB.jubilee.next[sex].number += 1;
                     DB.jubilee.next[sex].names.push({name: name, races: races});
                     DB.jubilee.next.all.number += 1;
@@ -596,19 +596,26 @@
     }
 
     // проверяем, является ли забег юбилейным
-    function isJubileeNow(races) {
+    function isJubileeNow(races, ageGR) {
         return (
             races % 50 === 0
             || (juniorsPage && (races === 11 || races === 21))
+            || ((!juniorsPage) && races === 10 && isJuniorPerson(ageGR))
         );
     }
 
     // проверяем, что скоро будет юбилейный забег
-    function isJubileeSoon(races) {
+    function isJubileeSoon(races, ageGR) {
         return (
             races % 50 >= 50 - lsprefs.jubileeMax
             || (juniorsPage && races < 21 && (races % 11 >= 11 - lsprefs.jubileeMax || races % 21 >= 21 - lsprefs.jubileeMax))
+            || ((!juniorsPage) && races < 10 && (races >= 10 - lsprefs.jubileeMax) && isJuniorPerson(ageGR))
         );
+    }
+
+    // проверяем, что бегун юниор
+    function isJuniorPerson(ageGR) {
+        return ['10', '11-14', '15-17'].includes(ageGR);
     }
 
     // добавляем на страницу блок настроек скрипта

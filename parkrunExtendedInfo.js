@@ -12,14 +12,12 @@
 
         // настройки по умолчанию
         var LANG = 'en',
-            jubileeMax = 2,
-            showAgeTable = true,
-            showHoverStyle = true,
             defaultPrefs = {
                 LANG: LANG,
-                jubileeMax: jubileeMax,
-                showAgeTable: showAgeTable,
-                showHoverStyle: showHoverStyle
+                jubileeMax: 2,
+                topNrows: 3,
+                showAgeTable: true,
+                showHoverStyle: true
             };
         var COLORS = {
                 count: '145, 238, 145',
@@ -168,6 +166,9 @@
                     DB.ageRate[sex].rate = rate;
                     DB.ageRate[sex].name = name;
                 }
+                DB.ageRate[sex].names.push({rate: rate, name: name});
+                DB.fastest[sex].names.push({time: time, time_sec: time2sec(time), name: name});
+                DB.maxRaces[sex].names.push({races: races, name: name});
                 if (races > DB.maxRaces[sex].races) {
                     DB.maxRaces[sex].races = races;
                     DB.maxRaces[sex].name = name;
@@ -191,6 +192,9 @@
             DB.personalBest[sex].names.sort(compareByName);
             DB.jubilee[sex].names.sort(compareByRaces);
             DB.jubilee.next[sex].names.sort(compareByRaces);
+            DB.ageRate[sex].names.sort(compareByAgeRate);
+            DB.fastest[sex].names.sort(compareByTimeSec);
+            DB.maxRaces[sex].names.sort(compareByRaces);
         }
         DB.firstRun.all.allNames.sort(compareFirst);
         DB.firstRun.all.homeNames.sort(compareFirst);
@@ -255,17 +259,17 @@
         // лучшие по времени
         let nodes = document.getElementById('summary1').getElementsByTagName('td');
         nodes[0].innerHTML = L10n[LANG].summaryTable.fastest;
-        if (time2sec(DB.fastest.m.time) < time2sec(DB.fastest.f.time)) {
+        if (DB.number.m > 0 && (DB.number.f === 0 || time2sec(DB.fastest.m.time) < time2sec(DB.fastest.f.time))) {
             nodes[1].innerHTML = DB.fastest.m.time;
             nodes[1].title = DB.fastest.m.name;
         } else {
             nodes[1].innerHTML = DB.fastest.f.time;
             nodes[1].title = DB.fastest.f.name;
         }
-        nodes[2].innerHTML = DB.fastest.m.time;
-        nodes[3].innerHTML = DB.fastest.m.name;
-        nodes[4].innerHTML = DB.fastest.f.time;
-        nodes[5].innerHTML = DB.fastest.f.name;
+        nodes[2].innerHTML = DB.fastest.m.time + names2p(DB.fastest.m.names, 'time');
+        nodes[3].innerHTML = DB.fastest.m.name + names2p(DB.fastest.m.names, 'name');
+        nodes[4].innerHTML = DB.fastest.f.time + names2p(DB.fastest.f.names, 'time');
+        nodes[5].innerHTML = DB.fastest.f.name + names2p(DB.fastest.f.names, 'name');
 
         // лучшие по возрастному рейтингу
         nodes = document.getElementById('summary2').getElementsByTagName('td');
@@ -277,10 +281,10 @@
             nodes[1].innerHTML = DB.ageRate.f.rate + ' %';
             nodes[1].title = DB.ageRate.f.name;
         }
-        nodes[2].innerHTML = DB.ageRate.m.rate + ' %';
-        nodes[3].innerHTML = DB.ageRate.m.name;
-        nodes[4].innerHTML = DB.ageRate.f.rate + ' %';
-        nodes[5].innerHTML = DB.ageRate.f.name;
+        nodes[2].innerHTML = DB.ageRate.m.rate + ' %' + names2p(DB.ageRate.m.names, 'rate');
+        nodes[3].innerHTML = DB.ageRate.m.name +        names2p(DB.ageRate.m.names, 'name');
+        nodes[4].innerHTML = DB.ageRate.f.rate + ' %' + names2p(DB.ageRate.f.names, 'rate');
+        nodes[5].innerHTML = DB.ageRate.f.name +        names2p(DB.ageRate.f.names, 'name');
 
         // лучшие максимальному количеству забегов
         nodes = document.getElementById('summary3').getElementsByTagName('td');
@@ -292,10 +296,10 @@
             nodes[1].innerHTML = DB.maxRaces.f.races;
             nodes[1].title = DB.maxRaces.f.name;
         }
-        nodes[2].innerHTML = DB.maxRaces.m.races;
-        nodes[3].innerHTML = DB.maxRaces.m.name;
-        nodes[4].innerHTML = DB.maxRaces.f.races;
-        nodes[5].innerHTML = DB.maxRaces.f.name;
+        nodes[2].innerHTML = DB.maxRaces.m.races + names2p(DB.maxRaces.m.names, 'races');
+        nodes[3].innerHTML = DB.maxRaces.m.name  + names2p(DB.maxRaces.m.names, 'name');
+        nodes[4].innerHTML = DB.maxRaces.f.races + names2p(DB.maxRaces.f.names, 'races');
+        nodes[5].innerHTML = DB.maxRaces.f.name  + names2p(DB.maxRaces.f.names, 'name');
 
         // количество участников забега
         nodes = document.getElementById('summary4').getElementsByTagName('td');
@@ -541,6 +545,21 @@
         }
     }
 
+    // функция сравнения для сортировки объектов по времени в секундах
+    function compareByTimeSec(obj1, obj2) {
+        return compareObjects(obj1, obj2, 'time_sec');
+    }
+
+    // функция сравнения для сортировки объектов по времени
+    function compareByTime(obj1, obj2) {
+        return (time2sec(obj1.time) - time2sec(obj2.time));
+    }
+
+    // функция сравнения для сортировки объектов по возрастному рейтингу
+    function compareByAgeRate(obj1, obj2) {
+        return compareObjects(obj2, obj1, 'rate');
+    }
+
     // функция сравнения для сортировки объектов по количеству забегов
     function compareByRaces(obj1, obj2) {
         return compareObjects(obj2, obj1, 'races');
@@ -562,25 +581,37 @@
     }
 
     // создаем строку имен из массива объектов
-    function names2p(Names) {
+    function names2p(Names, measure) {
         let str = '';
-        if (Names.length > 0) {
-            if (Names[0].hasOwnProperty('time')) {
-                for (let i = 0; i < Names.length; i++) {
-                    if (Names[i].hasOwnProperty('sex')) {
-                        str += '<p>' + Names[i].time + ' - ' + L10n[LANG].sex[Names[i].sex] + ' - ' + Names[i].name + '</p>';
-                    } else {
-                        str += '<p>' + Names[i].time + ' - ' + Names[i].name + '</p>';
+        if (measure === undefined) {
+            if (Names.length > 0) {
+                if (Names[0].hasOwnProperty('time')) {
+                    for (let i = 0; i < Names.length; i++) {
+                        if (Names[i].hasOwnProperty('sex')) {
+                            str += '<p>' + Names[i].time + ' - ' + L10n[LANG].sex[Names[i].sex] + ' - ' + Names[i].name + '</p>';
+                        } else {
+                            str += '<p>' + Names[i].time + ' - ' + Names[i].name + '</p>';
+                        }
+                    }
+                } else if (Names[0].hasOwnProperty('races')) {
+                    str = '<p>' + L10n[LANG].summaryTable.firstHomeNote + '</p>';
+                    for (let i = 0; i < Names.length; i++) {
+                        str += '<p>' + Names[i].name + ' (' + Names[i].races + ')' + '</p>';
+                    }
+                } else if (Names[0].hasOwnProperty('name')) {
+                    for (let i = 0; i < Names.length; i++) {
+                        str += '<p>' + Names[i].name + '</p>';
                     }
                 }
-            } else if (Names[0].hasOwnProperty('races')) {
-                str = '<p>' + L10n[LANG].summaryTable.firstHomeNote + '</p>';
-                for (let i = 0; i < Names.length; i++) {
-                    str += '<p>' + Names[i].name + ' (' + Names[i].races + ')' + '</p>';
-                }
-            } else if (Names[0].hasOwnProperty('name')) {
-                for (let i = 0; i < Names.length; i++) {
-                    str += '<p>' + Names[i].name + '</p>';
+            }
+        } else {
+            if (Names.length > 1) {
+                for (let i = 1; (i < lsprefs.topNrows) && (i < Names.length); i++) {
+                    if (measure !== 'rate') {
+                        str += '<p>' + Names[i][measure] + '</p>';
+                    } else {
+                        str += '<p>' + Names[i][measure] + ' %</p>';
+                    }
                 }
             }
         }
@@ -916,8 +947,8 @@
                           f: {all: 0, home: 0, allNames: [], homeNames: []}
             },
             maxRaces: {
-                        m: {name: '', races: 0},
-                        f: {name: '', races: 0}
+                        m: {name: '', races: 0, names: []},
+                        f: {name: '', races: 0, names: []}
             },
             jubilee: {
                         all: {number: 0, names: [], strNames: ''},
@@ -935,12 +966,12 @@
                           f: {number: 0, names: [], strNames: ''}
             },
             fastest: {
-                        m: {name: '', time: 0},
-                        f: {name: '', time: 0}
+                        m: {name: '', time: 0, names: []},
+                        f: {name: '', time: 0, names: []}
             },
             ageRate: {
-                        m: {name: '', rate: 0},
-                        f: {name: '', rate: 0}
+                        m: {name: '', rate: 0, names: []},
+                        f: {name: '', rate: 0, names: []}
             },
             ageNumber: {},
             number: {all: 0, m: 0, f: 0, u: 0, WC: {all: 0, m: 0, f: 0}, '---': {all: 0, m: 0, f: 0}},

@@ -553,7 +553,12 @@
 
     // функция сравнения для сортировки объектов по заданному свойству
     function compareObjects(obj1, obj2, property='name') {
-        return obj1[property] > obj2[property];
+        if (obj1[property] > obj2[property]) {
+            return 1;
+        } else if (obj1[property] < obj2[property]) {
+            return -1;
+        } else
+            return 0;
     }
 
     // создаем строку имен из массива объектов

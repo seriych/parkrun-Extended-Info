@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "parkrun Extended Info",
   "short_name": "parkrunExInf",
-  "version": "2020.2.9.1",
+  "version": "2020.2.18.0",
   "author": "seriych",
 
   "default_locale": "en",
@@ -33,6 +33,8 @@
       "matches": [
         "http://www.parkrun.ca/*",
         "https://www.parkrun.ca/*",
+        "http://www.parkrun.co.nl/*",
+        "https://www.parkrun.co.nl/*",
         "http://www.parkrun.co.nz/*",
         "https://www.parkrun.co.nz/*",
         "http://www.parkrun.co.za/*",
@@ -73,6 +75,8 @@
       "include_globs": [
         "http://www.parkrun.ca/*",
         "https://www.parkrun.ca/*",
+        "http://www.parkrun.co.nl/*",
+        "https://www.parkrun.co.nl/*",
         "http://www.parkrun.co.nz/*",
         "https://www.parkrun.co.nz/*",
         "http://www.parkrun.co.za/*",

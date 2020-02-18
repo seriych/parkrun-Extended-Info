@@ -112,7 +112,8 @@
                     races = parseInt(Atr[i].getAttribute('data-runs')),
                     time = Atr[i].getElementsByClassName('Results-table-td--time')[0].getElementsByClassName('compact')[0].innerText;
                 name = name
-                        .split(/(\s|\-)+/)
+                        .replace(/^[\s\-]*(.*[^\s\-])[\s\-]*$/, '$1')
+                        .split(/[\s\-]+/)
                         .map(word => word[0].toUpperCase() + word.substring(1).toLowerCase())
                         .join(' ')
                         .replace(/\s*\-\s*/g, '-');

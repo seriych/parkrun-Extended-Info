@@ -47,6 +47,8 @@
             }
             extendObjects(lsprefs, defaultPrefs);
 
+            addExtensionCssStyles(document.getElementById('main'));
+
             // запускаем обработку страницы
             if (historyPage) {
                 // история забегов
@@ -94,8 +96,6 @@
         let Cmain = document.getElementById('main'),
             Tresults = document.getElementsByClassName('Results-table')[0],
             Atr = Tresults.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-
-        addExtensionCssStyles(Cmain);
 
         // база для хранения собранной информации
         DB = initDatabase();
@@ -403,10 +403,10 @@
 
     // Обрабатываем страницу истории забегов
     function extendEventHistory() {
-        let TBresults = document.getElementById('results').getElementsByTagName('tbody')[0];
+        let TBresults = document.getElementsByClassName('Results-table')[0].getElementsByTagName('tbody')[0];
         addHistogram(TBresults, 2);
-        addHistogram(TBresults, 6, true, COLORS.man);
-        addHistogram(TBresults, 9, true, COLORS.woman);
+        addHistogram(TBresults, 5, true, COLORS.man);
+        addHistogram(TBresults, 7, true, COLORS.woman);
     }
 
     // Обрабатываем страницу результатов бегуна на всех паркранах
@@ -894,48 +894,53 @@
             trHoverStyle = 'display: none;';
         }
         if (document.getElementById('extensionStyles') === null) {
-            let style = document.createElement('style');
-            style.id = 'extensionStyles';
-            style.innerHTML = '\
-                .ageTable, .summaryTable {font-family: sans-serif, Arial; text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
-                .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 14pt; background: #e5f3fc;} \
-                .ageTable td, .summaryTable td, .ageTable th, .summaryTable th {border: 1px solid #c7dbe3;} \
-                .ageTable td, .summaryTable td {padding: 5px;} \
-                .ageTable th, .summaryTable th {padding: 5px 0px; vertical-align: middle;} \
-                .ageTable th:nth-child(1), .summaryTable th:nth-child(1) {font-weight: bold; text-align: left; font-size: 12pt; padding: 0px 10px;} \
-                .ageTable th:nth-child(2) {width: 90px;} \
-                .summaryTable td:nth-child(1) {padding-left: 10px; text-align: left; font-weight: bold;} \
-                .summaryTable tr:nth-child(1) td:not(:nth-child(2)), .summaryTable tr:nth-child(2) td:not(:nth-child(2)), .summaryTable tr:nth-child(3) td:not(:nth-child(2)) \
-                    {padding-left: 10px; text-align: left;} \
-                .ageTable td:nth-child(3), .ageTable td:nth-child(5), .ageTable td:nth-child(6), .ageTable td:nth-child(8) {width: 50px;} \
-                .ageTable tbody tr:hover, .summaryTable tbody tr:hover {background: #e5f3fc; font-weight: bold; vertical-align: top;} \
-                .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none; margin: 0px !important;} \
-                .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
-                .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
-                .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
-                .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {' + trHoverStyle + '} \
-                .sexMF img {vertical-align: middle;} \
-                .sexMF span {font-size: 14pt; vertical-align: middle;} \
-                .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
-                .guestsInfo p {margin-bottom: 5px;} \
-                .guestsInfo p span {font-weight: bold;} \
-                .scriptPrefsMain {font-family: sans-serif, Arial; position: absolute; right: 50px; top: 5px; width: 190px; z-index: 4; align: left; text-align: left;}\
-                .headerPrefs {font-size: 10pt; text-align: left; color: white; text-shadow: #222222 -1px -1px 1px, #222222 -1px 1px 1px, #222222 1px -1px 1px, #222222 1px 1px 1px;}\
-                .selLang {margin: 5px auto 0px; text-align: left;}\
-                .extIco {float: left; margin-right: 2px;}\
-                .optionFlag {padding: 3px 4px;}\
-                .optionFlag:hover {padding: 1px 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
-                .currentFlag {vertical-align: top; padding: 1px 2px; border: 2px inset #DDDDDD;}\
-                .scriptPrefs {font-size: 10pt; font-family: sans-serif, Arial; background: rgba(140, 155, 100, 0.9); position: absolute; right: 285px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
-                .scriptPrefs div {border-top: 1px dashed #AACCBB; vertical-align: middle; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px; margin-top: 3px; padding-top: 2px;}\
-                .scriptPrefs div input {vertical-align: middle; margin-right: 5px;}\
-                .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 245px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMG.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
-                .scriptPrefsIcoDiv:hover {filter: none !important; cursor: pointer; background-size: 36px !important;}\
-                .selJubilee {margin-top: 2px;}\
-                .selJubilee option {color: rgb(0, 0, 0); font-weight: normal;}\
-                .selJubilee option:checked {color: rgb(0, 144, 255) !important; font-weight: bold !important;}\
-            ';
-            node.appendChild(style);
+            let styleNode = document.createElement('style'),
+                styleRules = '';
+            styleNode.id = 'extensionStyles';
+            styleRules += '.Results-table-td {padding: 8px 10px;} ';
+            if (!(historyPage || athleteResultsLocalPage || athleteResultsAllPage)) {
+                styleRules += '\
+                    .ageTable, .summaryTable {font-family: sans-serif, Arial; text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
+                    .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 14pt; background: #e5f3fc;} \
+                    .ageTable td, .summaryTable td, .ageTable th, .summaryTable th {border: 1px solid #c7dbe3;} \
+                    .ageTable td, .summaryTable td {padding: 5px;} \
+                    .ageTable th, .summaryTable th {padding: 5px 0px; vertical-align: middle;} \
+                    .ageTable th:nth-child(1), .summaryTable th:nth-child(1) {font-weight: bold; text-align: left; font-size: 12pt; padding: 0px 10px;} \
+                    .ageTable th:nth-child(2) {width: 90px;} \
+                    .summaryTable td:nth-child(1) {padding-left: 10px; text-align: left; font-weight: bold;} \
+                    .summaryTable tr:nth-child(1) td:not(:nth-child(2)), .summaryTable tr:nth-child(2) td:not(:nth-child(2)), .summaryTable tr:nth-child(3) td:not(:nth-child(2)) \
+                        {padding-left: 10px; text-align: left;} \
+                    .ageTable td:nth-child(3), .ageTable td:nth-child(5), .ageTable td:nth-child(6), .ageTable td:nth-child(8) {width: 50px;} \
+                    .ageTable tbody tr:hover, .summaryTable tbody tr:hover {background: #e5f3fc; font-weight: bold; vertical-align: top;} \
+                    .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none; margin: 0px !important;} \
+                    .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
+                    .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
+                    .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
+                    .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {' + trHoverStyle + '} \
+                    .sexMF img {vertical-align: middle;} \
+                    .sexMF span {font-size: 14pt; vertical-align: middle;} \
+                    .guestsInfo {margin: 20px 15px -10px; font-size: 11pt; text-align: left;} \
+                    .guestsInfo p {margin-bottom: 5px;} \
+                    .guestsInfo p span {font-weight: bold;} \
+                    .scriptPrefsMain {font-family: sans-serif, Arial; position: absolute; right: 50px; top: 5px; width: 190px; z-index: 4; align: left; text-align: left;}\
+                    .headerPrefs {font-size: 10pt; text-align: left; color: white; text-shadow: #222222 -1px -1px 1px, #222222 -1px 1px 1px, #222222 1px -1px 1px, #222222 1px 1px 1px;}\
+                    .selLang {margin: 5px auto 0px; text-align: left;}\
+                    .extIco {float: left; margin-right: 2px;}\
+                    .optionFlag {padding: 3px 4px;}\
+                    .optionFlag:hover {padding: 1px 2px; border: 2px dashed #DDDDDD; cursor: pointer;}\
+                    .currentFlag {vertical-align: top; padding: 1px 2px; border: 2px inset #DDDDDD;}\
+                    .scriptPrefs {font-size: 10pt; font-family: sans-serif, Arial; background: rgba(140, 155, 100, 0.9); position: absolute; right: 285px; top: 0px; padding: 2px 10px; width: auto; height: 160px; z-index: 4; text-align: left;}\
+                    .scriptPrefs div {border-top: 1px dashed #AACCBB; vertical-align: middle; color: white; text-shadow: #333333 -1px -1px 1px, #333333 -1px 1px 1px, #333333 1px -1px 1px, #333333 1px 1px 1px; margin-top: 3px; padding-top: 2px;}\
+                    .scriptPrefs div input {vertical-align: middle; margin-right: 5px;}\
+                    .scriptPrefsIcoDiv {filter: grayscale(100%); position: absolute; right: 245px; top: 5px; width: 36px; height: 48px; z-index: 4; background: url("' + IMG.prefsIco36 + '") no-repeat center center; background-size: 32px;}\
+                    .scriptPrefsIcoDiv:hover {filter: none !important; cursor: pointer; background-size: 36px !important;}\
+                    .selJubilee {margin-top: 2px;}\
+                    .selJubilee option {color: rgb(0, 0, 0); font-weight: normal;}\
+                    .selJubilee option:checked {color: rgb(0, 144, 255) !important; font-weight: bold !important;}\
+                ';
+            }
+            styleNode.innerHTML = styleRules;
+            node.appendChild(styleNode);
         }
     }
 

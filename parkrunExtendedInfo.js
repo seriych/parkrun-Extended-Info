@@ -122,7 +122,9 @@
                     Atr[i].getElementsByTagName('td')[1].style.backgroundColor = '#FFE0FF';
                     Atr[i].getElementsByTagName('td')[2].style.backgroundColor = '#FFE0FF';
                 }
-                if (age.length < 1) {
+                if (Atr[i].getAttribute('data-agegroup') == '') {
+                    age = 'unknownSex'
+                } else if (age.length < 1) {
                     age = 'WC';
                 }
                 if (!DB.ageNumber.hasOwnProperty(age)) {
@@ -227,7 +229,7 @@
                 mnumber = DB.ageNumber[ageGR].m.number,
                 fnumber = DB.ageNumber[ageGR].f.number,
                 allnumber = mnumber + fnumber;
-            if (ageGR !== 'WC' && ageGR !== '---') {
+            if (ageGR !== 'WC' && ageGR !== '---' && ageGR !== 'unknownSex') {
                 let ageAVG = ageGR.split('-');
                 ageAVG = (parseInt(ageAVG[ageAVG.length - 1]) + parseInt(ageAVG[0])) / 2.0;
                 DB.ageAVG.m += ageAVG * mnumber;
@@ -980,7 +982,7 @@
                         f: {name: '', rate: 0, names: []}
             },
             ageNumber: {},
-            number: {all: 0, m: 0, f: 0, u: 0, WC: {all: 0, m: 0, f: 0}, '---': {all: 0, m: 0, f: 0}},
+            number: {all: 0, m: 0, f: 0, u: 0, WC: {all: 0, m: 0, f: 0}, unknownSex: {all: 0, m: 0, f: 0}, '---': {all: 0, m: 0, f: 0}},
             ageAVG: {m: 0, f: 0}
         };
     }

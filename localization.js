@@ -32,6 +32,7 @@ var L10n = {
         ageTable: {
             mainTitle: 'Distribution by age and fastest by age',
             WC: 'Wheelchair users',
+            unknownSex: 'Gender not specified',
             '---': 'Age not specified'
         },
         scriptSettings: {
@@ -130,6 +131,7 @@ var L10n = {
         ageTable: {
             mainTitle: 'Число участников и быстрейшие по возрастам',
             WC: 'Инвалиды-колясочники',
+            unknownSex: 'Пол неизвестен',
             '---': 'Возраст не указан'
         },
         scriptSettings: {

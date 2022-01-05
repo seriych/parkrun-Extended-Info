@@ -505,7 +505,7 @@
     // проверка, находимся ли мы на страничке результатов
     function isResultsPage() {
         let url = String(window.location);
-        if (!~url.indexOf('runSeqNumber')) {
+        if (~url.indexOf('/latestresults')) {
             latestPage = true;
         }
         if (~url.indexOf('-juniors/results/')) {
@@ -514,10 +514,10 @@
         if (~url.indexOf('/eventhistory') || ~url.indexOf('/historiabiegu')) {
             historyPage = true;
         }
-        if (~url.indexOf('/athletehistory')) {
+        if (~url.indexOf('/athletehistory') || /\.[^\.]{2}\/[^\/\.]{3,}\/parkrunner\/\d/i.test(url)) {
             athleteResultsLocalPage = true;
         }
-        if (~url.indexOf('/athleteresultshistory')) {
+        if (~url.indexOf('/athleteresultshistory') || /\.[^\.]{2}\/parkrunner\/\d/i.test(url)) {
             athleteResultsAllPage = true;
         }
         return (~url.indexOf('parkrun.')
@@ -526,6 +526,9 @@
                 || ~url.indexOf('/weeklyresults')
                 || ~url.indexOf('/eventhistory') || ~url.indexOf('/historiabiegu')
                 || ~url.indexOf('/athletehistory') || ~url.indexOf('/athleteresultshistory')
+                || /\/results\/\d/i.test(url)
+                || /\.[^\.]{2}\/parkrunner\/\d/i.test(url)
+                || /\.[^\.]{2}\/[^\/\.]{3,}\/parkrunner\/\d/i.test(url)
             )
         );
     }
@@ -637,7 +640,8 @@
     // проверяем, является ли забег юбилейным
     function isJubileeNow(races, ageGR) {
         return (
-            races % 50 === 0
+            races === 25
+            || races % 50 === 0
             || (juniorsPage && (races === 11 || races === 21))
             || ((!juniorsPage) && races === 10 && isJuniorPerson(ageGR))
         );
@@ -646,7 +650,8 @@
     // проверяем, что скоро будет юбилейный забег
     function isJubileeSoon(races, ageGR) {
         return (
-            races % 50 >= 50 - lsprefs.jubileeMax
+            (races < 25 && races % 25 >= 25 - lsprefs.jubileeMax)
+            || races % 50 >= 50 - lsprefs.jubileeMax
             || (juniorsPage && races < 21 && (races % 11 >= 11 - lsprefs.jubileeMax || races % 21 >= 21 - lsprefs.jubileeMax))
             || ((!juniorsPage) && races < 10 && (races >= 10 - lsprefs.jubileeMax) && isJuniorPerson(ageGR))
         );

@@ -5,6 +5,7 @@
         juniorsPage = false,
         historyPage = false,
         athleteResultsLocalPage = false,
+        athleteResultsSummaryPage = false,
         athleteResultsAllPage = false;
 
     // Выполняем обработку, если мы на нужной странице
@@ -56,6 +57,9 @@
             } else if (athleteResultsAllPage) {
                 // результаты бегуна на всех паркранах
                 extendAthleteAll();
+            } else if (athleteResultsSummaryPage) {
+                // сводка результатов бегуна
+                extendAthleteSummary();
             } else if (athleteResultsLocalPage) {
                 // результаты бегуна на текущем паркране
                 extendAthleteLocal();
@@ -414,6 +418,16 @@
     // Обрабатываем страницу результатов бегуна на всех паркранах
     function extendAthleteAll() {
         let TBresults = document.getElementsByClassName('sortable')[0].getElementsByTagName('tbody')[0];
+        addHistogram(TBresults, 1, true);
+        addHistogram(TBresults, 2);
+        TBresults = document.getElementsByClassName('sortable')[1].getElementsByTagName('tbody')[0];
+        addHistogram(TBresults, 4, true);
+        addHistogram(TBresults, 5);
+    }
+
+    // Обрабатываем страницу сводки результатов бегуна
+    function extendAthleteSummary() {
+        let TBresults = document.getElementsByClassName('sortable')[0].getElementsByTagName('tbody')[0];
         addHistogram(TBresults, 4, true);
         addHistogram(TBresults, 5);
         TBresults = document.getElementsByClassName('sortable')[1].getElementsByTagName('tbody')[0];
@@ -473,7 +487,7 @@
         }
 
         // нормируем масштаб гистограмм для обоих полов
-        if (!is_speed && !historyPage && !athleteResultsLocalPage && !athleteResultsAllPage && col_num > 2) {
+        if (!is_speed && !historyPage && !athleteResultsLocalPage && !athleteResultsSummaryPage && !athleteResultsAllPage && col_num > 2) {
             for (let ageGR in DB.ageNumber) {
                 value_max = Math.max(value_max, DB.ageNumber[ageGR].m.number, DB.ageNumber[ageGR].f.number);
             }
@@ -484,13 +498,13 @@
             let td = Atr[i].getElementsByTagName('td')[col_num],
                 transparent = 0.7,
                 pct = 0;
-            if ((historyPage || athleteResultsLocalPage || athleteResultsAllPage)
+            if ((historyPage || athleteResultsLocalPage || athleteResultsSummaryPage || athleteResultsAllPage)
                 && ((is_speed && Avalue[i] === value_min) || (!is_speed && Avalue[i] === value_max))) {
                 transparent = 1;
                 td.style.fontWeight = 'bold';
             }
             if (!is_speed) {
-                if (col_num > 1 && (athleteResultsAllPage || athleteResultsLocalPage)) {
+                if (col_num > 1 && (athleteResultsSummaryPage || athleteResultsLocalPage || athleteResultsAllPage)) {
                     pct = 2 + 98 * (((Avalue[i] - value_min) / (value_max - value_min)) ** pow);
                 } else {
                     pct = 100 * ((Avalue[i] / value_max) ** pow);
@@ -517,7 +531,10 @@
         if (~url.indexOf('/athletehistory') || /\.[^\.]{2}\/[^\/\.]{3,}\/parkrunner\/\d/i.test(url)) {
             athleteResultsLocalPage = true;
         }
-        if (~url.indexOf('/athleteresultshistory') || /\.[^\.]{2}\/parkrunner\/\d/i.test(url)) {
+        if (~url.indexOf('/athleteresultshistory') || /\.[^\.]{2}\/parkrunner\/\d+.?$/i.test(url)) {
+            athleteResultsSummaryPage = true;
+        }
+        if (/\.[^\.]{2}\/parkrunner\/\d+.all/i.test(url)) {
             athleteResultsAllPage = true;
         }
         return (~url.indexOf('parkrun.')
@@ -905,7 +922,7 @@
                 styleRules = '';
             styleNode.id = 'extensionStyles';
             styleRules += '.Results-table-td {padding: 8px 10px;} ';
-            if (!(historyPage || athleteResultsLocalPage || athleteResultsAllPage)) {
+            if (!(historyPage || athleteResultsLocalPage || athleteResultsSummaryPage || athleteResultsAllPage)) {
                 styleRules += '\
                     .ageTable, .summaryTable {font-family: sans-serif, Arial; text-align: center; border: 2px solid #c7dbe3; border-collapse: collapse; background: #f5fafc; margin: 30px 5px 20px; font-size: 11pt; width: 100%;} \
                     .ageTable thead th, .summaryTable thead th {font-weight: normal; font-size: 14pt; background: #e5f3fc;} \

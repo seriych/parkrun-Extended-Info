@@ -110,7 +110,7 @@
                 DB.number.u += 1;
             } else {
                 let name = Atr[i].getAttribute('data-name'),
-                    rate = Atr[i].getAttribute('data-agegrade'),
+                    rate = +Atr[i].getAttribute('data-agegrade'),
                     sex = 'm',
                     age = Atr[i].getAttribute('data-agegroup').replace(/^[^0-9\-]*/, ''),
                     races = parseInt(Atr[i].getAttribute('data-runs')),

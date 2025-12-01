@@ -936,8 +936,8 @@
                         {padding-left: 10px; text-align: left;} \
                     .ageTable td:nth-child(3), .ageTable td:nth-child(5), .ageTable td:nth-child(6), .ageTable td:nth-child(8) {width: 50px;} \
                     .ageTable tbody tr:hover, .summaryTable tbody tr:hover {background: #e5f3fc; font-weight: bold; vertical-align: top;} \
-                    .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none; margin: 0px !important;} \
-                    .ageTable tbody td p {font-size: 9pt; text-indent: -40px; padding-left: 40px;} \
+                    .ageTable tbody td p, .summaryTable tbody td p {text-align: left; font-weight: normal; display: none; margin: 0px !important; padding: 0 !important;} \
+                    .ageTable tbody td p {font-size: 9pt;} \
                     .summaryTable tbody td p {font-size: 10pt; margin-left: 5px;} \
                     .ageTable tbody td p:first-child, .summaryTable tbody td p:first-child {margin-top: 5px;} \
                     .ageTable tbody tr:hover p, .summaryTable tbody tr:hover p {' + trHoverStyle + '} \

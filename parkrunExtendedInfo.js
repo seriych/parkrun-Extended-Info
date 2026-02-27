@@ -112,6 +112,7 @@
                 let name = Atr[i].getAttribute('data-name'),
                     rate = +Atr[i].getAttribute('data-agegrade'),
                     sex = 'm',
+                    sexLocal = Atr[i].getAttribute('data-gender').trim(),
                     age = Atr[i].getAttribute('data-agegroup').replace(/^[^0-9\-]*/, ''),
                     races = parseInt(Atr[i].getAttribute('data-runs')),
                     time = Atr[i].getElementsByClassName('Results-table-td--time')[0].getElementsByClassName('compact')[0].innerText;
@@ -121,7 +122,9 @@
                         .map(word => word[0].toUpperCase() + word.substring(1).toLowerCase())
                         .join(' ')
                         .replace(/\s*\-\s*/g, '-');
-                if (Atr[i].getElementsByClassName('Results-table-td--F').length > 0) {
+                if ((Atr[i].getElementsByClassName('Results-table-td--F').length > 0)
+                    || ['Female', 'Femme', 'Kvinne', 'Kvinna', 'Kvinde', 'Weiblich', '女子', '\u5973\u5b50', 'Kobieta', 'Vrouw', 'Donna', 'Moteris', 'Naiset'].includes(sexLocal)
+                    ) {
                     sex = 'f';
                     Atr[i].getElementsByTagName('td')[1].style.backgroundColor = '#FFE0FF';
                     Atr[i].getElementsByTagName('td')[2].style.backgroundColor = '#FFE0FF';

@@ -556,19 +556,21 @@
     // проверка, находимся ли мы на страничке последнего забега
     function isLatestPage() {
         let url = String(window.location);
-        if (~url.indexOf('/latestresults')) {
+        if (url.includes('/latestresults')) {
             return true;
         }
 
-        let eventsTotal = document.getElementById('footerStats').getElementsByClassName('num')[0].innerText.trim().replace(/[^0-9]/g, '');
-        let eventNum = document.getElementById('content')
-            .getElementsByClassName('Results-header')[0]
-            .getElementsByTagName('h3')[0]
-            .innerText.trim()
-            .match(/#[0-9]+/g)[0]
-            .replace(/[^0-9]/g, '');
+        const eventsTotal = document.querySelector('#footerStats .num')?.innerText.replace(/\D/g, '');
 
-        return eventsTotal == eventNum;
+        const headerH3 = document.querySelector('.Results-header h3');
+        const eventMatch = headerH3?.innerText.match(/#(\d+)/);
+        const eventNum = eventMatch ? eventMatch[1] : null;
+
+        if (eventsTotal && eventNum) {
+            return eventsTotal === eventNum;
+        }
+
+        return false;
     }
 
     // переводим запись времени в секунды

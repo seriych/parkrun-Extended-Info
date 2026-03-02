@@ -110,7 +110,7 @@
                 DB.number.u += 1;
             } else {
                 let name = Atr[i].getAttribute('data-name'),
-                    rate = +Atr[i].getAttribute('data-agegrade'),
+                    rate = parseFloat(Atr[i].getAttribute('data-agegrade').trim()),
                     sex = 'm',
                     sexLocal = Atr[i].getAttribute('data-gender').trim(),
                     age = Atr[i].getAttribute('data-agegroup').replace(/^[^0-9\-]*/, ''),
@@ -522,7 +522,7 @@
     // проверка, находимся ли мы на страничке результатов
     function isResultsPage() {
         let url = String(window.location);
-        if (~url.indexOf('/latestresults')) {
+        if (isLatestPage()) {
             latestPage = true;
         }
         if (~url.indexOf('-juniors/results/')) {
@@ -551,6 +551,24 @@
                 || /\.[^\.]{2}\/[^\/\.]{3,}\/parkrunner\/\d/i.test(url)
             )
         );
+    }
+
+    // проверка, находимся ли мы на страничке последнего забега
+    function isLatestPage() {
+        let url = String(window.location);
+        if (~url.indexOf('/latestresults')) {
+            return true;
+        }
+
+        let eventsTotal = document.getElementById('footerStats').getElementsByClassName('num')[0].innerText.trim().replace(/[^0-9]/g, '');
+        let eventNum = document.getElementById('content')
+            .getElementsByClassName('Results-header')[0]
+            .getElementsByTagName('h3')[0]
+            .innerText.trim()
+            .match(/#[0-9]+/g)[0]
+            .replace(/[^0-9]/g, '');
+
+        return eventsTotal == eventNum;
     }
 
     // переводим запись времени в секунды
